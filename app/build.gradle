@@ -1,0 +1,23 @@
+plugins { id 'com.android.application' }
+android {
+    namespace 'io.perfoverlay.app'
+    compileSdk 35
+    defaultConfig {
+        applicationId 'io.perfoverlay.app'
+        minSdk 29
+        targetSdk 35
+        versionCode 5
+        versionName '0.4.0'
+    }
+    buildFeatures { aidl true }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+    buildTypes { release { minifyEnabled false } }
+}
+dependencies {
+    implementation files('../vendor/api-13.1.5.aar', '../vendor/provider-13.1.5.aar',
+        '../vendor/shared-13.1.5.aar', '../vendor/aidl-13.1.5.aar')
+    implementation files('../vendor/annotation-1.3.0.jar')
+}
