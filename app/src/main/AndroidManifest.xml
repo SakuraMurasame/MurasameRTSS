@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    android:versionCode="5" android:versionName="0.4.0">
+    android:versionCode="6" android:versionName="1.0.0">
     <uses-sdk android:minSdkVersion="29" android:targetSdkVersion="35" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
@@ -8,7 +8,7 @@
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="moe.shizuku.manager.permission.API_V23" />
     <queries><package android:name="moe.shizuku.privileged.api" /></queries>
-    <application android:label="MurasameRTSS" android:icon="@mipmap/ic_launcher"
+    <application android:name=".MurasameApp" android:label="MurasameRTSS" android:icon="@mipmap/ic_launcher"
         android:theme="@style/AppTheme" android:allowBackup="false" android:supportsRtl="true">
         <meta-data android:name="moe.shizuku.client.V3_SUPPORT" android:value="true" />
         <activity android:name=".MainActivity" android:exported="true">
@@ -25,7 +25,7 @@
                 android:value="User-started read-only performance metrics overlay with persistent notification controls. Monitoring ends when the user stops it." />
         </service>
         <service android:name=".MonitorTile" android:exported="true"
-            android:label="性能浮窗" android:icon="@drawable/ic_notification"
+            android:label="@string/language_4" android:icon="@drawable/ic_notification"
             android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
             <intent-filter><action android:name="android.service.quicksettings.action.QS_TILE" /></intent-filter>
             <meta-data android:name="android.service.quicksettings.ACTIVE_TILE" android:value="true" />

@@ -27,9 +27,9 @@ public final class HistoryMath {
         text = text.trim().replace('：', ':');
         if (text.matches("[0-9]{1,8}")) return Long.parseLong(text) * 1000;
         String[] parts = text.split(":", -1);
-        if (parts.length != 3) throw new IllegalArgumentException("请输入 时:分:秒，例如 00:01:30");
+        if (parts.length != 3) throw new IllegalArgumentException(I18n.t("请输入 时:分:秒，例如 00:01:30"));
         long h = Long.parseLong(parts[0]), m = Long.parseLong(parts[1]), s = Long.parseLong(parts[2]);
-        if (h < 0 || h > 9999 || m < 0 || m > 59 || s < 0 || s > 59) throw new IllegalArgumentException("时间格式不正确");
+        if (h < 0 || h > 9999 || m < 0 || m > 59 || s < 0 || s > 59) throw new IllegalArgumentException(I18n.t("时间格式不正确"));
         return (h * 3600 + m * 60 + s) * 1000;
     }
     public static boolean connects(long previousSequence, long sequence, long previousTime, long time) {

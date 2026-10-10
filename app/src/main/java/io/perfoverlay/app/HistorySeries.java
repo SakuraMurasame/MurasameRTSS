@@ -27,11 +27,11 @@ public final class HistorySeries {
     }
     public String note(HistoryStore.Point point) {
         HistoryStore.Point p = point != null ? point : points.isEmpty() ? null : points.get(points.size() - 1);
-        return p == null ? "此范围暂无采样" : p.values.getOrDefault("INFO_" + metric.name(), "旧记录可能未采集该指标");
+        return p == null ? I18n.t("此范围暂无采样") : p.values.getOrDefault("INFO_" + metric.name(), I18n.t("旧记录可能未采集该指标"));
     }
     public String statistics() {
-        if (valid == 0) return "最低 --   最高 --   均值 --";
-        return String.format(Locale.ROOT, "最低 %.2f   最高 %.2f   均值 %.2f%s", min, max, mean,
-                metric == Metric.CPU_FREQ ? "（全部组）" : "");
+        if (valid == 0) return I18n.t("最低 --   最高 --   均值 --");
+        return String.format(Locale.ROOT, I18n.t("最低 %.2f   最高 %.2f   均值 %.2f%s"), min, max, mean,
+                metric == Metric.CPU_FREQ ? I18n.t("（全部组）") : "");
     }
 }

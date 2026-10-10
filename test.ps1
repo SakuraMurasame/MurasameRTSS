@@ -7,7 +7,11 @@ $taskSource = Join-Path $PSScriptRoot 'app\src\main\java\io\perfoverlay\app'
 if ($LASTEXITCODE -ne 0) { throw 'Test compilation failed' }
 & (Join-Path $Jdk 'bin\java.exe') -ea -cp $taskClasses CoreTests
 if ($LASTEXITCODE -ne 0) { throw 'Tests failed' }
-& (Join-Path $Jdk 'bin\javac.exe') -encoding UTF-8 --release 17 -d $taskClasses (Join-Path $taskSource 'Metric.java') (Join-Path $taskSource 'HistorySeries.java') (Join-Path $taskSource 'HistoryStore.java') (Join-Path $taskSource 'HistoryMath.java') (Join-Path $PSScriptRoot 'tests\HistoryTests.java')
+& (Join-Path $Jdk 'bin\javac.exe') -encoding UTF-8 --release 17 -d $taskClasses (Join-Path $taskSource 'I18n.java') (Join-Path $taskSource 'Metric.java') (Join-Path $taskSource 'HistorySeries.java') (Join-Path $taskSource 'HistoryStore.java') (Join-Path $taskSource 'HistoryMath.java') (Join-Path $PSScriptRoot 'tests\HistoryTests.java')
 if ($LASTEXITCODE -ne 0) { throw 'History test compilation failed' }
 & (Join-Path $Jdk 'bin\java.exe') -ea -cp $taskClasses HistoryTests (Join-Path $PSScriptRoot 'build')
 if ($LASTEXITCODE -ne 0) { throw 'History tests failed' }
+& (Join-Path $Jdk 'bin\javac.exe') -encoding UTF-8 --release 17 -cp $taskClasses -d $taskClasses (Join-Path $PSScriptRoot 'tests\LocalizationTests.java')
+if ($LASTEXITCODE -ne 0) { throw 'Localization test compilation failed' }
+& (Join-Path $Jdk 'bin\java.exe') -ea -cp $taskClasses LocalizationTests $PSScriptRoot
+if ($LASTEXITCODE -ne 0) { throw 'Localization tests failed' }

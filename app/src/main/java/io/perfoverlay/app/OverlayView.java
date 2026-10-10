@@ -48,9 +48,9 @@ public final class OverlayView extends View {
         baseline = -fm.top + text.getTextSize() * 0.225f;
         metrics.clear(); labels.clear(); values.clear();
         for (Metric m : prefs.order()) if (prefs.enabled(m)) {
-            metrics.add(m); labels.add(m.label + " "); values.add(snapshot.values.get(m));
+            metrics.add(m); labels.add(I18n.t(m.label) + " "); values.add(I18n.raw(snapshot.values.get(m)));
         }
-        if (metrics.isEmpty()) { metrics.add(Metric.RAM); labels.add(""); values.add("请在应用中选择显示项目"); }
+        if (metrics.isEmpty()) { metrics.add(Metric.RAM); labels.add(""); values.add(I18n.t("请在应用中选择显示项目")); }
         float available = maxWidth;
         if (MeasureSpec.getMode(widthSpec) != MeasureSpec.UNSPECIFIED) available = Math.min(available, MeasureSpec.getSize(widthSpec));
         float[] widths = new float[metrics.size()];

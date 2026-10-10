@@ -27,11 +27,14 @@ public final class TouchTestActivity extends Activity {
             if (x >= 0) c.drawCircle(x, y, 25 * density, p);
             p.setStyle(Paint.Style.FILL); p.setTextSize(18 * density); p.setColor(Color.WHITE);
             int top = Math.max((int) (150 * density), getHeight() / 3);
-            c.drawText("触摸测试 · 点击顶部浮窗覆盖区域", 20 * density, top, p);
-            c.drawText("点击 " + taps + "    事件 " + events + "    手指 " + fingers, 20 * density, top + 38 * density, p);
-            p.setTextSize(12 * density); p.setColor(0xFFB3C8D2);
-            c.drawText("滑动会留下轨迹；系统返回手势退出。", 20 * density, top + 75 * density, p);
-            c.drawText("本页验证触摸标志，跨应用穿透还需在游戏中确认。", 20 * density, top + 99 * density, p);
+            String message = I18n.t("触摸测试 · 点击顶部浮窗覆盖区域") + "\n\n"
+                    + I18n.t("点击 ") + taps + I18n.t("    事件 ") + events + I18n.t("    手指 ") + fingers
+                    + "\n\n" + I18n.t("滑动会留下轨迹；系统返回手势退出。")
+                    + "\n" + I18n.t("本页验证触摸标志，跨应用穿透还需在游戏中确认。");
+            android.text.TextPaint label = new android.text.TextPaint(p); label.setTextSize(14 * density);
+            android.text.StaticLayout layout = android.text.StaticLayout.Builder.obtain(message, 0, message.length(), label,
+                    Math.max(1, getWidth() - (int) (40 * density))).setIncludePad(false).build();
+            int save = c.save(); c.translate(20 * density, top); layout.draw(c); c.restoreToCount(save);
         }
         @Override public boolean onTouchEvent(MotionEvent e) {
             events++; fingers = e.getPointerCount(); x = e.getX(); y = e.getY();

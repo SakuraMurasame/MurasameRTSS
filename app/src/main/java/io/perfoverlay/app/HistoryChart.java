@@ -14,13 +14,13 @@ public final class HistoryChart extends View {
     private Path[] traces = new Path[0];
     public interface Selection { void selected(HistoryStore.Point point); }
     private Selection listener;
-    public HistoryChart(Context c) { super(c); setContentDescription("历史曲线，点击或横向拖动同步选择采样点"); }
+    public HistoryChart(Context c) { super(c); setContentDescription(I18n.t("历史曲线，点击或横向拖动同步选择采样点")); }
     private float dp(float n) { return n * getResources().getDisplayMetrics().density; }
     public void selection(Selection callback) { listener = callback; }
     public void bind(HistorySeries series) {
         data = series; low = series.valid == 0 ? 0 : series.min; high = series.valid == 0 ? 1 : series.max;
         if (high - low < .01) { double padding = Math.max(.5, Math.abs(high) * .02); low = low >= 0 ? Math.max(0, low - padding) : low - padding; high += padding; }
-        rebuildTraces(); setContentDescription(series.metric.title + "曲线；" + series.statistics()); invalidate();
+        rebuildTraces(); setContentDescription(I18n.t(series.metric.title) + I18n.t("曲线；") + series.statistics()); invalidate();
     }
     public void selected(HistoryStore.Point p) { selected = p; invalidate(); }
     private float left() { return dp(42); }
@@ -59,13 +59,13 @@ public final class HistoryChart extends View {
         c.drawText(HistoryMath.time(data.from), left(), getHeight() - dp(5), pen);
         String end = HistoryMath.time(data.to); c.drawText(end, right() - pen.measureText(end), getHeight() - dp(5), pen);
         if (data.valid == 0) {
-            String empty = "暂无有效读数";
+            String empty = I18n.t("暂无有效读数");
             c.drawText(empty, left() + (right() - left() - pen.measureText(empty)) / 2, (top() + bottom()) / 2, pen);
         }
         int save = c.save(); c.clipRect(left() - dp(1), 0, right() + dp(1), bottom() + dp(2));
         for (int group = 0; group < data.groups; group++) {
             pen.setColor(data.groups > 1 ? colors[group % colors.length] : 0xFFE4E8EC); pen.setStrokeWidth(dp(.8f));
-            if (data.groups > 1) c.drawText("组" + (group + 1), left() + group * dp(34), dp(10), pen);
+            if (data.groups > 1) c.drawText(I18n.t("组") + (group + 1), left() + group * dp(34), dp(10), pen);
             pen.setStyle(Paint.Style.STROKE);
             if (group < traces.length) c.drawPath(traces[group], pen);
             pen.setStyle(Paint.Style.FILL);

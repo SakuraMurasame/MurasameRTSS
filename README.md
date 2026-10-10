@@ -1,12 +1,12 @@
-# MurasameRTSS 0.4.0
+# MurasameRTSS 1.0.0
 
 Android 游戏性能监控浮窗，默认顶部横向平铺。为“无 Root，已安装 Shizuku”的使用方式实现。
 
-[下载 APK](https://github.com/SakuraMurasame/MurasameRTSS/releases/tag/v0.4.0) · [历史更新](CHANGELOG.md) · [问题反馈](https://github.com/SakuraMurasame/MurasameRTSS/issues)
+[下载 APK](https://github.com/SakuraMurasame/MurasameRTSS/releases/tag/v1.0.0) · [历史更新](CHANGELOG.md) · [问题反馈](https://github.com/SakuraMurasame/MurasameRTSS/issues)
 
 ## 安装与使用
 
-1. 从 [GitHub Releases](https://github.com/SakuraMurasame/MurasameRTSS/releases/tag/v0.4.0) 下载并安装 `MurasameRTSS-0.4.0.apk`，可以覆盖同签名的旧版 PerfOverlay 或 MurasameRTSS 并保留配置与历史记录。
+1. 从 [GitHub Releases](https://github.com/SakuraMurasame/MurasameRTSS/releases/tag/v1.0.0) 下载并安装 `MurasameRTSS-1.0.0.apk`，可以覆盖同签名的旧版 PerfOverlay 或 MurasameRTSS 并保留配置与历史记录。
 2. 在 Shizuku 中通过无线调试启动服务。
 3. 打开 MurasameRTSS，在“监控”页允许悬浮窗和通知，点击“连接 / 授权 Shizuku”。
 4. 点击“开始监控”，再切回游戏。
@@ -16,7 +16,15 @@ Android 游戏性能监控浮窗，默认顶部横向平铺。为“无 Root，�
 
 安装包支持 Android 10 及以上，使用项目本地开发证书签名。源码和 APK 不包含签名私钥。自行构建时请妥善保留生成的 `signing/development.jks`，用于更新自己构建的版本；自行构建的 APK 不能直接覆盖不同签名的发布版。
 
+## 语言
+
+在“关于 → 应用语言”选择 **简体中文 / 日本語 / English / Français / Deutsch**。默认跟随系统，其他系统语言回退到英语。设置在重启后保留，切换不停止监控和记录。
+
+翻译包含设置、通知、指标名称、曲线统计、删除提示及更新历史。硬件节点名称和系统原始错误信息保留原值。记录文件中的数值、单位和时间格式不随语言变化，兼容旧记录。
+
 ## 本版已实现
+
+- 1.0.0 新增日语、英语、法语和德语；移除首页副标题和关于页的图标制作说明，保留图标及历史更新。
 
 - 0.4.0 自动记录默认开启，记录采集独立于浮窗指标开关。15 项指标同时纵向排列，共用时间轴与同步游标，显示当前 / 末点 / 选中值和最低 / 最高 / 均值，兼容旧记录与三种删除操作。
 - 0.3.0 更名 MurasameRTSS，使用用户提供图片制作的丛雨透明图标，加入关于程序和 0.1.0–0.3.0 更新历史。
@@ -57,7 +65,7 @@ Shizuku 的 shell 权限仍受 ROM 和 SELinux 约束，授权后不保证所有
 
 已在型号 `24122RKC7G`、SM8750、Android 16 / HyperOS `OS3.0.302.0.WOMMIXM` 上检查。GPU 的 `gpuclk`、`devfreq/cur_freq` 和 devfreq 目录对 shell 均返回 `Permission denied`，普通应用同样被拒绝。因此本版本会准确显示 ROM 权限限制，不能靠再次授权 Shizuku解除。未修改节点权限、SELinux 或系统安全设置。
 
-FPS 在独立 SurfaceView 测试应用上实测：30 FPS 对应约 33.3 ms，60 FPS 对应约 16.7 ms。此指标是该图层的呈现帧率；插帧、视频 Surface、分屏、多图层游戏可能影响其与引擎内部渲染帧数的对应关系。诊断页展示实际选择的包名和图层。停留在 PerfOverlay 设置页时显示 `--`，切回游戏后开始检测。
+FPS 在独立 SurfaceView 测试应用上实测：30 FPS 对应约 33.3 ms，60 FPS 对应约 16.7 ms。此指标是该图层的呈现帧率；插帧、视频 Surface、分屏、多图层游戏可能影响其与引擎内部渲染帧数的对应关系。诊断页展示实际选择的包名和图层。停留在 MurasameRTSS 设置页时显示 `--`，切回游戏后开始检测。
 
 帧率只使用真实呈现时间戳，忽略 pending/0/重复时间戳；超过约 1 秒没有新帧时显示 0，缺少有效帧接口时显示 `--`。不会把系统刷新率当成应用 FPS。
 
@@ -89,9 +97,17 @@ Android 12+ 的整窗 alpha 取 `getMaximumObscuringOpacityForTouch() - 0.01`；
 .\test.ps1 -Jdk 'C:\Program Files\Android\openjdk\jdk-21.0.8'
 ```
 
-构建脚本使用 SDK 自带 AAPT2、AIDL、D8、zipalign 和 apksigner，所有中间产物写入项目 `build/`，不会修改系统 SDK。输出 `dist/MurasameRTSS-0.4.0.apk` 和 SHA-256 校验文件。
+构建脚本使用 SDK 自带 AAPT2、AIDL、D8、zipalign 和 apksigner，所有中间产物写入项目 `build/`，不会修改系统 SDK。输出 `dist/MurasameRTSS-1.0.0.apk` 和 SHA-256 校验文件。
 
 也可在 Android Studio 中打开本目录，通过 AGP 8.13.0 / Gradle 8.13 构建。Shizuku 13.1.5 依赖已固定版本并随源码保存在 `vendor/`。
+
+翻译源位于 `tools/localization.json`，生成的 Android 字符串资源随源码提供，不需要构建时联网下载翻译。
+
+```powershell
+python tools/generate_localization.py --check
+# 编辑翻译后重新生成资源：
+python tools/generate_localization.py
+```
 
 ## 主要文件
 
@@ -114,7 +130,7 @@ tests/CoreTests.java         可在本机运行的核心逻辑测试
 
 ## 验证范围
 
-本次 5503 次断言与验证边界见 `TEST_REPORT_0.4.0.md`。前版曲线 / 删除 / 图标实机验证见 `TEST_REPORT_0.3.0.md`，横竖屏 / 触摸穿透见 `TEST_REPORT_0.2.1.md`，此前 FPS 与功耗见 `TEST_REPORT_0.2.0.md`。完整更新记录见 `CHANGELOG.md`。
+1.0.0 的验证范围见 `TEST_REPORT_1.0.0.md`。0.4.0 的记录生命周期与验证边界见 `TEST_REPORT_0.4.0.md`。前版曲线 / 删除 / 图标实机验证见 `TEST_REPORT_0.3.0.md`，横竖屏 / 触摸穿透见 `TEST_REPORT_0.2.1.md`，此前 FPS 与功耗见 `TEST_REPORT_0.2.0.md`。完整更新记录见 `CHANGELOG.md`。
 
 首轮实机建议依次验证：
 

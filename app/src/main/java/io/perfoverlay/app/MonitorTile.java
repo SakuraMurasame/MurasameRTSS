@@ -9,8 +9,9 @@ import android.service.quicksettings.TileService;
 public final class MonitorTile extends TileService {
     @Override public void onStartListening() {
         Tile tile = getQsTile(); if (tile == null) return;
+        tile.setLabel(I18n.t("性能浮窗"));
         tile.setState(MonitorService.running ? Tile.STATE_ACTIVE : Tile.STATE_INACTIVE);
-        tile.setSubtitle(MonitorService.running ? "点击停止" : "点击打开并开始"); tile.updateTile();
+        tile.setSubtitle(MonitorService.running ? I18n.t("点击停止") : I18n.t("点击打开并开始")); tile.updateTile();
     }
     @Override public void onClick() {
         if (MonitorService.running) { stopService(new Intent(this, MonitorService.class)); onStartListening(); return; }

@@ -81,6 +81,14 @@ public final class MonitorService extends Service implements android.content.Sha
             });
         }
     };
+    private final BroadcastReceiver languageChange = new BroadcastReceiver() {
+        @Override public void onReceive(Context context, Intent intent) {
+            resize();
+            getSystemService(NotificationManager.class).createNotificationChannel(new NotificationChannel("monitor", I18n.t("性能监控"), NotificationManager.IMPORTANCE_LOW));
+            if (running) getSystemService(NotificationManager.class).notify(10, notification());
+            updateTile();
+        }
+    };
     private final BroadcastReceiver screen = new BroadcastReceiver() {
         @Override public void onReceive(Context c, Intent i) {
             suspended = !getSystemService(PowerManager.class).isInteractive() || getSystemService(KeyguardManager.class).isKeyguardLocked();
@@ -107,14 +115,16 @@ public final class MonitorService extends Service implements android.content.Sha
         params.gravity = Gravity.TOP | Gravity.CENTER_HORIZONTAL;
         params.alpha = OverlayView.safeWindowAlpha(this);
         params.layoutInDisplayCutoutMode = WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_NEVER;
-        params.setTitle("MurasameRTSS 只读性能监控");
+        params.setTitle(I18n.t("MurasameRTSS 只读性能监控"));
         if (Build.VERSION.SDK_INT >= 30) params.setFitInsetsTypes(WindowInsets.Type.systemBars() | WindowInsets.Type.displayCutout());
         prefs.store.registerOnSharedPreferenceChangeListener(this);
         IntentFilter filter = new IntentFilter();
         filter.addAction(Intent.ACTION_SCREEN_OFF); filter.addAction(Intent.ACTION_SCREEN_ON); filter.addAction(Intent.ACTION_USER_PRESENT);
         if (Build.VERSION.SDK_INT >= 33) registerReceiver(screen, filter, Context.RECEIVER_NOT_EXPORTED);
         else registerReceiver(screen, filter);
-        getSystemService(NotificationManager.class).createNotificationChannel(new NotificationChannel("monitor", "性能监控", NotificationManager.IMPORTANCE_LOW));
+        getSystemService(NotificationManager.class).createNotificationChannel(new NotificationChannel("monitor", I18n.t("性能监控"), NotificationManager.IMPORTANCE_LOW));
+        if (Build.VERSION.SDK_INT >= 33) registerReceiver(languageChange, new IntentFilter(MurasameApp.LANGUAGE_CHANGED), Context.RECEIVER_NOT_EXPORTED);
+        else registerReceiver(languageChange, new IntentFilter(MurasameApp.LANGUAGE_CHANGED));
         windowContext.registerComponentCallbacks(windowConfiguration);
         resize();
     }
@@ -123,7 +133,7 @@ public final class MonitorService extends Service implements android.content.Sha
         if (STOP.equals(action)) { stopSelf(); return START_NOT_STICKY; }
         // Stale notification actions must never resurrect monitoring after it was stopped.
         if (!running && !START.equals(action)) { stopSelf(); return START_NOT_STICKY; }
-        if (!Settings.canDrawOverlays(this)) { Toast.makeText(this, "请先允许显示在其他应用上层", Toast.LENGTH_LONG).show(); stopSelf(); return START_NOT_STICKY; }
+        if (!Settings.canDrawOverlays(this)) { Toast.makeText(this, I18n.t("请先允许显示在其他应用上层"), Toast.LENGTH_LONG).show(); stopSelf(); return START_NOT_STICKY; }
         boolean newMonitoring = !running;
         if (newMonitoring) { running = true; hidden = false; paused = false; latest = null; }
         if (HIDE.equals(action)) hidden = !hidden;
@@ -137,7 +147,7 @@ public final class MonitorService extends Service implements android.content.Sha
             else startForeground(10, notification());
         } catch (RuntimeException e) {
             message = "系统拒绝启动前台服务";
-            Toast.makeText(this, message, Toast.LENGTH_LONG).show(); stopSelf(); return START_NOT_STICKY;
+            Toast.makeText(this, I18n.raw(message), Toast.LENGTH_LONG).show(); stopSelf(); return START_NOT_STICKY;
         }
         // Only a new monitoring session auto-starts. Manual end must stay ended
         // through hide/pause/refresh and repeated START intents.
@@ -154,12 +164,12 @@ public final class MonitorService extends Service implements android.content.Sha
         Intent launch = new Intent(this, MainActivity.class);
         PendingIntent open = PendingIntent.getActivity(this, 0, launch, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
         return new Notification.Builder(this, "monitor")
-                .setSmallIcon(R.drawable.ic_notification).setContentTitle("MurasameRTSS · " + (paused ? "已暂停" : hidden ? "浮窗已隐藏" : "监控中"))
-                .setContentText(history.active.isEmpty() ? "点击打开设置 · 浮窗允许触摸穿透" : "正在记录曲线 · 在应用的记录页结束并保存")
+                .setSmallIcon(R.drawable.ic_notification).setContentTitle("MurasameRTSS · " + (paused ? I18n.t("已暂停") : hidden ? I18n.t("浮窗已隐藏") : I18n.t("监控中")))
+                .setContentText(history.active.isEmpty() ? I18n.t("点击打开设置 · 浮窗允许触摸穿透") : I18n.t("正在记录曲线 · 在应用的记录页结束并保存"))
                 .setContentIntent(open).setOngoing(true).setOnlyAlertOnce(true).setShowWhen(false)
-                .addAction(new Notification.Action.Builder(null, hidden ? "显示" : "隐藏", action(HIDE, 1)).build())
-                .addAction(new Notification.Action.Builder(null, paused ? "继续" : "暂停", action(PAUSE, 2)).build())
-                .addAction(new Notification.Action.Builder(null, "停止", action(STOP, 3)).build()).build();
+                .addAction(new Notification.Action.Builder(null, hidden ? I18n.t("显示") : I18n.t("隐藏"), action(HIDE, 1)).build())
+                .addAction(new Notification.Action.Builder(null, paused ? I18n.t("继续") : I18n.t("暂停"), action(PAUSE, 2)).build())
+                .addAction(new Notification.Action.Builder(null, I18n.t("停止"), action(STOP, 3)).build()).build();
     }
     private PendingIntent action(String action, int code) {
         return PendingIntent.getService(this, code, new Intent(this, MonitorService.class).setAction(action), PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
@@ -226,13 +236,13 @@ public final class MonitorService extends Service implements android.content.Sha
         history.end();
         bridge.close(); prefs.store.unregisterOnSharedPreferenceChangeListener(this);
         windowContext.unregisterComponentCallbacks(windowConfiguration);
-        try { unregisterReceiver(screen); } catch (RuntimeException ignored) { }
+        try { unregisterReceiver(screen); unregisterReceiver(languageChange); } catch (RuntimeException ignored) { }
         running = false; hidden = false; paused = false; latest = null; message = "已停止";
         stopForeground(STOP_FOREGROUND_REMOVE); updateTile(); super.onDestroy();
     }
     @Override public IBinder onBind(Intent intent) { return null; }
     @Override protected void dump(java.io.FileDescriptor fd, java.io.PrintWriter writer, String[] args) {
-        writer.println("MurasameRTSS 0.4.0 running=" + running + " hidden=" + hidden + " paused=" + paused);
+        writer.println("MurasameRTSS 1.0.0 running=" + running + " hidden=" + hidden + " paused=" + paused);
         writer.println("font=" + prefs.font() + " backgroundOpacity=" + prefs.opacity() + " windowAlpha=" + params.alpha);
         int[] location = new int[2]; overlay.getLocationOnScreen(location);
         writer.println("overlay attached=" + attached + " x=" + location[0] + " y=" + location[1]
