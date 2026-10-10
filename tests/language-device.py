@@ -37,7 +37,7 @@ for lang,name in [('en','English'),('ja','日本語'),('fr','Français'),('de','
     check(tr('关于程序',lang),tree)
     assert '图标基于你提供' not in ET.tostring(tree, encoding='unicode')
     capture(lang + '-about')
-    for tab,marker in [('监控','你的性能监控'),('样式','文字与黑底'),('指标','显示项目'),('记录','记录与曲线')]:
+    for tab,marker in [('监控','性能概览'),('样式','外观主题'),('指标','显示项目'),('记录','记录与曲线')]:
         tap(tr(tab,lang)); tree = dump(); check(tr(marker,lang), tree)
         if tab == '记录': capture(lang + '-history'); adb('shell', 'input', 'keyevent', '4')
         elif tab == '监控': capture(lang + '-monitor')

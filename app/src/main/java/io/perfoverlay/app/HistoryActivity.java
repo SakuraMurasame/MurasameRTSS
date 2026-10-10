@@ -12,6 +12,7 @@ import java.util.*;
 
 public final class HistoryActivity extends Activity {
     private final Handler ui = new Handler(Looper.getMainLooper());
+    private UiTheme theme;
     private History history;
     private Prefs prefs;
     private LinearLayout content, records;
@@ -30,6 +31,7 @@ public final class HistoryActivity extends Activity {
     private String restoredFrom, restoredTo;
     private List<HistoryStore.Point> points = new ArrayList<>();
     private HistoryStore.Point selected;
+    private long restoredSelection = -1;
     private int generation, listLimit = 20;
     private int drawGeneration;
     private boolean loading;
@@ -50,47 +52,75 @@ public final class HistoryActivity extends Activity {
         }
     };
     @Override public void onCreate(Bundle state) {
-        super.onCreate(state); history = History.get(this); prefs = new Prefs(this);
+        UiTheme.beforeCreate(this); super.onCreate(state); history = History.get(this); prefs = new Prefs(this);
         if (state != null) {
             id = state.getString("id", ""); followLatest = state.getBoolean("follow", true);
             restoredFrom = state.getString("from"); restoredTo = state.getString("to");
+            restoredSelection = state.getLong("selection", -1);
         } else id = history.active;
         build();
     }
-    @Override protected void onResume() { super.onResume(); ui.post(tick); }
+    @Override protected void onResume() { super.onResume(); if (theme != null && theme.dark != UiTheme.get(this).dark) { recreate(); return; } ui.removeCallbacks(tick); ui.post(tick); }
     @Override protected void onPause() { ui.removeCallbacks(tick); super.onPause(); }
     @Override protected void onDestroy() { generation++; ui.removeCallbacksAndMessages(null); super.onDestroy(); }
     @Override protected void onSaveInstanceState(Bundle b) {
         b.putString("id", id); b.putBoolean("follow", followLatest);
+        b.putLong("selection", selected == null ? restoredSelection : selected.sequence);
         if (!id.isEmpty() && from != null) { b.putString("from", from.getText().toString()); b.putString("to", to.getText().toString()); }
         super.onSaveInstanceState(b);
     }
     private int dp(float n) { return Math.round(n * getResources().getDisplayMetrics().density); }
-    private TextView text(String s, int size) { TextView v = new TextView(this); v.setText(s); v.setTextSize(size); v.setTextColor(0xFFE8EEF3); v.setPadding(0, dp(6), 0, dp(6)); return v; }
+    private TextView text(String s, int size) { TextView v = new TextView(this); v.setText(s); v.setTextSize(size); v.setTextColor(theme.ink); v.setPadding(0, dp(6), 0, dp(6)); return v; }
     private LinearLayout col() { LinearLayout c = new LinearLayout(this); c.setOrientation(LinearLayout.VERTICAL); return c; }
     private Button button(LinearLayout parent, String s, Runnable action) {
-        Button b = new Button(this); b.setText(s); b.setAllCaps(false); b.setTextColor(0xFF62E0CA); b.setOnClickListener(v -> action.run());
-        b.setTextSize(13); b.setPadding(dp(12), dp(10), dp(12), dp(10)); b.setMinHeight(dp(44));
-        GradientDrawable background = new GradientDrawable(); background.setColor(0xFF22333E); background.setCornerRadius(dp(12)); b.setBackground(background);
+        Button b = new Button(this); b.setText(s); b.setAllCaps(false); b.setTextColor(theme.accent); b.setOnClickListener(v -> action.run());
+        b.setTextSize(13); b.setPadding(dp(12), dp(10), dp(12), dp(10)); b.setMinHeight(dp(44)); b.setMinWidth(0);
+        GradientDrawable background = new GradientDrawable(); background.setColor(theme.surface); background.setCornerRadius(dp(12)); b.setBackground(background);
         LinearLayout.LayoutParams p = new LinearLayout.LayoutParams(-1, -2); p.setMargins(0, dp(6), 0, dp(6)); parent.addView(b, p); return b;
     }
     private LinearLayout card(String title) {
         LinearLayout c = col(); c.setPadding(dp(14), dp(12), dp(14), dp(12));
-        GradientDrawable bg = new GradientDrawable(); bg.setColor(0xFF151F29); bg.setCornerRadius(dp(16)); c.setBackground(bg);
+        GradientDrawable bg = new GradientDrawable(); bg.setColor(theme.card); bg.setCornerRadius(dp(16)); bg.setStroke(dp(1), theme.border); c.setBackground(bg);
         LinearLayout.LayoutParams p = new LinearLayout.LayoutParams(-1, -2); p.bottomMargin = dp(12); content.addView(c, p);
-        TextView t = text(title, 18); t.setTypeface(null, Typeface.BOLD); c.addView(t); return c;
+        if (!title.isEmpty()) { TextView t = text(title, 18); t.setTypeface(null, Typeface.BOLD); c.addView(t); } return c;
     }
     private void build() {
+        theme = UiTheme.get(this); theme.window(this);
         generation++; drawGeneration++; loading = false; selected = null;
         charts.clear(); captions.clear(); series.clear(); points = new ArrayList<>();
-        LinearLayout root = col(); root.setBackgroundColor(0xFF0C1218);
+        LinearLayout root = col(); root.setBackgroundColor(theme.bg);
         root.setOnApplyWindowInsetsListener((v, insets) -> { v.setPadding(insets.getSystemWindowInsetLeft(), insets.getSystemWindowInsetTop(), insets.getSystemWindowInsetRight(), insets.getSystemWindowInsetBottom()); return insets; });
-        button(root, id.isEmpty() ? I18n.t("‹ 返回 MurasameRTSS") : I18n.t("‹ 全部记录"), () -> { if (id.isEmpty()) finish(); else { id = ""; build(); } });
-        scroll = new ScrollView(this); content = col(); content.setPadding(dp(16), dp(8), dp(16), dp(24)); scroll.addView(content); root.addView(scroll, new LinearLayout.LayoutParams(-1, 0, 1)); setContentView(root);
-        LinearLayout control = card(I18n.t("记录与曲线")); status = text(I18n.raw(history.status), 13); control.addView(status);
-        Switch auto = new Switch(this); auto.setText(I18n.t("监控时自动记录")); auto.setTextColor(0xFFE8EEF3); auto.setTextSize(14);
+        LinearLayout header = new LinearLayout(this); header.setGravity(Gravity.CENTER_VERTICAL); header.setPadding(dp(20), dp(12), dp(20), dp(8));
+        if (!id.isEmpty()) {
+            Button back = new Button(this); back.setText("‹"); back.setTextSize(25); back.setTextColor(theme.accent);
+            back.setContentDescription(I18n.t("‹ 全部记录")); back.setMinWidth(0); back.setPadding(0, 0, 0, 0);
+            back.setBackground(theme.shape(this, theme.surface, 12, false)); back.setOnClickListener(v -> { id = ""; build(); });
+            LinearLayout.LayoutParams backLayout = new LinearLayout.LayoutParams(dp(44), dp(44)); backLayout.rightMargin = dp(10);
+            header.addView(back, backLayout);
+        }
+        TextView heading = text(I18n.t("记录与曲线"), 23); heading.setTypeface(null, Typeface.BOLD); header.addView(heading, new LinearLayout.LayoutParams(0, -2, 1));
+        ImageView mascot = new ImageView(this); mascot.setImageResource(R.drawable.murasame_character); mascot.setContentDescription(I18n.t("丛雨程序图标")); header.addView(mascot, new LinearLayout.LayoutParams(dp(44), dp(44))); root.addView(header);
+        scroll = new ScrollView(this); content = col(); content.setPadding(dp(16), dp(8), dp(16), dp(24)); scroll.addView(content); root.addView(scroll, new LinearLayout.LayoutParams(-1, 0, 1)); LinearLayout nav = UiNav.create(this, theme, 3, index -> {
+            if (index == 3) return;
+            startActivity(new Intent(this, MainActivity.class).putExtra("page", index).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)); finish();
+        });
+        LinearLayout.LayoutParams navLayout = new LinearLayout.LayoutParams(-1, -2); navLayout.setMargins(dp(12), 0, dp(12), dp(6)); root.addView(nav, navLayout);
+        setContentView(root);
+        LinearLayout control = card(""); status = text(I18n.raw(history.status), 13); control.addView(status);
+        Switch auto = new Switch(this); auto.setText(I18n.t("监控时自动记录")); auto.setTextColor(theme.ink); auto.setTextSize(14);
         auto.setPadding(0, dp(8), 0, dp(8)); auto.setChecked(prefs.autoRecord());
-        auto.setOnCheckedChangeListener((v, enabled) -> prefs.put("auto_record", enabled)); control.addView(auto);
+        auto.setOnCheckedChangeListener((v, enabled) -> prefs.put("auto_record", enabled));
+        LinearLayout recordOptions = new LinearLayout(this); recordOptions.setGravity(Gravity.CENTER_VERTICAL);
+        recordOptions.addView(auto, new LinearLayout.LayoutParams(0, -2, 1));
+        FrameLayout help = new FrameLayout(this); help.setContentDescription(I18n.t("记录说明")); help.setFocusable(true);
+        help.setBackground(theme.shape(this, theme.surface, 12, false));
+        help.addView(new UiIcon(this, 4, theme.accent), new FrameLayout.LayoutParams(dp(22), dp(22), Gravity.CENTER));
+        help.setOnClickListener(v -> new AlertDialog.Builder(this).setTitle(I18n.t("记录说明"))
+                .setMessage(I18n.t("开关默认开启：开始监控即记录，停止监控即保存。记录所有可采集指标，与浮窗开关无关。手动结束后本次不再自动续录；关闭开关也会结束当前记录。")
+                    + "\n\n" + I18n.t("停止监控后保留全部曲线。无效读数、暂停与删除处不连线。"))
+                .setNegativeButton(I18n.t("取消"), null).show());
+        LinearLayout.LayoutParams helpLayout = new LinearLayout.LayoutParams(dp(44), dp(44)); helpLayout.leftMargin = dp(10);
+        recordOptions.addView(help, helpLayout); control.addView(recordOptions);
         recordButton = button(control, history.active.isEmpty() ? I18n.t("开始记录") : I18n.t("结束并保存记录"), () -> {
             if (!MonitorService.running && history.active.isEmpty()) { toast(I18n.t("请先返回监控页，开启监控后再开始记录")); return; }
             startService(new Intent(this, MonitorService.class).setAction(history.active.isEmpty() ? MonitorService.RECORD_START : MonitorService.RECORD_STOP));
@@ -99,7 +129,6 @@ public final class HistoryActivity extends Activity {
                 else if (id.isEmpty()) loadList(); else loadDetail(false);
             } }, 500);
         });
-        control.addView(text(I18n.t("开关默认开启：开始监控即记录，停止监控即保存。记录所有可采集指标，与浮窗开关无关。手动结束后本次不再自动续录；关闭开关也会结束当前记录。"), 12));
         if (id.isEmpty()) {
             button(control, I18n.t("查看当前曲线"), () -> { if (history.active.isEmpty()) toast(I18n.t("当前未记录，开启监控或手动开始记录")); else { id = history.active; build(); } });
             records = card(I18n.t("历史记录")); button(records, I18n.t("刷新列表"), this::loadList); loadList();
@@ -127,11 +156,10 @@ public final class HistoryActivity extends Activity {
         summary = text(I18n.t("正在加载…"), 12); c.addView(summary);
         selection = text(I18n.t("点选任意曲线同步查看同一时刻的全部指标。"), 12); c.addView(selection);
         for (Metric m : PANELS) {
-            LinearLayout panel = col(); panel.setPadding(dp(7), dp(5), dp(7), dp(5)); panel.setBackgroundColor(0xFF1B1D20);
-            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(-1, -2); lp.bottomMargin = dp(7); c.addView(panel, lp);
-            TextView title = text(I18n.t(m.title) + " · " + unit(m), 13); title.setTextColor(0xFFBFD9EF); title.setTypeface(null, Typeface.BOLD); panel.addView(title);
+            LinearLayout panel = card("");
+            TextView title = text(I18n.t(m.title) + " · " + unit(m), 13); title.setTextColor(theme.ink); title.setTypeface(null, Typeface.BOLD); panel.addView(title);
             TextView caption = text(I18n.t("等待数据"), 11); caption.setTypeface(Typeface.MONOSPACE);
-            caption.setMinLines(3);
+            caption.setMinLines(2);
             panel.addView(caption); captions.put(m, caption);
             HistoryChart chart = new HistoryChart(this); chart.selection(this::selectPoint);
             panel.addView(chart, new LinearLayout.LayoutParams(-1, dp(124))); charts.put(m, chart);
@@ -160,7 +188,7 @@ public final class HistoryActivity extends Activity {
         loadDetail(resetRange);
     }
     private EditText field(LinearLayout c, String hint, String value) {
-        EditText e = new EditText(this); e.setTextColor(0xFFE8EEF3); e.setHintTextColor(0xFF93A6B7); e.setHint(hint + I18n.t(" 00:00:00 或秒数"));
+        EditText e = new EditText(this); e.setTextColor(theme.ink); e.setHintTextColor(theme.muted); e.setHint(hint + I18n.t(" 00:00:00 或秒数"));
         e.setSingleLine(); e.setInputType(android.text.InputType.TYPE_CLASS_DATETIME | android.text.InputType.TYPE_DATETIME_VARIATION_TIME);
         e.setImeOptions(android.view.inputmethod.EditorInfo.IME_FLAG_NO_EXTRACT_UI); e.setSelectAllOnFocus(true);
         e.setText(value); e.setContentDescription(hint); c.addView(e); return e;
@@ -170,6 +198,10 @@ public final class HistoryActivity extends Activity {
         history.io.execute(() -> {
             try { List<HistoryStore.Point> result = history.store().read(entry); ui.post(() -> {
                 if (isDestroyed() || token != generation) return; loading = false; points = result;
+                if (restoredSelection >= 0) {
+                    for (HistoryStore.Point point : points) if (point.sequence == restoredSelection) { selected = point; break; }
+                    restoredSelection = -1;
+                }
                 if (resetRange || to.getText().length() == 0) {
                     from.setText("00:00:00"); to.setText(HistoryMath.time(points.isEmpty() ? 0 : points.get(points.size() - 1).elapsed));
                 } else if (followLatest && entry.equals(history.active) && !to.hasFocus() && !from.hasFocus()) {
@@ -195,8 +227,7 @@ public final class HistoryActivity extends Activity {
                     if (isDestroyed() || token != drawGeneration || pageToken != generation) return;
                     series.clear(); series.putAll(prepared);
                     if (selected != null && prepared.get(PANELS[0]).points.stream().noneMatch(p -> p.sequence == selected.sequence)) selected = null;
-                    summary.setText(prepared.get(PANELS[0]).points.size() + " / " + points.size() + I18n.t(" 个采样点 · ") + PANELS.length + I18n.t(" 项指标 · 共用时间轴\n")
-                            + I18n.t("停止监控后保留全部曲线。无效读数、暂停与删除处不连线。"));
+                    summary.setText(prepared.get(PANELS[0]).points.size() + " / " + points.size() + I18n.t(" 个采样点 · ") + PANELS.length + I18n.t(" 项指标 · 共用时间轴\n").trim());
                     for (Metric m : PANELS) charts.get(m).bind(prepared.get(m));
                     selectPoint(selected);
                 });

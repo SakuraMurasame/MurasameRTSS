@@ -185,11 +185,11 @@
     <string name="msg_181" formatted="false">": Sensorfunktion vor der Auswahl prüfen"</string>
     <string name="msg_182" formatted="false">"Sensor aktualisiert"</string>
     <string name="msg_183" formatted="false">"Über die App"</string>
-    <string name="msg_184" formatted="false">"MurasameRTSS · 1.0.0\nAndroid-Leistungsoverlay und lokale Verlaufsdiagramme"</string>
+    <string name="msg_184" formatted="false">"MurasameRTSS · 1.1.0\nAndroid-Leistungsoverlay und lokale Verlaufsdiagramme"</string>
     <string name="msg_185" formatted="false">"Murasame-App-Symbol"</string>
     <string name="msg_186" formatted="false">"Änderungsverlauf"</string>
     <string name="msg_187" formatted="false">"Datum / Version / Änderungen"</string>
-    <string name="msg_188" formatted="false">"2026-10-10 · 1.0.0\nJapanisch, Englisch, Französisch und Deutsch hinzugefügt, mit System- oder manueller Sprachauswahl. Untertitel und Hinweis zur Symbolerstellung entfernt.\n\n2026-10-08 · 0.4.0\nAutomatische Aufzeichnung standardmäßig aktiv: Überwachung startet die Aufnahme, Beenden speichert sie. Alle Werte werden unabhängig vom Overlay erfasst. 15 gestapelte Diagramme mit gemeinsamer Zeitachse, synchronem Cursor, letztem/gewähltem Wert sowie Min/Max/Mittel. Löschen von Punkten, Zeiträumen und Sitzungen bleibt möglich.\n\n2026-10-07 · 0.3.0\nUmbenennung in MurasameRTSS mit Murasame-Symbol. Manuelle Aufzeichnung, Messgrößenauswahl, Zeiträume und Löschen von Punkten, Zeiträumen oder Sitzungen hinzugefügt. App-Info und Änderungsverlauf ergänzt.\n\n2026-10-07 · 0.2.1\nUnnötige Zeilenumbrüche im Querformat behoben. Breite wird beim Drehen neu berechnet.\n\n2026-10-07 · 0.2.0\nDarstellungs-FPS, Frame-Zeiten über Shizuku und Schätzung des Geräteverbrauchs ergänzt. GPU-Zugriffsgrenzen erklärt und Diagnose verbessert.\n\n2026-10-07 · 0.1.0\nErste Version: manuelle Steuerung, dauerhafte Benachrichtigung, oberes Overlay, CPU-Gruppentakt, Temperaturen, Speicher und Akku. Messgrößen, Schrift und Deckkraft einstellbar; Berührungen werden durchgereicht."</string>
+    <string name="msg_188" formatted="false">"2026-10-10 · 1.1.0\nNeue untere Navigation, Leistungsübersicht, Overlay-Vorschau und Diagrammkarten. Dauerhaft gespeicherte Designs Dunkel, Hell und System hinzugefügt.\n\n2026-10-10 · 1.0.0\nJapanisch, Englisch, Französisch und Deutsch hinzugefügt, mit System- oder manueller Sprachauswahl. Untertitel und Hinweis zur Symbolerstellung entfernt.\n\n2026-10-08 · 0.4.0\nAutomatische Aufzeichnung standardmäßig aktiv: Überwachung startet die Aufnahme, Beenden speichert sie. Alle Werte werden unabhängig vom Overlay erfasst. 15 gestapelte Diagramme mit gemeinsamer Zeitachse, synchronem Cursor, letztem/gewähltem Wert sowie Min/Max/Mittel. Löschen von Punkten, Zeiträumen und Sitzungen bleibt möglich.\n\n2026-10-07 · 0.3.0\nUmbenennung in MurasameRTSS mit Murasame-Symbol. Manuelle Aufzeichnung, Messgrößenauswahl, Zeiträume und Löschen von Punkten, Zeiträumen oder Sitzungen hinzugefügt. App-Info und Änderungsverlauf ergänzt.\n\n2026-10-07 · 0.2.1\nUnnötige Zeilenumbrüche im Querformat behoben. Breite wird beim Drehen neu berechnet.\n\n2026-10-07 · 0.2.0\nDarstellungs-FPS, Frame-Zeiten über Shizuku und Schätzung des Geräteverbrauchs ergänzt. GPU-Zugriffsgrenzen erklärt und Diagnose verbessert.\n\n2026-10-07 · 0.1.0\nErste Version: manuelle Steuerung, dauerhafte Benachrichtigung, oberes Overlay, CPU-Gruppentakt, Temperaturen, Speicher und Akku. Messgrößen, Schrift und Deckkraft einstellbar; Berührungen werden durchgereicht."</string>
     <string name="msg_189" formatted="false">"Live-Diagnose"</string>
     <string name="msg_190" formatted="false">"Daten bleiben auf dem Gerät. -- bedeutet nicht verfügbar, nicht null Grad oder null Watt."</string>
     <string name="msg_191" formatted="false">"Diagnosebericht kopieren"</string>
@@ -288,4 +288,17 @@
     <string name="language_2" formatted="false">"App-Sprache"</string>
     <string name="language_3" formatted="false">"Sprachwechsel wird sofort wirksam, ohne Überwachung oder Aufzeichnung zu unterbrechen."</string>
     <string name="language_4" formatted="false">"Leistungsoverlay"</string>
+    <string name="ui_theme" formatted="false">"Darstellung"</string>
+    <string name="ui_theme_note" formatted="false">"App-Design und Overlay-Deckkraft werden getrennt eingestellt."</string>
+    <string name="ui_dark" formatted="false">"Dunkel"</string>
+    <string name="ui_light" formatted="false">"Hell"</string>
+    <string name="ui_overview" formatted="false">"Leistungsübersicht"</string>
+    <string name="ui_cpu_frequency" formatted="false">"CPU-Takt"</string>
+    <string name="ui_permissions" formatted="false">"Berechtigungen und Verbindung"</string>
+    <string name="ui_interval" formatted="false">"Messintervall"</string>
+    <string name="ui_live_note" formatted="false">"Überwachung starten, um Messwerte zu sehen"</string>
+    <string name="ui_overlay_preview" formatted="false">"Overlay-Vorschau"</string>
+    <string name="ui_overlay" formatted="false">"Overlay"</string>
+    <string name="ui_notifications" formatted="false">"Benachrichtigungen"</string>
+    <string name="ui_record_help" formatted="false">"Hinweise zur Aufzeichnung"</string>
 </resources>

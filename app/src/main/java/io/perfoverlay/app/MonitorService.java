@@ -242,7 +242,7 @@ public final class MonitorService extends Service implements android.content.Sha
     }
     @Override public IBinder onBind(Intent intent) { return null; }
     @Override protected void dump(java.io.FileDescriptor fd, java.io.PrintWriter writer, String[] args) {
-        writer.println("MurasameRTSS 1.0.0 running=" + running + " hidden=" + hidden + " paused=" + paused);
+        writer.println("MurasameRTSS 1.1.0 running=" + running + " hidden=" + hidden + " paused=" + paused);
         writer.println("font=" + prefs.font() + " backgroundOpacity=" + prefs.opacity() + " windowAlpha=" + params.alpha);
         int[] location = new int[2]; overlay.getLocationOnScreen(location);
         writer.println("overlay attached=" + attached + " x=" + location[0] + " y=" + location[1]

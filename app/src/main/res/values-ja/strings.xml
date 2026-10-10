@@ -185,11 +185,11 @@
     <string name="msg_181" formatted="false">"：センサーの意味を確認して選択"</string>
     <string name="msg_182" formatted="false">"センサーを変更しました"</string>
     <string name="msg_183" formatted="false">"アプリについて"</string>
-    <string name="msg_184" formatted="false">"MurasameRTSS · 1.0.0\nAndroid ゲーム性能表示とローカル記録グラフ"</string>
+    <string name="msg_184" formatted="false">"MurasameRTSS · 1.1.0\nAndroid ゲーム性能表示とローカル記録グラフ"</string>
     <string name="msg_185" formatted="false">"ムラサメのアプリアイコン"</string>
     <string name="msg_186" formatted="false">"更新履歴"</string>
     <string name="msg_187" formatted="false">"日付／バージョン／更新内容"</string>
-    <string name="msg_188" formatted="false">"2026-10-10 · 1.0.0\n日本語・英語・フランス語・ドイツ語に対応。システム連動または手動で言語を選択できます。ホームの副題とアイコン制作説明を削除。\n\n2026-10-08 · 0.4.0\n自動記録を既定で有効化。監視開始で記録、停止で保存。表示項目とは独立して全項目を記録。15 項目の縦並びグラフ、共通時間軸、同期カーソル、末尾・選択値と最小・最大・平均値を追加。点・範囲・記録全体の削除に対応。\n\n2026-10-07 · 0.3.0\nMurasameRTSS に改名し、ムラサメのアイコンに変更。手動記録、項目切替、時間範囲表示と点・範囲・記録全体の削除、アプリ情報と更新履歴を追加。\n\n2026-10-07 · 0.2.1\n横画面で余裕がある場合の不要な折り返しを修正。回転時に再測定。\n\n2026-10-07 · 0.2.0\nShizuku による実表示 FPS、フレーム間隔、端末電力推定を追加。GPU の権限制限を明記し診断を改善。\n\n2026-10-07 · 0.1.0\n初版：手動操作、常駐通知、上部表示、CPU グループ周波数・温度・メモリ・電池の監視。項目、文字サイズ、背景不透明度を設定可能。タッチ通過に対応。"</string>
+    <string name="msg_188" formatted="false">"2026-10-10 · 1.1.0\n下部ナビゲーション、性能概要、表示プレビュー、グラフカードを刷新。ダーク・ライト・システム連動テーマと設定保存に対応。\n\n2026-10-10 · 1.0.0\n日本語・英語・フランス語・ドイツ語に対応。システム連動または手動で言語を選択できます。ホームの副題とアイコン制作説明を削除。\n\n2026-10-08 · 0.4.0\n自動記録を既定で有効化。監視開始で記録、停止で保存。表示項目とは独立して全項目を記録。15 項目の縦並びグラフ、共通時間軸、同期カーソル、末尾・選択値と最小・最大・平均値を追加。点・範囲・記録全体の削除に対応。\n\n2026-10-07 · 0.3.0\nMurasameRTSS に改名し、ムラサメのアイコンに変更。手動記録、項目切替、時間範囲表示と点・範囲・記録全体の削除、アプリ情報と更新履歴を追加。\n\n2026-10-07 · 0.2.1\n横画面で余裕がある場合の不要な折り返しを修正。回転時に再測定。\n\n2026-10-07 · 0.2.0\nShizuku による実表示 FPS、フレーム間隔、端末電力推定を追加。GPU の権限制限を明記し診断を改善。\n\n2026-10-07 · 0.1.0\n初版：手動操作、常駐通知、上部表示、CPU グループ周波数・温度・メモリ・電池の監視。項目、文字サイズ、背景不透明度を設定可能。タッチ通過に対応。"</string>
     <string name="msg_189" formatted="false">"リアルタイム診断"</string>
     <string name="msg_190" formatted="false">"データは端末内に保存します。-- は取得不可を表し、温度や電力がゼロという意味ではありません。"</string>
     <string name="msg_191" formatted="false">"診断レポートをコピー"</string>
@@ -288,4 +288,17 @@
     <string name="language_2" formatted="false">"アプリの言語"</string>
     <string name="language_3" formatted="false">"言語変更はすぐ反映され、監視や記録は中断しません。"</string>
     <string name="language_4" formatted="false">"性能表示"</string>
+    <string name="ui_theme" formatted="false">"外観テーマ"</string>
+    <string name="ui_theme_note" formatted="false">"アプリのテーマと表示の背景不透明度は個別に設定します。"</string>
+    <string name="ui_dark" formatted="false">"ダーク"</string>
+    <string name="ui_light" formatted="false">"ライト"</string>
+    <string name="ui_overview" formatted="false">"性能概要"</string>
+    <string name="ui_cpu_frequency" formatted="false">"CPU 周波数"</string>
+    <string name="ui_permissions" formatted="false">"権限と接続"</string>
+    <string name="ui_interval" formatted="false">"取得間隔"</string>
+    <string name="ui_live_note" formatted="false">"監視開始後に実測値を表示"</string>
+    <string name="ui_overlay_preview" formatted="false">"表示プレビュー"</string>
+    <string name="ui_overlay" formatted="false">"重ねて表示"</string>
+    <string name="ui_notifications" formatted="false">"通知"</string>
+    <string name="ui_record_help" formatted="false">"記録の説明"</string>
 </resources>

@@ -185,11 +185,11 @@
     <string name="msg_181" formatted="false">": verify what the sensor measures before selecting"</string>
     <string name="msg_182" formatted="false">"Sensor updated"</string>
     <string name="msg_183" formatted="false">"About the app"</string>
-    <string name="msg_184" formatted="false">"MurasameRTSS · 1.0.0\nAndroid gaming overlay and local performance graphs"</string>
+    <string name="msg_184" formatted="false">"MurasameRTSS · 1.1.0\nAndroid gaming overlay and local performance graphs"</string>
     <string name="msg_185" formatted="false">"Murasame app icon"</string>
     <string name="msg_186" formatted="false">"Changelog"</string>
     <string name="msg_187" formatted="false">"Date / Version / Changes"</string>
-    <string name="msg_188" formatted="false">"2026-10-10 · 1.0.0\nAdded Japanese, English, French and German, with system or manual language selection. Removed the home subtitle and icon creation note.\n\n2026-10-08 · 0.4.0\nAutomatic recording enabled by default. Monitoring starts recording; stopping saves it. All metrics are recorded independently of overlay selection. Added 15 stacked graphs with shared timeline, synchronized cursor, last/selected values and min/max/mean. Kept sample, range and session deletion.\n\n2026-10-07 · 0.3.0\nRenamed to MurasameRTSS with Murasame icon. Added manual recording, metric selection, time ranges and deletion of points, ranges or sessions. Added About and changelog.\n\n2026-10-07 · 0.2.1\nFixed unnecessary wrapping in landscape. Measure available width again on rotation.\n\n2026-10-07 · 0.2.0\nAdded Shizuku presentation FPS, frame time and device power estimate. Explained GPU access limits and improved diagnostics.\n\n2026-10-07 · 0.1.0\nInitial release: manual controls, persistent notification, top overlay, CPU group clocks, temperatures, memory and battery monitoring. Configurable metrics, font and background opacity with touch-through."</string>
+    <string name="msg_188" formatted="false">"2026-10-10 · 1.1.0\nRedesigned bottom navigation, performance overview, overlay preview and graph cards. Added persistent Dark, Light and System themes.\n\n2026-10-10 · 1.0.0\nAdded Japanese, English, French and German, with system or manual language selection. Removed the home subtitle and icon creation note.\n\n2026-10-08 · 0.4.0\nAutomatic recording enabled by default. Monitoring starts recording; stopping saves it. All metrics are recorded independently of overlay selection. Added 15 stacked graphs with shared timeline, synchronized cursor, last/selected values and min/max/mean. Kept sample, range and session deletion.\n\n2026-10-07 · 0.3.0\nRenamed to MurasameRTSS with Murasame icon. Added manual recording, metric selection, time ranges and deletion of points, ranges or sessions. Added About and changelog.\n\n2026-10-07 · 0.2.1\nFixed unnecessary wrapping in landscape. Measure available width again on rotation.\n\n2026-10-07 · 0.2.0\nAdded Shizuku presentation FPS, frame time and device power estimate. Explained GPU access limits and improved diagnostics.\n\n2026-10-07 · 0.1.0\nInitial release: manual controls, persistent notification, top overlay, CPU group clocks, temperatures, memory and battery monitoring. Configurable metrics, font and background opacity with touch-through."</string>
     <string name="msg_189" formatted="false">"Live diagnostics"</string>
     <string name="msg_190" formatted="false">"Data stays on this device. -- means unavailable, not zero temperature or power."</string>
     <string name="msg_191" formatted="false">"Copy diagnostic report"</string>
@@ -288,4 +288,17 @@
     <string name="language_2" formatted="false">"App language"</string>
     <string name="language_3" formatted="false">"Language changes apply immediately without interrupting monitoring or recording."</string>
     <string name="language_4" formatted="false">"Performance overlay"</string>
+    <string name="ui_theme" formatted="false">"Appearance"</string>
+    <string name="ui_theme_note" formatted="false">"App theme and overlay background opacity are configured separately."</string>
+    <string name="ui_dark" formatted="false">"Dark"</string>
+    <string name="ui_light" formatted="false">"Light"</string>
+    <string name="ui_overview" formatted="false">"Performance overview"</string>
+    <string name="ui_cpu_frequency" formatted="false">"CPU clocks"</string>
+    <string name="ui_permissions" formatted="false">"Permissions and connections"</string>
+    <string name="ui_interval" formatted="false">"Sample interval"</string>
+    <string name="ui_live_note" formatted="false">"Start monitoring to see live readings"</string>
+    <string name="ui_overlay_preview" formatted="false">"Overlay preview"</string>
+    <string name="ui_overlay" formatted="false">"Overlay"</string>
+    <string name="ui_notifications" formatted="false">"Notifications"</string>
+    <string name="ui_record_help" formatted="false">"Recording help"</string>
 </resources>

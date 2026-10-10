@@ -6,15 +6,16 @@ import java.util.Locale;
 
 /** Compact graph with shared time bounds and a synchronized cursor. */
 public final class HistoryChart extends View {
+    private final UiTheme theme;
     private final Paint pen = new Paint(Paint.ANTI_ALIAS_FLAG);
-    private final int[] colors = {0xFF72E6CD, 0xFFFFC75F, 0xFF98AFFF, 0xFFF199C7, 0xFF79CAFF, 0xFFE9B58D};
+    private final int[] colors;
     private HistorySeries data;
     private double low, high = 1;
     private HistoryStore.Point selected;
     private Path[] traces = new Path[0];
     public interface Selection { void selected(HistoryStore.Point point); }
     private Selection listener;
-    public HistoryChart(Context c) { super(c); setContentDescription(I18n.t("历史曲线，点击或横向拖动同步选择采样点")); }
+    public HistoryChart(Context c) { super(c); theme = UiTheme.get(c); colors = new int[]{theme.accent, theme.violet, theme.amber, theme.dark ? 0xFF79CAFF : 0xFF24699B, theme.dark ? 0xFFF199C7 : 0xFF9B3978, theme.dark ? 0xFFE9B58D : 0xFF885624}; setContentDescription(I18n.t("历史曲线，点击或横向拖动同步选择采样点")); }
     private float dp(float n) { return n * getResources().getDisplayMetrics().density; }
     public void selection(Selection callback) { listener = callback; }
     public void bind(HistorySeries series) {
@@ -48,12 +49,12 @@ public final class HistoryChart extends View {
         }
     }
     @Override protected void onDraw(Canvas c) {
-        super.onDraw(c); c.drawColor(0xFF1B1D20); if (data == null) return;
+        super.onDraw(c); c.drawColor(theme.card); if (data == null) return;
         pen.setTypeface(Typeface.MONOSPACE); pen.setTextSize(dp(9)); pen.setStrokeWidth(dp(.5f));
-        pen.setColor(0xFF2A2D31);
+        pen.setColor(theme.grid);
         for (float gx = left(); gx <= right(); gx += dp(10)) c.drawLine(gx, top(), gx, bottom(), pen);
         for (float gy = top(); gy <= bottom(); gy += dp(10)) c.drawLine(left(), gy, right(), gy, pen);
-        pen.setColor(0xFF9AA6B2);
+        pen.setColor(theme.muted);
         c.drawText(String.format(Locale.ROOT, "%.1f", high), 0, top() + dp(6), pen);
         c.drawText(String.format(Locale.ROOT, "%.1f", low), 0, bottom(), pen);
         c.drawText(HistoryMath.time(data.from), left(), getHeight() - dp(5), pen);
@@ -64,14 +65,14 @@ public final class HistoryChart extends View {
         }
         int save = c.save(); c.clipRect(left() - dp(1), 0, right() + dp(1), bottom() + dp(2));
         for (int group = 0; group < data.groups; group++) {
-            pen.setColor(data.groups > 1 ? colors[group % colors.length] : 0xFFE4E8EC); pen.setStrokeWidth(dp(.8f));
+            pen.setColor(data.groups > 1 ? colors[group % colors.length] : data.metric == Metric.CPU_TEMP || data.metric == Metric.GPU_TEMP || data.metric == Metric.SOC_TEMP || data.metric == Metric.BAT_TEMP ? theme.amber : theme.accent); pen.setStrokeWidth(dp(.8f));
             if (data.groups > 1) c.drawText(I18n.t("组") + (group + 1), left() + group * dp(34), dp(10), pen);
             pen.setStyle(Paint.Style.STROKE);
             if (group < traces.length) c.drawPath(traces[group], pen);
             pen.setStyle(Paint.Style.FILL);
         }
         if (selected != null && selected.elapsed >= data.from && selected.elapsed <= data.to) {
-            pen.setColor(0xFF79EBD1); pen.setStrokeWidth(dp(1));
+            pen.setColor(theme.accent); pen.setStrokeWidth(dp(1));
             pen.setPathEffect(new DashPathEffect(new float[]{dp(3), dp(3)}, 0));
             c.drawLine(x(selected.elapsed), top(), x(selected.elapsed), bottom(), pen); pen.setPathEffect(null);
         }
@@ -79,8 +80,8 @@ public final class HistoryChart extends View {
         if (selected != null && selected.elapsed >= data.from && selected.elapsed <= data.to) {
             String stamp = HistoryMath.time(selected.elapsed);
             float labelX = Math.max(left(), Math.min(right() - pen.measureText(stamp), x(selected.elapsed) - pen.measureText(stamp) / 2));
-            pen.setColor(0xFF1B1D20); c.drawRect(labelX - dp(2), getHeight() - dp(18), labelX + pen.measureText(stamp) + dp(2), getHeight(), pen);
-            pen.setColor(0xFF79EBD1); c.drawText(stamp, labelX, getHeight() - dp(5), pen);
+            pen.setColor(theme.card); c.drawRect(labelX - dp(2), getHeight() - dp(18), labelX + pen.measureText(stamp) + dp(2), getHeight(), pen);
+            pen.setColor(theme.accent); c.drawText(stamp, labelX, getHeight() - dp(5), pen);
         }
     }
     private void select(float px) {

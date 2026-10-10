@@ -7,25 +7,26 @@ import android.view.*;
 
 public final class TouchTestActivity extends Activity {
     @Override public void onCreate(Bundle state) {
-        super.onCreate(state);
+        UiTheme.beforeCreate(this); super.onCreate(state);
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                 | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
         setContentView(new TouchCanvas());
     }
     private final class TouchCanvas extends View {
+        private final UiTheme theme = UiTheme.get(TouchTestActivity.this);
         private final Paint p = new Paint(Paint.ANTI_ALIAS_FLAG);
         private final Path trail = new Path();
         private int taps, events, fingers;
         private float x = -1, y = -1;
-        TouchCanvas() { super(TouchTestActivity.this); setBackgroundColor(0xFF172B36); }
+        TouchCanvas() { super(TouchTestActivity.this); setBackgroundColor(theme.bg); }
         @Override protected void onDraw(Canvas c) {
             float density = getResources().getDisplayMetrics().density;
-            p.setColor(0xFF34505E); p.setStrokeWidth(1); p.setStyle(Paint.Style.STROKE);
+            p.setColor(theme.grid); p.setStrokeWidth(1); p.setStyle(Paint.Style.STROKE);
             for (int i = 0; i < getWidth(); i += 64) c.drawLine(i, 0, i, getHeight(), p);
             for (int i = 0; i < getHeight(); i += 64) c.drawLine(0, i, getWidth(), i, p);
-            p.setColor(0xFF62E0CA); p.setStrokeWidth(4); c.drawPath(trail, p);
+            p.setColor(theme.accent); p.setStrokeWidth(4); c.drawPath(trail, p);
             if (x >= 0) c.drawCircle(x, y, 25 * density, p);
-            p.setStyle(Paint.Style.FILL); p.setTextSize(18 * density); p.setColor(Color.WHITE);
+            p.setStyle(Paint.Style.FILL); p.setTextSize(18 * density); p.setColor(theme.ink);
             int top = Math.max((int) (150 * density), getHeight() / 3);
             String message = I18n.t("触摸测试 · 点击顶部浮窗覆盖区域") + "\n\n"
                     + I18n.t("点击 ") + taps + I18n.t("    事件 ") + events + I18n.t("    手指 ") + fingers

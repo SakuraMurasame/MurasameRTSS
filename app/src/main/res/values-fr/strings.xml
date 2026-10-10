@@ -185,11 +185,11 @@
     <string name="msg_181" formatted="false">" : vérifiez la fonction du capteur avant de choisir"</string>
     <string name="msg_182" formatted="false">"Capteur mis à jour"</string>
     <string name="msg_183" formatted="false">"À propos de l’application"</string>
-    <string name="msg_184" formatted="false">"MurasameRTSS · 1.0.0\nSuperposition de performances Android et courbes locales"</string>
+    <string name="msg_184" formatted="false">"MurasameRTSS · 1.1.0\nSuperposition de performances Android et courbes locales"</string>
     <string name="msg_185" formatted="false">"Icône Murasame"</string>
     <string name="msg_186" formatted="false">"Historique des versions"</string>
     <string name="msg_187" formatted="false">"Date / Version / Modifications"</string>
-    <string name="msg_188" formatted="false">"2026-10-10 · 1.0.0\nAjout du japonais, de l’anglais, du français et de l’allemand, selon le système ou un choix manuel. Retrait du sous-titre et de la note sur la création de l’icône.\n\n2026-10-08 · 0.4.0\nEnregistrement automatique activé par défaut : le suivi démarre la capture, son arrêt la sauvegarde. Toutes les mesures sont enregistrées indépendamment de l’affichage. Ajout de 15 courbes empilées avec axe commun, curseur synchronisé, valeurs dernière/sélectionnée et min/max/moyenne. Suppression de points, périodes et sessions conservée.\n\n2026-10-07 · 0.3.0\nRenommage en MurasameRTSS avec icône Murasame. Ajout de l’enregistrement manuel, choix des mesures, périodes et suppression de points, périodes ou sessions. Ajout des informations et de l’historique des versions.\n\n2026-10-07 · 0.2.1\nCorrection des retours à la ligne inutiles en paysage. Nouveau calcul de largeur lors de la rotation.\n\n2026-10-07 · 0.2.0\nAjout des FPS de présentation et intervalles via Shizuku, et de l’estimation de puissance totale. Précisions sur les restrictions GPU et amélioration du diagnostic.\n\n2026-10-07 · 0.1.0\nPremière version : commandes manuelles, notification persistante, superposition en haut, fréquences CPU, températures, mémoire et batterie. Mesures, texte et opacité configurables, gestes traversants."</string>
+    <string name="msg_188" formatted="false">"2026-10-10 · 1.1.0\nNouvelle navigation basse, aperçu des performances, prévisualisation et cartes de courbes. Ajout des thèmes Sombre, Clair et Système, avec choix mémorisé.\n\n2026-10-10 · 1.0.0\nAjout du japonais, de l’anglais, du français et de l’allemand, selon le système ou un choix manuel. Retrait du sous-titre et de la note sur la création de l’icône.\n\n2026-10-08 · 0.4.0\nEnregistrement automatique activé par défaut : le suivi démarre la capture, son arrêt la sauvegarde. Toutes les mesures sont enregistrées indépendamment de l’affichage. Ajout de 15 courbes empilées avec axe commun, curseur synchronisé, valeurs dernière/sélectionnée et min/max/moyenne. Suppression de points, périodes et sessions conservée.\n\n2026-10-07 · 0.3.0\nRenommage en MurasameRTSS avec icône Murasame. Ajout de l’enregistrement manuel, choix des mesures, périodes et suppression de points, périodes ou sessions. Ajout des informations et de l’historique des versions.\n\n2026-10-07 · 0.2.1\nCorrection des retours à la ligne inutiles en paysage. Nouveau calcul de largeur lors de la rotation.\n\n2026-10-07 · 0.2.0\nAjout des FPS de présentation et intervalles via Shizuku, et de l’estimation de puissance totale. Précisions sur les restrictions GPU et amélioration du diagnostic.\n\n2026-10-07 · 0.1.0\nPremière version : commandes manuelles, notification persistante, superposition en haut, fréquences CPU, températures, mémoire et batterie. Mesures, texte et opacité configurables, gestes traversants."</string>
     <string name="msg_189" formatted="false">"Diagnostic en direct"</string>
     <string name="msg_190" formatted="false">"Les données restent sur l’appareil. -- signifie indisponible, pas une température ou puissance nulle."</string>
     <string name="msg_191" formatted="false">"Copier le diagnostic"</string>
@@ -288,4 +288,17 @@
     <string name="language_2" formatted="false">"Langue de l’application"</string>
     <string name="language_3" formatted="false">"La langue change immédiatement, sans interrompre le suivi ni l’enregistrement."</string>
     <string name="language_4" formatted="false">"Performance"</string>
+    <string name="ui_theme" formatted="false">"Apparence"</string>
+    <string name="ui_theme_note" formatted="false">"Le thème et l’opacité de la superposition se règlent séparément."</string>
+    <string name="ui_dark" formatted="false">"Sombre"</string>
+    <string name="ui_light" formatted="false">"Clair"</string>
+    <string name="ui_overview" formatted="false">"Aperçu des performances"</string>
+    <string name="ui_cpu_frequency" formatted="false">"Fréquences CPU"</string>
+    <string name="ui_permissions" formatted="false">"Autorisations et connexion"</string>
+    <string name="ui_interval" formatted="false">"Intervalle de mesure"</string>
+    <string name="ui_live_note" formatted="false">"Lancez le suivi pour voir les mesures"</string>
+    <string name="ui_overlay_preview" formatted="false">"Aperçu de la superposition"</string>
+    <string name="ui_overlay" formatted="false">"Superposition"</string>
+    <string name="ui_notifications" formatted="false">"Notifications"</string>
+    <string name="ui_record_help" formatted="false">"Aide à l’enregistrement"</string>
 </resources>
