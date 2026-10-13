@@ -16,7 +16,7 @@ public final class UiNav {
         for (int i = 0; i < labels.length; i++) {
             int index = i, color = i == selected ? theme.accent : theme.muted;
             LinearLayout tab = new LinearLayout(context); tab.setOrientation(LinearLayout.VERTICAL); tab.setGravity(Gravity.CENTER);
-            if (i == selected) tab.setBackground(theme.shape(context, theme.softAccent, 12, false));
+            tab.setBackground(UiMotion.surface(context,theme,i==selected?theme.softAccent:0,12,false));
             UiIcon icon = new UiIcon(context, i, color); tab.addView(icon, new LinearLayout.LayoutParams((int)(22 * density), (int)(22 * density)));
             TextView text = new TextView(context); text.setText(I18n.t(labels[i])); text.setTextColor(color); text.setTextSize(11);
             text.setGravity(Gravity.CENTER); text.setMaxLines(1); text.setTypeface(null, i == selected ? Typeface.BOLD : Typeface.NORMAL);
@@ -28,6 +28,16 @@ public final class UiNav {
             bar.addView(tab, lp);
         }
         return bar;
+    }
+    public static void select(LinearLayout bar,UiTheme theme,int selected) {
+        String[] labels={"监控","样式","指标","记录","关于"};
+        for (int i=0;i<bar.getChildCount();i++) {
+            LinearLayout tab=(LinearLayout)bar.getChildAt(i); boolean active=i==selected; int color=active?theme.accent:theme.muted;
+            tab.setSelected(active); tab.setBackground(UiMotion.surface(bar.getContext(),theme,active?theme.softAccent:0,12,false));
+            ((UiIcon)tab.getChildAt(0)).color(color); TextView label=(TextView)tab.getChildAt(1);
+            label.setText(I18n.t(labels[i])); label.setTextColor(color); label.setTypeface(null,active?Typeface.BOLD:Typeface.NORMAL);
+            tab.setContentDescription(I18n.t(labels[i]));
+        }
     }
     private UiNav() { }
 }

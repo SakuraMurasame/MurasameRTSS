@@ -4,6 +4,7 @@ package io.perfoverlay.app;
 public final class HardwareUserService extends IHardwareService.Stub {
     private final HardwareProbe probe = new HardwareProbe();
     private final FpsProbe fps = new FpsProbe();
+    private final AppBatteryProbe battery = new AppBatteryProbe();
     public HardwareUserService() { }
     @Override public String sample(int mask) {
         try {
@@ -13,5 +14,6 @@ public final class HardwareUserService extends IHardwareService.Stub {
             return result.toString();
         } catch (Exception e) { return "{\"error\":\"硬件采样失败\"}"; }
     }
-    @Override public void destroy() { fps.close(); System.exit(0); }
+    @Override public String battery() { return battery.sample(); }
+    @Override public void destroy() { fps.close(); battery.close(); System.exit(0); }
 }

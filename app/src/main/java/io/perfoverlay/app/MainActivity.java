@@ -22,6 +22,7 @@ public final class MainActivity extends Activity {
     private UiTheme theme;
     private int BG, CARD, INK, MUTED, ACCENT;
     private final java.util.EnumMap<Metric, TextView> overview = new java.util.EnumMap<>(Metric.class);
+    private final java.util.EnumMap<Metric, TextView> metricDetails = new java.util.EnumMap<>(Metric.class);
     private TextView samplingLabel, overviewNote;
     private boolean permissionExpanded;
     private Prefs prefs;
@@ -30,6 +31,34 @@ public final class MainActivity extends Activity {
     private Button startButton, hideButton, pauseButton;
     private OverlayView preview;
     private int page;
+    private FrameLayout pageHost;
+    private LinearLayout nav;
+    private ScrollView activeScroll;
+    private final int[] positions = new int[5];
+    private final PageState[] pages = new PageState[5];
+    private boolean resumed;
+    private boolean openingHistory;
+    private final android.content.SharedPreferences.OnSharedPreferenceChangeListener settingsChanged = (store,key) -> {
+        for (int i=0;i<pages.length;i++) if (i!=page || !resumed) pages[i]=null;
+    };
+    private final class PageState {
+        final ScrollView scroll;
+        final LinearLayout body;
+        final TextView runtimeView=runtime, previewLabel=previewTitle, permissionView=permissions, diagnosticView=diagnostics;
+        final TextView intervalView=samplingLabel, overviewLabel=overviewNote;
+        final Button startView=startButton, hideView=hideButton, pauseView=pauseButton;
+        final OverlayView previewView=preview;
+        final java.util.EnumMap<Metric,TextView> cells=new java.util.EnumMap<>(overview);
+        final java.util.EnumMap<Metric,TextView> detailCells=new java.util.EnumMap<>(metricDetails);
+        PageState(ScrollView scroll,LinearLayout body) { this.scroll=scroll; this.body=body; }
+        void bind() {
+            activeScroll=scroll; content=body; runtime=runtimeView; previewTitle=previewLabel; permissions=permissionView;
+            diagnostics=diagnosticView; samplingLabel=intervalView; overviewNote=overviewLabel;
+            startButton=startView; hideButton=hideView; pauseButton=pauseView; preview=previewView;
+            overview.clear(); overview.putAll(cells);
+            metricDetails.clear(); metricDetails.putAll(detailCells);
+        }
+    }
     private boolean pendingStart;
     private boolean notificationRequestInFlight;
     private final Handler ui = new Handler(Looper.getMainLooper());
@@ -47,9 +76,14 @@ public final class MainActivity extends Activity {
     @Override public void onCreate(Bundle state) {
         UiTheme.beforeCreate(this); super.onCreate(state); prefs = new Prefs(this);
         if (state != null) page = state.getInt("page", 0);
+        if (state != null) {
+            int[] saved=state.getIntArray("positions"); if (saved!=null) System.arraycopy(saved,0,positions,0,Math.min(saved.length,positions.length));
+            permissionExpanded=state.getBoolean("permissionsExpanded",false);
+        }
         if (getIntent().hasExtra("page")) page = getIntent().getIntExtra("page", 0);
         getIntent().removeExtra("page");
         Shizuku.addRequestPermissionResultListener(shizukuResult);
+        prefs.store.registerOnSharedPreferenceChangeListener(settingsChanged);
         buildPage();
         if (getIntent().getBooleanExtra("startFromTile", false)) {
             getIntent().removeExtra("startFromTile"); ui.post(this::startMonitoring);
@@ -57,15 +91,31 @@ public final class MainActivity extends Activity {
     }
     @Override protected void onResume() {
         super.onResume();
+        resumed=true;
+        openingHistory=false;
         if (theme != null && theme.dark != UiTheme.get(this).dark) { recreate(); return; }
+        if (pageHost!=null && pages[page]==null) showPage(page,false,0);
+        if (nav!=null) UiNav.select(nav,theme,page);
         ui.removeCallbacks(refresh); ui.post(refresh);
         if (pendingStart && !notificationRequestInFlight && Settings.canDrawOverlays(this)) { pendingStart = false; startMonitoring(); }
     }
-    @Override protected void onPause() { ui.removeCallbacks(refresh); super.onPause(); }
+    @Override protected void onPause() { resumed=false; rememberPosition(); ui.removeCallbacks(refresh); super.onPause(); }
     @Override protected void onDestroy() {
         ui.removeCallbacksAndMessages(null); Shizuku.removeRequestPermissionResultListener(shizukuResult); super.onDestroy();
+        prefs.store.unregisterOnSharedPreferenceChangeListener(settingsChanged);
     }
-    @Override protected void onSaveInstanceState(Bundle b) { b.putInt("page", page); super.onSaveInstanceState(b); }
+    @Override protected void onSaveInstanceState(Bundle b) {
+        rememberPosition();
+        b.putInt("page",page); b.putIntArray("positions",positions); b.putBoolean("permissionsExpanded",permissionExpanded); super.onSaveInstanceState(b);
+    }
+    private void rememberPosition() { if (activeScroll!=null && activeScroll.getHeight()>0) positions[page]=activeScroll.getScrollY(); }
+    @Override protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent); setIntent(intent);
+        if (intent.hasExtra("page")) {
+            int target=intent.getIntExtra("page",0); intent.removeExtra("page");
+            if (target>=0 && target<5 && target!=3) showPage(target,false,0);
+        }
+    }
     private int dp(float n) { return Math.round(n * getResources().getDisplayMetrics().density); }
     private TextView text(String value, int size, int color) {
         TextView v = new TextView(this); v.setText(value); v.setTextSize(size); v.setTextColor(color); v.setLineSpacing(dp(3), 1); return v;
@@ -84,7 +134,7 @@ public final class MainActivity extends Activity {
     }
     private Button button(String label, Runnable action, boolean primary) {
         Button b = new Button(this); b.setText(label); b.setTextSize(13); b.setAllCaps(false);
-        b.setTextColor(primary ? theme.primaryInk : ACCENT); b.setBackground(box(primary ? ACCENT : theme.surface, 12));
+        b.setTextColor(primary ? theme.primaryInk : ACCENT); b.setBackground(UiMotion.surface(this,theme,primary ? ACCENT : theme.surface,12,false));
         b.setPadding(dp(12), dp(10), dp(12), dp(10)); b.setMinHeight(dp(44)); b.setMinWidth(0);
         b.setOnClickListener(v -> action.run()); return b;
     }
@@ -92,11 +142,11 @@ public final class MainActivity extends Activity {
         Button b = button(label, action, primary); LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(-1, -2); lp.topMargin = dp(9); l.addView(b, lp);
     }
     private void buildPage() {
+        rememberPosition();
+        java.util.Arrays.fill(pages,null);
         theme = UiTheme.get(this); theme.window(this);
         BG = theme.bg; CARD = theme.card; INK = theme.ink; MUTED = theme.muted; ACCENT = theme.accent;
-        overview.clear(); samplingLabel = null; overviewNote = null;
-        runtime = null; preview = null; previewTitle = null; permissions = null; diagnostics = null;
-        startButton = null; hideButton = null; pauseButton = null;
+        if (pageHost!=null) { showPage(page,false,0); return; }
         LinearLayout root = column(); root.setBackgroundColor(BG);
         root.setOnApplyWindowInsetsListener((v, insets) -> {
             int left, top, right, bottom;
@@ -113,13 +163,27 @@ public final class MainActivity extends Activity {
         ImageView mascot = new ImageView(this); mascot.setImageResource(R.drawable.murasame_character);
         mascot.setContentDescription(I18n.t("丛雨程序图标")); header.addView(mascot, new LinearLayout.LayoutParams(dp(44), dp(44)));
         root.addView(header);
-        ScrollView scroll = new ScrollView(this); scroll.setFillViewport(true);
-        content = column(); content.setPadding(dp(16), 0, dp(16), dp(12)); scroll.addView(content); root.addView(scroll, new LinearLayout.LayoutParams(-1, 0, 1));
-        LinearLayout nav = UiNav.create(this, theme, page, this::navigate);
+        pageHost=new UiMotion.Host(this); root.addView(pageHost,new LinearLayout.LayoutParams(-1,0,1));
+        nav = UiNav.create(this, theme, page, this::navigate);
         LinearLayout.LayoutParams navLayout = new LinearLayout.LayoutParams(-1, -2); navLayout.setMargins(dp(12), 0, dp(12), dp(6));
         root.addView(nav, navLayout);
         setContentView(root);
-        if (page == 0) monitorPage(); else if (page == 1) stylePage(); else if (page == 2) metricsPage(); else diagnosticsPage();
+        showPage(page,false,0);
+    }
+    private void showPage(int target,boolean animate,int direction) {
+        rememberPosition();
+        page=target; PageState state=pages[page];
+        if (state==null) {
+            overview.clear(); metricDetails.clear(); samplingLabel=null; overviewNote=null; runtime=null; preview=null; previewTitle=null;
+            permissions=null; diagnostics=null; startButton=null; hideButton=null; pauseButton=null;
+            ScrollView scroll=new ScrollView(this); scroll.setFillViewport(true);
+            content=column(); content.setPadding(dp(16),0,dp(16),dp(12)); scroll.addView(content);
+            if (page==0) monitorPage(); else if (page==1) stylePage(); else if (page==2) metricsPage(); else diagnosticsPage();
+            state=new PageState(scroll,content); pages[page]=state;
+        }
+        state.bind(); UiNav.select(nav,theme,page);
+        UiMotion.swap(pageHost,activeScroll,direction,animate);
+        UiMotion.restoreScroll(activeScroll,positions[page]);
         refreshState();
     }
     private void previewCard() {
@@ -158,6 +222,7 @@ public final class MainActivity extends Activity {
         pauseButton = button(I18n.t("暂停采样"), () -> send(MonitorService.PAUSE), false);
         LinearLayout.LayoutParams h = new LinearLayout.LayoutParams(0, -2, 1); h.rightMargin = dp(8);
         controls.addView(hideButton, h); controls.addView(pauseButton, new LinearLayout.LayoutParams(0, -2, 1)); control.addView(controls);
+        fullButton(control, I18n.t("应用耗电"), () -> UiMotion.open(this,new Intent(this,AppBatteryActivity.class),1), false);
         LinearLayout metrics = card(I18n.t("性能概览"), "");
         overviewNote = text("", 11, MUTED); metrics.addView(overviewNote); addGap(metrics, 8);
         Metric[] shown = {Metric.CPU_FREQ, Metric.RAM, Metric.CPU_TEMP, Metric.BAT_TEMP};
@@ -188,7 +253,7 @@ public final class MainActivity extends Activity {
         LinearLayout details = column(); p.addView(details);
         boolean expanded = permissionExpanded || !Settings.canDrawOverlays(this);
         details.setVisibility(expanded ? View.VISIBLE : View.GONE);
-        permissionTitle.setOnClickListener(v -> { permissionExpanded = details.getVisibility() != View.VISIBLE; details.setVisibility(permissionExpanded ? View.VISIBLE : View.GONE); });
+        permissionTitle.setOnClickListener(v -> { UiMotion.expand(p); permissionExpanded = details.getVisibility() != View.VISIBLE; details.setVisibility(permissionExpanded ? View.VISIBLE : View.GONE); });
         details.addView(text(I18n.t("已安装 Shizuku 时，先在 Shizuku 中启动服务，再返回这里授权。"), 12, MUTED));
         fullButton(details, I18n.t("允许悬浮窗"), this::overlayPermission, false);
         fullButton(details, I18n.t("允许通知"), this::notificationPermission, false);
@@ -197,8 +262,11 @@ public final class MainActivity extends Activity {
         fullButton(details, I18n.t("打开触摸测试页"), () -> startActivity(new Intent(this, TouchTestActivity.class)), false);
     }
     private void navigate(int index) {
-        if (index == 3) startActivity(new Intent(this, HistoryActivity.class));
-        else if (index != page) { page = index; buildPage(); }
+        if (index==3) {
+            if (openingHistory) return; openingHistory=true;
+            rememberPosition(); UiNav.select(nav,theme,3);
+            UiMotion.open(this,new Intent(this,HistoryActivity.class),index>page?1:-1);
+        } else if (index!=page) showPage(index,true,index>page?1:-1);
     }
     private interface IntChange { void set(int value); }
     private interface BoolChange { void set(boolean value); }
@@ -252,7 +320,7 @@ public final class MainActivity extends Activity {
             choice.setOnCheckedChangeListener((v, on) -> prefs.put("metric_" + m.name(), on)); c.addView(choice);
             Snapshot s = MonitorService.latest;
             String reason = s == null ? m == Metric.FPS ? I18n.t("开启 Shizuku 并切换到目标应用后读取") : I18n.t("开始监控后查看可用数据") : I18n.raw(s.values.get(m)) + " · " + I18n.raw(s.reasons.get(m));
-            c.addView(text(reason, 12, MUTED)); addGap(c, 7);
+            TextView reading=text(reason,12,MUTED); c.addView(reading); metricDetails.put(m,reading); addGap(c,7);
             LinearLayout row = new LinearLayout(this);
             Button up = button(I18n.t("前移 ↑"), () -> { prefs.move(m, -1); buildPage(); }, false);
             Button down = button(I18n.t("后移 ↓"), () -> { prefs.move(m, 1); buildPage(); }, false);
@@ -280,17 +348,17 @@ public final class MainActivity extends Activity {
     private void diagnosticsPage() {
         LinearLayout language = card(I18n.t("语言"), I18n.t("语言切换立即生效，监控和记录不会中断。"));
         fullButton(language, I18n.t("应用语言") + " · " + languageName(), this::chooseLanguage, false);
-        LinearLayout about = card(I18n.t("关于程序"), I18n.t("MurasameRTSS · 1.1.0\nAndroid 游戏性能浮窗与本地曲线记录"));
+        LinearLayout about = card(I18n.t("关于程序"), I18n.t("MurasameRTSS · 1.2.1\nAndroid 游戏性能浮窗与本地曲线记录"));
         ImageView icon = new ImageView(this); icon.setImageResource(R.drawable.murasame_character);
         icon.setContentDescription(I18n.t("丛雨程序图标")); about.addView(icon, new LinearLayout.LayoutParams(dp(88), dp(88)));
         LinearLayout updates = card(I18n.t("历史更新"), I18n.t("日期 / 版本 / 更新内容"));
-        updates.addView(text(I18n.t("2026-10-10 · 1.1.0\n更新底部导航、性能概览、浮窗预览与曲线卡片；新增暗色、亮色和跟随系统主题，设置持久保存。\n\n2026-10-10 · 1.0.0\n新增日语、英语、法语和德语，支持跟随系统或手动选择语言。移除首页副标题和关于页图标制作说明。\n\n2026-10-08 · 0.4.0\n新增默认开启的“监控时自动记录”开关；开始监控自动记录，停止监控保存。记录采集独立于浮窗显示，新增 15 项指标纵向曲线面板、共用时间轴、同步游标、末点 / 选中读数及最低 / 最高 / 均值。保留单点、时间段和整次删除。\n\n2026-10-07 · 0.3.0\n应用更名 MurasameRTSS，更换丛雨图标；新增手动曲线记录、指标切换、时间范围查看、单点 / 时间段 / 整次记录删除；新增关于程序和历史更新。\n\n2026-10-07 · 0.2.1\n修复横屏空间充足时仍显示两行的问题；按可用宽度平铺，旋转屏幕自动重新测量。\n\n2026-10-07 · 0.2.0\n加入 Shizuku 应用呈现 FPS 和帧间隔检测、整机功耗估算；明确 GPU 节点读取限制，改进诊断信息。\n\n2026-10-07 · 0.1.0\n首个版本：手动启停、常驻通知、顶部浮窗、CPU 核心组频率及温度 / 内存 / 电池监控；可选指标、字号与黑底透明度，支持触摸穿透。"), 13, INK));
+        updates.addView(text(I18n.t("2026-10-13 · 1.2.1\n优化卡片与页面切换：保留页面、滚动位置，新增轻量过渡与点击反馈。耗电详情独立显示，返回键先回到列表，保留曲线选中区间。\n\n2026-10-13 · 1.2.0\n新增独立后台应用耗电记录、耗电占比与 mAh、时间范围查看及平均功耗图。前台不透明，后台半透明，未归类消耗使用斜纹。\n\n2026-10-10 · 1.1.0\n更新底部导航、性能概览、浮窗预览与曲线卡片；新增暗色、亮色和跟随系统主题，设置持久保存。\n\n2026-10-10 · 1.0.0\n新增日语、英语、法语和德语，支持跟随系统或手动选择语言。移除首页副标题和关于页图标制作说明。\n\n2026-10-08 · 0.4.0\n新增默认开启的“监控时自动记录”开关；开始监控自动记录，停止监控保存。记录采集独立于浮窗显示，新增 15 项指标纵向曲线面板、共用时间轴、同步游标、末点 / 选中读数及最低 / 最高 / 均值。保留单点、时间段和整次删除。\n\n2026-10-07 · 0.3.0\n应用更名 MurasameRTSS，更换丛雨图标；新增手动曲线记录、指标切换、时间范围查看、单点 / 时间段 / 整次记录删除；新增关于程序和历史更新。\n\n2026-10-07 · 0.2.1\n修复横屏空间充足时仍显示两行的问题；按可用宽度平铺，旋转屏幕自动重新测量。\n\n2026-10-07 · 0.2.0\n加入 Shizuku 应用呈现 FPS 和帧间隔检测、整机功耗估算；明确 GPU 节点读取限制，改进诊断信息。\n\n2026-10-07 · 0.1.0\n首个版本：手动启停、常驻通知、顶部浮窗、CPU 核心组频率及温度 / 内存 / 电池监控；可选指标、字号与黑底透明度，支持触摸穿透。"), 13, INK));
         LinearLayout c = card(I18n.t("实时诊断"), I18n.t("数据保留在本机。-- 表示无有效数据；不代表温度或功耗为零。"));
         diagnostics = text("", 12, MUTED); diagnostics.setTypeface(Typeface.MONOSPACE); diagnostics.setTextIsSelectable(true); c.addView(diagnostics);
         fullButton(c, I18n.t("复制诊断报告"), () -> {
             getSystemService(ClipboardManager.class).setPrimaryClip(ClipData.newPlainText(I18n.t("MurasameRTSS 诊断"), diagnosticText())); toast(I18n.t("已复制"));
         }, false);
-        LinearLayout limits = card(I18n.t("当前版本"), "MurasameRTSS 1.1.0 · Android 10+");
+        LinearLayout limits = card(I18n.t("当前版本"), "MurasameRTSS 1.2.1 · Android 10+");
         limits.addView(text(I18n.t("新增应用呈现 FPS / 帧间隔：由 Shizuku 读取前台应用图层的 SurfaceFlinger 时间戳；与游戏内部渲染帧数、屏幕 Hz 不同。\n\n新增整机功耗估算：仅未接外部电源且正在放电时提供。充电时请查看电池侧功率，不能将其当成整机功耗。\n\nCPU/GPU 独立功耗仍未适配。GPU 权限被 ROM 拒绝时会明确说明；Shizuku 不等于 Root。"), 13, MUTED));
     }
     private String themeName() {
@@ -342,6 +410,11 @@ public final class MainActivity extends Activity {
         for (java.util.Map.Entry<Metric, TextView> cell : overview.entrySet()) {
             String value = sample == null ? "--" : I18n.raw(sample.values.get(cell.getKey()));
             cell.getValue().setText(value); cell.getValue().setTextColor("--".equals(value) ? MUTED : cell.getKey() == Metric.CPU_TEMP || cell.getKey() == Metric.BAT_TEMP ? theme.amber : INK);
+        }
+        for (java.util.Map.Entry<Metric,TextView> entry:metricDetails.entrySet()) {
+            Metric metric=entry.getKey();
+            entry.getValue().setText(sample==null ? I18n.t(metric==Metric.FPS ? "开启 Shizuku 并切换到目标应用后读取" : "开始监控后查看可用数据")
+                    : I18n.raw(sample.values.get(metric))+" · "+I18n.raw(sample.reasons.get(metric)));
         }
         if (startButton != null) startButton.setText(MonitorService.running ? I18n.t("停止监控") : I18n.t("开始监控"));
         if (hideButton != null) { hideButton.setEnabled(MonitorService.running); hideButton.setText(MonitorService.hidden ? I18n.t("显示浮窗") : I18n.t("隐藏浮窗")); }

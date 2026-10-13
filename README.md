@@ -1,20 +1,21 @@
-# MurasameRTSS 1.1.0
+# MurasameRTSS 1.2.1
 
 Android 游戏性能监控浮窗，默认顶部横向平铺。为“无 Root，已安装 Shizuku”的使用方式实现。
 
-[下载 APK](https://github.com/SakuraMurasame/MurasameRTSS/releases/tag/v1.1.0) · [历史更新](CHANGELOG.md) · [问题反馈](https://github.com/SakuraMurasame/MurasameRTSS/issues)
+[下载 APK](https://github.com/SakuraMurasame/MurasameRTSS/releases/tag/v1.2.1) · [历史更新](CHANGELOG.md) · [问题反馈](https://github.com/SakuraMurasame/MurasameRTSS/issues)
 
-1.1.0 安装包为 `MurasameRTSS-1.1.0.apk`，发布页同时提供 SHA-256 校验文件。
+1.2.1 安装包为 `MurasameRTSS-1.2.1.apk`，发布页同时提供 SHA-256 校验文件。
 
 ## 安装与使用
 
-1. 从 [GitHub Releases](https://github.com/SakuraMurasame/MurasameRTSS/releases/tag/v1.1.0) 下载并安装 `MurasameRTSS-1.1.0.apk`。可覆盖同签名的旧版 PerfOverlay 或 MurasameRTSS 并保留配置与历史记录。
+1. 从 [GitHub Releases](https://github.com/SakuraMurasame/MurasameRTSS/releases/tag/v1.2.1) 下载并安装 `MurasameRTSS-1.2.1.apk`。可覆盖同签名旧版并保留配置与历史记录。
 2. 在 Shizuku 中通过无线调试启动服务。
 3. 打开 MurasameRTSS，在“监控”页允许悬浮窗和通知，点击“连接 / 授权 Shizuku”。
 4. 点击“开始监控”，再切回游戏。
 5. 在“样式”页选择暗色、亮色或跟随系统主题，并调整字号、黑底不透明度、顶部间距、分隔线和刷新速度；设置会立即应用。主页也提供字号与黑底不透明度快捷滑块。
 6. 在“指标”页开关和排序显示项目。在通知栏可隐藏、暂停或停止；也可添加“性能浮窗”快捷设置磁贴。
 7. “记录”页的“监控时自动记录”默认开启：开始监控即记录，停止监控即保存。可同时查看 15 项纵向曲线；关闭开关后也可以手动开始。点任意曲线同步选择时刻，点击“时间范围 / 删除”管理数据。
+8. 在“监控 → 应用耗电”或“记录 → 应用耗电记录”开启独立后台耗电监控。首次采样建立基线，下一次采样后显示各程序耗电占比与 mAh；点击程序查看前台 / 后台 / 未归类的分时功耗。可手动选时间范围、历史记录及删除整次记录。详细口径见 [应用耗电说明](BATTERY_MONITOR.md)。
 
 安装包支持 Android 10 及以上，使用项目本地开发证书签名。源码和 APK 不包含签名私钥。自行构建时请妥善保留生成的 `signing/development.jks`，用于更新自己构建的版本；自行构建的 APK 不能直接覆盖不同签名的发布版。
 
@@ -26,6 +27,8 @@ Android 游戏性能监控浮窗，默认顶部横向平铺。为“无 Root，�
 
 ## 本版已实现
 
+- 1.2.1 改善卡片与页面切换，复用页面并保留滚动位置；耗电详情使用独立视图，返回先回到列表。短距离过渡和原生点击反馈遵守系统的动画设置。
+- 1.2.0 新增独立后台应用耗电统计、耗电占比、mAh、时间范围和平均功耗图；前台不透明、后台半透明，系统未归类部分斜纹显示。使用 Shizuku 读取系统归因估算，不会将整机电流按程序时间比例分摊。
 - 1.1.0 新增暗色 / 亮色 / 跟随系统主题，调整底部导航、实时指标卡片、浮窗预览和独立曲线卡片。主题与浮窗黑底透明度分别设置，切换主题不结束记录。
 - 1.0.0 新增日语、英语、法语和德语；移除首页副标题和关于页的图标制作说明，保留图标及历史更新。
 
@@ -100,7 +103,7 @@ Android 12+ 的整窗 alpha 取 `getMaximumObscuringOpacityForTouch() - 0.01`；
 .\test.ps1 -Jdk 'C:\Program Files\Android\openjdk\jdk-21.0.8'
 ```
 
-构建脚本使用 SDK 自带 AAPT2、AIDL、D8、zipalign 和 apksigner，所有中间产物写入项目 `build/`，不会修改系统 SDK。输出 `dist/MurasameRTSS-1.1.0.apk` 和 SHA-256 校验文件。
+构建脚本使用 SDK 自带 AAPT2、AIDL、D8、zipalign 和 apksigner，所有中间产物写入项目 `build/`，不会修改系统 SDK。输出 `dist/MurasameRTSS-1.2.1.apk` 和 SHA-256 校验文件。
 
 也可在 Android Studio 中打开本目录，通过 AGP 8.13.0 / Gradle 8.13 构建。Shizuku 13.1.5 依赖已固定版本并随源码保存在 `vendor/`。
 
@@ -133,7 +136,7 @@ tests/CoreTests.java         可在本机运行的核心逻辑测试
 
 ## 验证范围
 
-1.1.0 的验证范围见 `TEST_REPORT_1.1.0.md`。多语言验证见 `TEST_REPORT_1.0.0.md`，记录生命周期见 `TEST_REPORT_0.4.0.md`，前版曲线 / 删除 / 图标实机验证见 `TEST_REPORT_0.3.0.md`，横竖屏 / 触摸穿透见 `TEST_REPORT_0.2.1.md`，此前 FPS 与功耗见 `TEST_REPORT_0.2.0.md`。完整更新记录见 `CHANGELOG.md`。
+交互优化的验证范围见 `TEST_REPORT_1.2.1.md`，应用耗电见 `TEST_REPORT_1.2.0.md`。此前界面与主题见 `TEST_REPORT_1.1.0.md`，多语言见 `TEST_REPORT_1.0.0.md`，记录生命周期见 `TEST_REPORT_0.4.0.md`，曲线 / 删除 / 图标见 `TEST_REPORT_0.3.0.md`，横竖屏 / 触摸穿透见 `TEST_REPORT_0.2.1.md`，此前 FPS 与功耗见 `TEST_REPORT_0.2.0.md`。完整更新记录见 `CHANGELOG.md`。
 
 首轮实机建议依次验证：
 

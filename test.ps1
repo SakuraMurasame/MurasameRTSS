@@ -15,3 +15,7 @@ if ($LASTEXITCODE -ne 0) { throw 'History tests failed' }
 if ($LASTEXITCODE -ne 0) { throw 'Localization test compilation failed' }
 & (Join-Path $Jdk 'bin\java.exe') -ea -cp $taskClasses LocalizationTests $PSScriptRoot
 if ($LASTEXITCODE -ne 0) { throw 'Localization tests failed' }
+& (Join-Path $Jdk 'bin\javac.exe') -encoding UTF-8 --release 17 -cp $taskClasses -d $taskClasses (Join-Path $taskSource 'AppBatteryData.java') (Join-Path $taskSource 'AppBatteryParser.java') (Join-Path $taskSource 'AppBatteryStore.java') (Join-Path $PSScriptRoot 'tests\AppBatteryTests.java')
+if ($LASTEXITCODE -ne 0) { throw 'App battery test compilation failed' }
+& (Join-Path $Jdk 'bin\java.exe') -ea -cp $taskClasses AppBatteryTests (Join-Path $PSScriptRoot 'build')
+if ($LASTEXITCODE -ne 0) { throw 'App battery tests failed' }

@@ -185,11 +185,11 @@
     <string name="msg_181" formatted="false">" : vérifiez la fonction du capteur avant de choisir"</string>
     <string name="msg_182" formatted="false">"Capteur mis à jour"</string>
     <string name="msg_183" formatted="false">"À propos de l’application"</string>
-    <string name="msg_184" formatted="false">"MurasameRTSS · 1.1.0\nSuperposition de performances Android et courbes locales"</string>
+    <string name="msg_184" formatted="false">"MurasameRTSS · 1.2.1\nSuperposition de performances Android et courbes locales"</string>
     <string name="msg_185" formatted="false">"Icône Murasame"</string>
     <string name="msg_186" formatted="false">"Historique des versions"</string>
     <string name="msg_187" formatted="false">"Date / Version / Modifications"</string>
-    <string name="msg_188" formatted="false">"2026-10-10 · 1.1.0\nNouvelle navigation basse, aperçu des performances, prévisualisation et cartes de courbes. Ajout des thèmes Sombre, Clair et Système, avec choix mémorisé.\n\n2026-10-10 · 1.0.0\nAjout du japonais, de l’anglais, du français et de l’allemand, selon le système ou un choix manuel. Retrait du sous-titre et de la note sur la création de l’icône.\n\n2026-10-08 · 0.4.0\nEnregistrement automatique activé par défaut : le suivi démarre la capture, son arrêt la sauvegarde. Toutes les mesures sont enregistrées indépendamment de l’affichage. Ajout de 15 courbes empilées avec axe commun, curseur synchronisé, valeurs dernière/sélectionnée et min/max/moyenne. Suppression de points, périodes et sessions conservée.\n\n2026-10-07 · 0.3.0\nRenommage en MurasameRTSS avec icône Murasame. Ajout de l’enregistrement manuel, choix des mesures, périodes et suppression de points, périodes ou sessions. Ajout des informations et de l’historique des versions.\n\n2026-10-07 · 0.2.1\nCorrection des retours à la ligne inutiles en paysage. Nouveau calcul de largeur lors de la rotation.\n\n2026-10-07 · 0.2.0\nAjout des FPS de présentation et intervalles via Shizuku, et de l’estimation de puissance totale. Précisions sur les restrictions GPU et amélioration du diagnostic.\n\n2026-10-07 · 0.1.0\nPremière version : commandes manuelles, notification persistante, superposition en haut, fréquences CPU, températures, mémoire et batterie. Mesures, texte et opacité configurables, gestes traversants."</string>
+    <string name="msg_188" formatted="false">"2026-10-13 · 1.2.1\nNavigation plus fluide avec conservation des pages et du défilement, transitions brèves et retour tactile visuel. Les détails de consommation sont séparés ; Retour revient à la liste et l’intervalle sélectionné est conservé.\n\n2026-10-13 · 1.2.0\nAjout de relevés indépendants de consommation des applications, parts et mAh, plages horaires et graphiques de puissance moyenne. Premier plan opaque, arrière-plan translucide, consommation non classée hachurée.\n\n2026-10-10 · 1.1.0\nNouvelle navigation basse, aperçu des performances, prévisualisation et cartes de courbes. Ajout des thèmes Sombre, Clair et Système, avec choix mémorisé.\n\n2026-10-10 · 1.0.0\nAjout du japonais, de l’anglais, du français et de l’allemand, selon le système ou un choix manuel. Retrait du sous-titre et de la note sur la création de l’icône.\n\n2026-10-08 · 0.4.0\nEnregistrement automatique activé par défaut : le suivi démarre la capture, son arrêt la sauvegarde. Toutes les mesures sont enregistrées indépendamment de l’affichage. Ajout de 15 courbes empilées avec axe commun, curseur synchronisé, valeurs dernière/sélectionnée et min/max/moyenne. Suppression de points, périodes et sessions conservée.\n\n2026-10-07 · 0.3.0\nRenommage en MurasameRTSS avec icône Murasame. Ajout de l’enregistrement manuel, choix des mesures, périodes et suppression de points, périodes ou sessions. Ajout des informations et de l’historique des versions.\n\n2026-10-07 · 0.2.1\nCorrection des retours à la ligne inutiles en paysage. Nouveau calcul de largeur lors de la rotation.\n\n2026-10-07 · 0.2.0\nAjout des FPS de présentation et intervalles via Shizuku, et de l’estimation de puissance totale. Précisions sur les restrictions GPU et amélioration du diagnostic.\n\n2026-10-07 · 0.1.0\nPremière version : commandes manuelles, notification persistante, superposition en haut, fréquences CPU, températures, mémoire et batterie. Mesures, texte et opacité configurables, gestes traversants."</string>
     <string name="msg_189" formatted="false">"Diagnostic en direct"</string>
     <string name="msg_190" formatted="false">"Les données restent sur l’appareil. -- signifie indisponible, pas une température ou puissance nulle."</string>
     <string name="msg_191" formatted="false">"Copier le diagnostic"</string>
@@ -301,4 +301,51 @@
     <string name="ui_overlay" formatted="false">"Superposition"</string>
     <string name="ui_notifications" formatted="false">"Notifications"</string>
     <string name="ui_record_help" formatted="false">"Aide à l’enregistrement"</string>
+    <string name="battery_000" formatted="false">"Consommation des applications"</string>
+    <string name="battery_001" formatted="false">"Accès aux statistiques de consommation refusé par le système"</string>
+    <string name="battery_002" formatted="false">"Statistiques de consommation trop volumineuses"</string>
+    <string name="battery_003" formatted="false">"Le système ne fournit pas de statistiques compatibles"</string>
+    <string name="battery_004" formatted="false">"Lecture des statistiques de consommation impossible"</string>
+    <string name="battery_005" formatted="false">"Stockage des relevés indisponible"</string>
+    <string name="battery_006" formatted="false">"En attente du premier relevé de référence"</string>
+    <string name="battery_007" formatted="false">"Limite du relevé atteinte ou échec de l’écriture"</string>
+    <string name="battery_008" formatted="false">"Enregistrement de la consommation"</string>
+    <string name="battery_009" formatted="false">"Référence établie ; en attente du prochain relevé"</string>
+    <string name="battery_010" formatted="false">"Démarrez Shizuku et autorisez l’accès"</string>
+    <string name="battery_011" formatted="false">"Arrêter et enregistrer le relevé"</string>
+    <string name="battery_012" formatted="false">"Démarrer le suivi de consommation"</string>
+    <string name="battery_013" formatted="false">"À propos des estimations"</string>
+    <string name="battery_014" formatted="false">"La consommation est estimée par attribution Android, sans mesure matérielle par application. Le pourcentage est la part de consommation attribuée sur la période sélectionnée, et non la baisse du niveau de batterie."</string>
+    <string name="battery_015" formatted="false">"Les relevés sont espacés d’au moins 60 secondes, même écran éteint. La veille profonde peut les retarder. La puissance est une moyenne par intervalle ; les statistiques peuvent être différées et les faibles variations arrondies à zéro."</string>
+    <string name="battery_016" formatted="false">"Les services de premier plan et processus en cache sont comptés en arrière-plan. La consommation non classée est hachurée. Les applications partageant un UID sont regroupées."</string>
+    <string name="battery_017" formatted="false">"Aucune consommation n’est déduite pendant les déconnexions, réinitialisations ou changements d’identité. Le premier relevé sert de référence ; le suivant crée le premier intervalle."</string>
+    <string name="battery_018" formatted="false">"Plage horaire"</string>
+    <string name="battery_019" formatted="false">"Choisir un relevé"</string>
+    <string name="battery_020" formatted="false">"Seuls les intervalles complets sont inclus ; ceux aux limites ne sont pas divisés."</string>
+    <string name="battery_021" formatted="false">"Part et consommation"</string>
+    <string name="battery_022" formatted="false">"Touchez une application pour voir sa puissance sur la période choisie."</string>
+    <string name="battery_023" formatted="false">"Supprimer le relevé complet"</string>
+    <string name="battery_024" formatted="false">"Arrêtez le suivi avant de modifier l’intervalle"</string>
+    <string name="battery_025" formatted="false">"Aucun relevé de consommation"</string>
+    <string name="battery_026" formatted="false">"Lecture du relevé impossible"</string>
+    <string name="battery_027" formatted="false">"Consommation attribuée"</string>
+    <string name="battery_028" formatted="false">"Part dans la consommation des applications listées"</string>
+    <string name="battery_029" formatted="false">"Aucun intervalle complet et valide dans cette plage"</string>
+    <string name="battery_030" formatted="false">"Afficher plus d’applications"</string>
+    <string name="battery_031" formatted="false">"Saisissez une plage horaire valide"</string>
+    <string name="battery_032" formatted="false">"Retour à la liste"</string>
+    <string name="battery_033" formatted="false">"Premier plan : opaque · Arrière-plan : translucide · Non classé : hachuré"</string>
+    <string name="battery_034" formatted="false">"Puissance moyenne par intervalle"</string>
+    <string name="battery_035" formatted="false">"Consommation par intervalle"</string>
+    <string name="battery_036" formatted="false">"Sélectionnez un intervalle pour voir la puissance"</string>
+    <string name="battery_037" formatted="false">"Premier plan"</string>
+    <string name="battery_038" formatted="false">"Arrière-plan"</string>
+    <string name="battery_039" formatted="false">"Non classé"</string>
+    <string name="battery_040" formatted="false">"Processus système"</string>
+    <string name="battery_041" formatted="false">"Attribution partagée"</string>
+    <string name="battery_042" formatted="false">"Arrêtez d’abord le suivi"</string>
+    <string name="battery_043" formatted="false">"Suppression irréversible. Supprimer ce relevé ?"</string>
+    <string name="battery_044" formatted="false">"Relevés de consommation"</string>
+    <string name="battery_unknown_app" formatted="false">"Application non identifiée"</string>
+    <string name="battery_back" formatted="false">"Retour"</string>
 </resources>

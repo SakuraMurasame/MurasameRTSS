@@ -23,8 +23,12 @@ public final class ShizukuBridge implements AutoCloseable {
         }
     };
     public ShizukuBridge(Context context) {
+        this(context, false);
+    }
+    public ShizukuBridge(Context context, boolean battery) {
         args = new Shizuku.UserServiceArgs(new ComponentName(context, HardwareUserService.class))
-                .tag("perfoverlay.hardware").processNameSuffix("hardware").daemon(false).version(3);
+                .tag(battery ? "perfoverlay.battery" : "perfoverlay.hardware")
+                .processNameSuffix(battery ? "battery" : "hardware").daemon(false).version(4);
     }
     public static boolean available() {
         try { return Shizuku.pingBinder() && !Shizuku.isPreV11(); }
@@ -50,6 +54,12 @@ public final class ShizukuBridge implements AutoCloseable {
         catch (Exception e) { remote = null; state = "Shizuku 读取中断"; return null; }
     }
     public String status() { return state; }
+    public String battery() {
+        IHardwareService service = remote;
+        if (service == null || !authorized()) return null;
+        try { return service.battery(); }
+        catch (Exception e) { remote = null; state = "Shizuku 读取中断"; return null; }
+    }
     @Override public void close() {
         remote = null;
         if (bound) {

@@ -7,11 +7,13 @@ import android.view.View;
 /** Small line icons drawn locally; no image decoding or extra runtime dependency. */
 public final class UiIcon extends View {
     private final Paint pen = new Paint(Paint.ANTI_ALIAS_FLAG);
-    private final int kind, color;
+    private final int kind;
+    private int color;
     public UiIcon(Context context, int kind, int color) {
         super(context); this.kind = kind; this.color = color;
         setImportantForAccessibility(IMPORTANT_FOR_ACCESSIBILITY_NO);
     }
+    public void color(int value) { color=value; invalidate(); }
     @Override protected void onDraw(Canvas canvas) {
         super.onDraw(canvas); int save = canvas.save();
         float size = Math.min(getWidth(), getHeight());

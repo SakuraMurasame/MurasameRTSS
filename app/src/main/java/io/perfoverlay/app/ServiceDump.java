@@ -11,6 +11,9 @@ import java.util.concurrent.*;
 public final class ServiceDump implements AutoCloseable {
     private final ExecutorService reader = Executors.newSingleThreadExecutor();
     public String read(String serviceName, String... args) throws Exception {
+        return readLimited(2 * 1024 * 1024, serviceName, args);
+    }
+    public String readLimited(int limit, String serviceName, String... args) throws Exception {
         IBinder service = (IBinder) Class.forName("android.os.ServiceManager")
                 .getMethod("getService", String.class).invoke(null, serviceName);
         if (service == null) throw new IllegalStateException(serviceName + " service unavailable");
@@ -20,7 +23,7 @@ public final class ServiceDump implements AutoCloseable {
                     ByteArrayOutputStream bytes = new ByteArrayOutputStream()) {
                 byte[] buffer = new byte[8192]; int n;
                 while ((n = input.read(buffer)) != -1) {
-                    if (bytes.size() + n > 2 * 1024 * 1024) throw new IllegalStateException("dump output exceeds limit");
+                    if (bytes.size() + n > limit) throw new IllegalStateException("dump output exceeds limit");
                     bytes.write(buffer, 0, n);
                 }
                 return bytes.toString(StandardCharsets.UTF_8.name());

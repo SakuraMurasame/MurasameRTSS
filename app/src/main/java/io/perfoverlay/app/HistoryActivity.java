@@ -32,6 +32,8 @@ public final class HistoryActivity extends Activity {
     private List<HistoryStore.Point> points = new ArrayList<>();
     private HistoryStore.Point selected;
     private long restoredSelection = -1;
+    private int listPosition;
+    private boolean listNeedsRestore;
     private int generation, listLimit = 20;
     private int drawGeneration;
     private boolean loading;
@@ -57,8 +59,10 @@ public final class HistoryActivity extends Activity {
             id = state.getString("id", ""); followLatest = state.getBoolean("follow", true);
             restoredFrom = state.getString("from"); restoredTo = state.getString("to");
             restoredSelection = state.getLong("selection", -1);
+            listPosition=state.getInt("listPosition",0);
         } else id = history.active;
         build();
+        UiMotion.backHandler(this,this::backAction);
     }
     @Override protected void onResume() { super.onResume(); if (theme != null && theme.dark != UiTheme.get(this).dark) { recreate(); return; } ui.removeCallbacks(tick); ui.post(tick); }
     @Override protected void onPause() { ui.removeCallbacks(tick); super.onPause(); }
@@ -66,8 +70,19 @@ public final class HistoryActivity extends Activity {
     @Override protected void onSaveInstanceState(Bundle b) {
         b.putString("id", id); b.putBoolean("follow", followLatest);
         b.putLong("selection", selected == null ? restoredSelection : selected.sequence);
+        b.putInt("listPosition",id.isEmpty() && scroll!=null?scroll.getScrollY():listPosition);
         if (!id.isEmpty() && from != null) { b.putString("from", from.getText().toString()); b.putString("to", to.getText().toString()); }
         super.onSaveInstanceState(b);
+    }
+    @Override public void onBackPressed() { backAction(); }
+    private void backAction() {
+        if (!id.isEmpty()) { id=""; build(); UiMotion.reveal(content,-1); }
+        else UiMotion.back(this);
+    }
+    private void openRecord(String entry) {
+        if (id.isEmpty() && scroll!=null) listPosition=scroll.getScrollY();
+        id=entry; restoredFrom=null; restoredTo=null; restoredSelection=-1; followLatest=true;
+        build(); UiMotion.reveal(content,1);
     }
     private int dp(float n) { return Math.round(n * getResources().getDisplayMetrics().density); }
     private TextView text(String s, int size) { TextView v = new TextView(this); v.setText(s); v.setTextSize(size); v.setTextColor(theme.ink); v.setPadding(0, dp(6), 0, dp(6)); return v; }
@@ -75,7 +90,7 @@ public final class HistoryActivity extends Activity {
     private Button button(LinearLayout parent, String s, Runnable action) {
         Button b = new Button(this); b.setText(s); b.setAllCaps(false); b.setTextColor(theme.accent); b.setOnClickListener(v -> action.run());
         b.setTextSize(13); b.setPadding(dp(12), dp(10), dp(12), dp(10)); b.setMinHeight(dp(44)); b.setMinWidth(0);
-        GradientDrawable background = new GradientDrawable(); background.setColor(theme.surface); background.setCornerRadius(dp(12)); b.setBackground(background);
+        b.setBackground(UiMotion.surface(this,theme,theme.surface,12,false));
         LinearLayout.LayoutParams p = new LinearLayout.LayoutParams(-1, -2); p.setMargins(0, dp(6), 0, dp(6)); parent.addView(b, p); return b;
     }
     private LinearLayout card(String title) {
@@ -94,7 +109,7 @@ public final class HistoryActivity extends Activity {
         if (!id.isEmpty()) {
             Button back = new Button(this); back.setText("‹"); back.setTextSize(25); back.setTextColor(theme.accent);
             back.setContentDescription(I18n.t("‹ 全部记录")); back.setMinWidth(0); back.setPadding(0, 0, 0, 0);
-            back.setBackground(theme.shape(this, theme.surface, 12, false)); back.setOnClickListener(v -> { id = ""; build(); });
+            back.setBackground(UiMotion.surface(this,theme,theme.surface,12,false)); back.setOnClickListener(v -> backAction());
             LinearLayout.LayoutParams backLayout = new LinearLayout.LayoutParams(dp(44), dp(44)); backLayout.rightMargin = dp(10);
             header.addView(back, backLayout);
         }
@@ -102,7 +117,8 @@ public final class HistoryActivity extends Activity {
         ImageView mascot = new ImageView(this); mascot.setImageResource(R.drawable.murasame_character); mascot.setContentDescription(I18n.t("丛雨程序图标")); header.addView(mascot, new LinearLayout.LayoutParams(dp(44), dp(44))); root.addView(header);
         scroll = new ScrollView(this); content = col(); content.setPadding(dp(16), dp(8), dp(16), dp(24)); scroll.addView(content); root.addView(scroll, new LinearLayout.LayoutParams(-1, 0, 1)); LinearLayout nav = UiNav.create(this, theme, 3, index -> {
             if (index == 3) return;
-            startActivity(new Intent(this, MainActivity.class).putExtra("page", index).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)); finish();
+            UiMotion.open(this,new Intent(this,MainActivity.class).putExtra("page",index)
+                    .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP),index>3?1:-1); finish();
         });
         LinearLayout.LayoutParams navLayout = new LinearLayout.LayoutParams(-1, -2); navLayout.setMargins(dp(12), 0, dp(12), dp(6)); root.addView(nav, navLayout);
         setContentView(root);
@@ -130,11 +146,13 @@ public final class HistoryActivity extends Activity {
             } }, 500);
         });
         if (id.isEmpty()) {
-            button(control, I18n.t("查看当前曲线"), () -> { if (history.active.isEmpty()) toast(I18n.t("当前未记录，开启监控或手动开始记录")); else { id = history.active; build(); } });
-            records = card(I18n.t("历史记录")); button(records, I18n.t("刷新列表"), this::loadList); loadList();
+            button(control, I18n.t("应用耗电记录"), () -> UiMotion.open(this,new Intent(this,AppBatteryActivity.class),1));
+            button(control, I18n.t("查看当前曲线"), () -> { if (history.active.isEmpty()) toast(I18n.t("当前未记录，开启监控或手动开始记录")); else openRecord(history.active); });
+            records = card(I18n.t("历史记录")); button(records, I18n.t("刷新列表"), this::loadList); listNeedsRestore=true; loadList();
         } else detail();
     }
     private void loadList() {
+        final int wanted=listNeedsRestore?listPosition:scroll.getScrollY();
         final int token = ++generation;
         history.io.execute(() -> {
             try { List<String> list = history.store().list(); ui.post(() -> {
@@ -143,9 +161,10 @@ public final class HistoryActivity extends Activity {
                 if (list.isEmpty()) records.addView(text(I18n.t("还没有记录。开启自动记录后，开始监控即可生成记录。"), 14));
                 for (int i = 0; i < Math.min(listLimit, list.size()); i++) {
                     String entry = list.get(i);
-                    button(records, date(HistoryStore.started(entry)) + (entry.equals(history.active) ? I18n.t(" · 记录中") : ""), () -> { id = entry; build(); });
+                    button(records, date(HistoryStore.started(entry)) + (entry.equals(history.active) ? I18n.t(" · 记录中") : ""), () -> openRecord(entry));
                 }
                 if (list.size() > listLimit) button(records, I18n.t("加载更早的记录"), () -> { listLimit += 20; loadList(); });
+                listNeedsRestore=false; UiMotion.restoreScroll(scroll,wanted);
             }); } catch (Exception e) { error(e); }
         });
     }

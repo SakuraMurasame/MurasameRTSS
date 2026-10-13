@@ -185,11 +185,11 @@
     <string name="msg_181" formatted="false">"：センサーの意味を確認して選択"</string>
     <string name="msg_182" formatted="false">"センサーを変更しました"</string>
     <string name="msg_183" formatted="false">"アプリについて"</string>
-    <string name="msg_184" formatted="false">"MurasameRTSS · 1.1.0\nAndroid ゲーム性能表示とローカル記録グラフ"</string>
+    <string name="msg_184" formatted="false">"MurasameRTSS · 1.2.1\nAndroid ゲーム性能表示とローカル記録グラフ"</string>
     <string name="msg_185" formatted="false">"ムラサメのアプリアイコン"</string>
     <string name="msg_186" formatted="false">"更新履歴"</string>
     <string name="msg_187" formatted="false">"日付／バージョン／更新内容"</string>
-    <string name="msg_188" formatted="false">"2026-10-10 · 1.1.0\n下部ナビゲーション、性能概要、表示プレビュー、グラフカードを刷新。ダーク・ライト・システム連動テーマと設定保存に対応。\n\n2026-10-10 · 1.0.0\n日本語・英語・フランス語・ドイツ語に対応。システム連動または手動で言語を選択できます。ホームの副題とアイコン制作説明を削除。\n\n2026-10-08 · 0.4.0\n自動記録を既定で有効化。監視開始で記録、停止で保存。表示項目とは独立して全項目を記録。15 項目の縦並びグラフ、共通時間軸、同期カーソル、末尾・選択値と最小・最大・平均値を追加。点・範囲・記録全体の削除に対応。\n\n2026-10-07 · 0.3.0\nMurasameRTSS に改名し、ムラサメのアイコンに変更。手動記録、項目切替、時間範囲表示と点・範囲・記録全体の削除、アプリ情報と更新履歴を追加。\n\n2026-10-07 · 0.2.1\n横画面で余裕がある場合の不要な折り返しを修正。回転時に再測定。\n\n2026-10-07 · 0.2.0\nShizuku による実表示 FPS、フレーム間隔、端末電力推定を追加。GPU の権限制限を明記し診断を改善。\n\n2026-10-07 · 0.1.0\n初版：手動操作、常駐通知、上部表示、CPU グループ周波数・温度・メモリ・電池の監視。項目、文字サイズ、背景不透明度を設定可能。タッチ通過に対応。"</string>
+    <string name="msg_188" formatted="false">"2026-10-13 · 1.2.1\nカードとページの移動を改善。ページとスクロール位置を保持し、短い遷移とタップの反応を追加。電力消費の詳細を独立表示し、戻る操作で一覧に戻ります。選択した区間も保持します。\n\n2026-10-13 · 1.2.0\n独立したアプリ電力消費のバックグラウンド記録、消費割合と mAh、時間範囲と平均電力グラフを追加。前面は不透明、背面は半透明、未分類は斜線で表示します。\n\n2026-10-10 · 1.1.0\n下部ナビゲーション、性能概要、表示プレビュー、グラフカードを刷新。ダーク・ライト・システム連動テーマと設定保存に対応。\n\n2026-10-10 · 1.0.0\n日本語・英語・フランス語・ドイツ語に対応。システム連動または手動で言語を選択できます。ホームの副題とアイコン制作説明を削除。\n\n2026-10-08 · 0.4.0\n自動記録を既定で有効化。監視開始で記録、停止で保存。表示項目とは独立して全項目を記録。15 項目の縦並びグラフ、共通時間軸、同期カーソル、末尾・選択値と最小・最大・平均値を追加。点・範囲・記録全体の削除に対応。\n\n2026-10-07 · 0.3.0\nMurasameRTSS に改名し、ムラサメのアイコンに変更。手動記録、項目切替、時間範囲表示と点・範囲・記録全体の削除、アプリ情報と更新履歴を追加。\n\n2026-10-07 · 0.2.1\n横画面で余裕がある場合の不要な折り返しを修正。回転時に再測定。\n\n2026-10-07 · 0.2.0\nShizuku による実表示 FPS、フレーム間隔、端末電力推定を追加。GPU の権限制限を明記し診断を改善。\n\n2026-10-07 · 0.1.0\n初版：手動操作、常駐通知、上部表示、CPU グループ周波数・温度・メモリ・電池の監視。項目、文字サイズ、背景不透明度を設定可能。タッチ通過に対応。"</string>
     <string name="msg_189" formatted="false">"リアルタイム診断"</string>
     <string name="msg_190" formatted="false">"データは端末内に保存します。-- は取得不可を表し、温度や電力がゼロという意味ではありません。"</string>
     <string name="msg_191" formatted="false">"診断レポートをコピー"</string>
@@ -301,4 +301,51 @@
     <string name="ui_overlay" formatted="false">"重ねて表示"</string>
     <string name="ui_notifications" formatted="false">"通知"</string>
     <string name="ui_record_help" formatted="false">"記録の説明"</string>
+    <string name="battery_000" formatted="false">"アプリの電力消費"</string>
+    <string name="battery_001" formatted="false">"システムがアプリの電力統計へのアクセスを拒否しました"</string>
+    <string name="battery_002" formatted="false">"アプリの電力統計がサイズ上限を超えています"</string>
+    <string name="battery_003" formatted="false">"システムから対応するアプリ電力統計を取得できません"</string>
+    <string name="battery_004" formatted="false">"アプリの電力統計を読み取れませんでした"</string>
+    <string name="battery_005" formatted="false">"電力消費記録の保存先を利用できません"</string>
+    <string name="battery_006" formatted="false">"最初の電力消費基準値を待っています"</string>
+    <string name="battery_007" formatted="false">"電力消費記録が上限に達したか、書き込みに失敗しました"</string>
+    <string name="battery_008" formatted="false">"アプリの電力消費を記録中"</string>
+    <string name="battery_009" formatted="false">"基準値を取得しました。次の測定を待っています"</string>
+    <string name="battery_010" formatted="false">"先に Shizuku を起動し、権限を許可してください"</string>
+    <string name="battery_011" formatted="false">"停止して電力消費記録を保存"</string>
+    <string name="battery_012" formatted="false">"電力消費の監視を開始"</string>
+    <string name="battery_013" formatted="false">"電力消費の推定について"</string>
+    <string name="battery_014" formatted="false">"アプリの消費量は Android による帰属推定値で、アプリごとのハードウェア実測ではありません。割合は選択区間の統計対象全体に対する各アプリの消費比率で、電池残量の減少率ではありません。"</string>
+    <string name="battery_015" formatted="false">"測定間隔は最低 60 秒で、画面消灯後も監視します。深いスリープ中は測定が遅れる場合があります。電力は区間平均です。統計の遅延や丸めで微小な変化がゼロになることがあります。"</string>
+    <string name="battery_016" formatted="false">"フォアグラウンドサービスとキャッシュプロセスはバックグラウンドに含めます。未分類の消費量は斜線で示します。同じ UID のアプリは合算され、分離できません。"</string>
+    <string name="battery_017" formatted="false">"切断、統計リセット、アプリ識別の変更をまたいで消費量を推定しません。初回は基準値のみで、次の測定から区間データが得られます。"</string>
+    <string name="battery_018" formatted="false">"時間範囲"</string>
+    <string name="battery_019" formatted="false">"電力消費記録を選択"</string>
+    <string name="battery_020" formatted="false">"測定区間全体を含む範囲のみ集計し、境界区間は分割しません。"</string>
+    <string name="battery_021" formatted="false">"消費割合と消費量"</string>
+    <string name="battery_022" formatted="false">"アプリをタップして選択区間の電力を確認します。"</string>
+    <string name="battery_023" formatted="false">"電力消費記録全体を削除"</string>
+    <string name="battery_024" formatted="false">"測定間隔を変更する前に電力消費の監視を停止してください"</string>
+    <string name="battery_025" formatted="false">"電力消費記録はまだありません"</string>
+    <string name="battery_026" formatted="false">"電力消費記録を読み込めませんでした"</string>
+    <string name="battery_027" formatted="false">"統計対象の消費量"</string>
+    <string name="battery_028" formatted="false">"消費割合：表示されたアプリ合計に対する比率"</string>
+    <string name="battery_029" formatted="false">"選択範囲に有効な測定区間全体がありません"</string>
+    <string name="battery_030" formatted="false">"さらにアプリを表示"</string>
+    <string name="battery_031" formatted="false">"有効な時間範囲を入力してください"</string>
+    <string name="battery_032" formatted="false">"消費量一覧に戻る"</string>
+    <string name="battery_033" formatted="false">"前面：不透明 · 背面：半透明 · 未分類：斜線"</string>
+    <string name="battery_034" formatted="false">"区間平均電力"</string>
+    <string name="battery_035" formatted="false">"区間ごとの消費量"</string>
+    <string name="battery_036" formatted="false">"区間を選択してアプリの電力を確認"</string>
+    <string name="battery_037" formatted="false">"フォアグラウンド"</string>
+    <string name="battery_038" formatted="false">"バックグラウンド"</string>
+    <string name="battery_039" formatted="false">"未分類"</string>
+    <string name="battery_040" formatted="false">"システムプロセス"</string>
+    <string name="battery_041" formatted="false">"共有統計"</string>
+    <string name="battery_042" formatted="false">"先に電力消費の監視を停止してください"</string>
+    <string name="battery_043" formatted="false">"削除は元に戻せません。この電力消費記録を削除しますか？"</string>
+    <string name="battery_044" formatted="false">"アプリの電力消費記録"</string>
+    <string name="battery_unknown_app" formatted="false">"不明なアプリ"</string>
+    <string name="battery_back" formatted="false">"戻る"</string>
 </resources>

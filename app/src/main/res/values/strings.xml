@@ -185,11 +185,11 @@
     <string name="msg_181" formatted="false">": verify what the sensor measures before selecting"</string>
     <string name="msg_182" formatted="false">"Sensor updated"</string>
     <string name="msg_183" formatted="false">"About the app"</string>
-    <string name="msg_184" formatted="false">"MurasameRTSS · 1.1.0\nAndroid gaming overlay and local performance graphs"</string>
+    <string name="msg_184" formatted="false">"MurasameRTSS · 1.2.1\nAndroid gaming overlay and local performance graphs"</string>
     <string name="msg_185" formatted="false">"Murasame app icon"</string>
     <string name="msg_186" formatted="false">"Changelog"</string>
     <string name="msg_187" formatted="false">"Date / Version / Changes"</string>
-    <string name="msg_188" formatted="false">"2026-10-10 · 1.1.0\nRedesigned bottom navigation, performance overview, overlay preview and graph cards. Added persistent Dark, Light and System themes.\n\n2026-10-10 · 1.0.0\nAdded Japanese, English, French and German, with system or manual language selection. Removed the home subtitle and icon creation note.\n\n2026-10-08 · 0.4.0\nAutomatic recording enabled by default. Monitoring starts recording; stopping saves it. All metrics are recorded independently of overlay selection. Added 15 stacked graphs with shared timeline, synchronized cursor, last/selected values and min/max/mean. Kept sample, range and session deletion.\n\n2026-10-07 · 0.3.0\nRenamed to MurasameRTSS with Murasame icon. Added manual recording, metric selection, time ranges and deletion of points, ranges or sessions. Added About and changelog.\n\n2026-10-07 · 0.2.1\nFixed unnecessary wrapping in landscape. Measure available width again on rotation.\n\n2026-10-07 · 0.2.0\nAdded Shizuku presentation FPS, frame time and device power estimate. Explained GPU access limits and improved diagnostics.\n\n2026-10-07 · 0.1.0\nInitial release: manual controls, persistent notification, top overlay, CPU group clocks, temperatures, memory and battery monitoring. Configurable metrics, font and background opacity with touch-through."</string>
+    <string name="msg_188" formatted="false">"2026-10-13 · 1.2.1\nSmoother card and page navigation with retained pages and scroll positions, brief transitions and touch feedback. Battery details use a separate view; Back returns to the list and selected chart intervals are preserved.\n\n2026-10-13 · 1.2.0\nAdded independent background app battery recording, consumption shares and mAh, time ranges and interval-average power charts. Foreground is opaque, background translucent, and unclassified consumption hatched.\n\n2026-10-10 · 1.1.0\nRedesigned bottom navigation, performance overview, overlay preview and graph cards. Added persistent Dark, Light and System themes.\n\n2026-10-10 · 1.0.0\nAdded Japanese, English, French and German, with system or manual language selection. Removed the home subtitle and icon creation note.\n\n2026-10-08 · 0.4.0\nAutomatic recording enabled by default. Monitoring starts recording; stopping saves it. All metrics are recorded independently of overlay selection. Added 15 stacked graphs with shared timeline, synchronized cursor, last/selected values and min/max/mean. Kept sample, range and session deletion.\n\n2026-10-07 · 0.3.0\nRenamed to MurasameRTSS with Murasame icon. Added manual recording, metric selection, time ranges and deletion of points, ranges or sessions. Added About and changelog.\n\n2026-10-07 · 0.2.1\nFixed unnecessary wrapping in landscape. Measure available width again on rotation.\n\n2026-10-07 · 0.2.0\nAdded Shizuku presentation FPS, frame time and device power estimate. Explained GPU access limits and improved diagnostics.\n\n2026-10-07 · 0.1.0\nInitial release: manual controls, persistent notification, top overlay, CPU group clocks, temperatures, memory and battery monitoring. Configurable metrics, font and background opacity with touch-through."</string>
     <string name="msg_189" formatted="false">"Live diagnostics"</string>
     <string name="msg_190" formatted="false">"Data stays on this device. -- means unavailable, not zero temperature or power."</string>
     <string name="msg_191" formatted="false">"Copy diagnostic report"</string>
@@ -301,4 +301,51 @@
     <string name="ui_overlay" formatted="false">"Overlay"</string>
     <string name="ui_notifications" formatted="false">"Notifications"</string>
     <string name="ui_record_help" formatted="false">"Recording help"</string>
+    <string name="battery_000" formatted="false">"App battery usage"</string>
+    <string name="battery_001" formatted="false">"System denied access to app battery statistics"</string>
+    <string name="battery_002" formatted="false">"App battery statistics exceed the size limit"</string>
+    <string name="battery_003" formatted="false">"No supported app battery statistics from the system"</string>
+    <string name="battery_004" formatted="false">"Could not read app battery statistics"</string>
+    <string name="battery_005" formatted="false">"Battery record storage unavailable"</string>
+    <string name="battery_006" formatted="false">"Waiting for the first battery baseline"</string>
+    <string name="battery_007" formatted="false">"Battery record reached its limit or could not be written"</string>
+    <string name="battery_008" formatted="false">"Recording app battery usage"</string>
+    <string name="battery_009" formatted="false">"Baseline captured; waiting for the next sample"</string>
+    <string name="battery_010" formatted="false">"Start Shizuku and grant access first"</string>
+    <string name="battery_011" formatted="false">"Stop and save battery record"</string>
+    <string name="battery_012" formatted="false">"Start battery monitoring"</string>
+    <string name="battery_013" formatted="false">"About battery estimates"</string>
+    <string name="battery_014" formatted="false">"App usage is an Android attribution estimate, not a hardware measurement per app. Percentages show each app’s share of attributed consumption in the selected interval, not the drop in battery level."</string>
+    <string name="battery_015" formatted="false">"Sampling is attempted at least 60 seconds apart and continues with the screen off. Deep sleep can delay samples. Power is an interval average; system updates can lag and small changes may round to zero."</string>
+    <string name="battery_016" formatted="false">"Foreground services and cached processes count as background. Unclassified consumption is hatched. Apps sharing a UID are grouped and cannot be separated."</string>
+    <string name="battery_017" formatted="false">"No consumption is inferred across disconnects, system resets or app identity changes. The first sample is a baseline; interval data starts with the next sample."</string>
+    <string name="battery_018" formatted="false">"Time range"</string>
+    <string name="battery_019" formatted="false">"Select battery record"</string>
+    <string name="battery_020" formatted="false">"Only complete sample intervals are included; boundary intervals are not split."</string>
+    <string name="battery_021" formatted="false">"Battery share and consumption"</string>
+    <string name="battery_022" formatted="false">"Tap an app to inspect power during the selected interval."</string>
+    <string name="battery_023" formatted="false">"Delete battery session"</string>
+    <string name="battery_024" formatted="false">"Stop battery monitoring before changing the interval"</string>
+    <string name="battery_025" formatted="false">"No battery records yet"</string>
+    <string name="battery_026" formatted="false">"Could not read battery record"</string>
+    <string name="battery_027" formatted="false">"Attributed consumption"</string>
+    <string name="battery_028" formatted="false">"Share of consumption across the listed apps"</string>
+    <string name="battery_029" formatted="false">"No complete valid sample intervals in this range"</string>
+    <string name="battery_030" formatted="false">"Show more apps"</string>
+    <string name="battery_031" formatted="false">"Enter a valid time range"</string>
+    <string name="battery_032" formatted="false">"Back to battery list"</string>
+    <string name="battery_033" formatted="false">"Foreground: opaque · Background: translucent · Unclassified: hatched"</string>
+    <string name="battery_034" formatted="false">"Interval-average power"</string>
+    <string name="battery_035" formatted="false">"Consumption per interval"</string>
+    <string name="battery_036" formatted="false">"Select an interval to inspect app power"</string>
+    <string name="battery_037" formatted="false">"Foreground"</string>
+    <string name="battery_038" formatted="false">"Background"</string>
+    <string name="battery_039" formatted="false">"Unclassified"</string>
+    <string name="battery_040" formatted="false">"System process"</string>
+    <string name="battery_041" formatted="false">"Shared attribution"</string>
+    <string name="battery_042" formatted="false">"Stop battery monitoring first"</string>
+    <string name="battery_043" formatted="false">"This cannot be undone. Delete this battery session?"</string>
+    <string name="battery_044" formatted="false">"App battery records"</string>
+    <string name="battery_unknown_app" formatted="false">"Unidentified app"</string>
+    <string name="battery_back" formatted="false">"Back"</string>
 </resources>

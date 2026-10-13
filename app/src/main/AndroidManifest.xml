@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    android:versionCode="7" android:versionName="1.1.0">
+    android:versionCode="9" android:versionName="1.2.1">
     <uses-sdk android:minSdkVersion="29" android:targetSdkVersion="35" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="moe.shizuku.manager.permission.API_V23" />
-    <queries><package android:name="moe.shizuku.privileged.api" /></queries>
+    <queries>
+        <package android:name="moe.shizuku.privileged.api" />
+        <intent><action android:name="android.intent.action.MAIN" /><category android:name="android.intent.category.LAUNCHER" /></intent>
+    </queries>
     <application android:name=".MurasameApp" android:label="MurasameRTSS" android:icon="@mipmap/ic_launcher"
         android:theme="@style/AppTheme" android:allowBackup="false" android:supportsRtl="true">
         <meta-data android:name="moe.shizuku.client.V3_SUPPORT" android:value="true" />
@@ -19,6 +22,11 @@
         </activity>
         <activity android:name=".TouchTestActivity" android:exported="false" />
         <activity android:name=".HistoryActivity" android:exported="false" />
+        <activity android:name=".AppBatteryActivity" android:exported="false" />
+        <service android:name=".AppBatteryService" android:exported="false" android:foregroundServiceType="specialUse">
+            <property android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
+                android:value="User-started local per-app battery attribution recording with a persistent stop notification. Samples system estimates at low frequency, including when the screen is off." />
+        </service>
         <service android:name=".MonitorService" android:exported="false"
             android:foregroundServiceType="specialUse">
             <property android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
