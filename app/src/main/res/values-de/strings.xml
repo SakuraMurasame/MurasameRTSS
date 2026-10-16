@@ -185,11 +185,11 @@
     <string name="msg_181" formatted="false">": Sensorfunktion vor der Auswahl prüfen"</string>
     <string name="msg_182" formatted="false">"Sensor aktualisiert"</string>
     <string name="msg_183" formatted="false">"Über die App"</string>
-    <string name="msg_184" formatted="false">"MurasameRTSS · 1.2.1\nAndroid-Leistungsoverlay und lokale Verlaufsdiagramme"</string>
+    <string name="msg_184" formatted="false">"MurasameRTSS · 1.4.1\nAndroid-Leistungsoverlay und lokale Verlaufsdiagramme"</string>
     <string name="msg_185" formatted="false">"Murasame-App-Symbol"</string>
     <string name="msg_186" formatted="false">"Änderungsverlauf"</string>
     <string name="msg_187" formatted="false">"Datum / Version / Änderungen"</string>
-    <string name="msg_188" formatted="false">"2026-10-13 · 1.2.1\nFlüssigere Karten- und Seitennavigation mit erhaltenen Seiten und Scrollpositionen, kurzen Übergängen und visueller Berührungsrückmeldung. Verbrauchsdetails erscheinen separat; Zurück führt zur Liste, gewählte Diagrammintervalle bleiben erhalten.\n\n2026-10-13 · 1.2.0\nUnabhängige Aufzeichnung des App-Energieverbrauchs, Anteile und mAh, Zeitbereiche und Diagramme der mittleren Leistung. Vordergrund deckend, Hintergrund transparent, nicht zugeordneter Verbrauch schraffiert.\n\n2026-10-10 · 1.1.0\nNeue untere Navigation, Leistungsübersicht, Overlay-Vorschau und Diagrammkarten. Dauerhaft gespeicherte Designs Dunkel, Hell und System hinzugefügt.\n\n2026-10-10 · 1.0.0\nJapanisch, Englisch, Französisch und Deutsch hinzugefügt, mit System- oder manueller Sprachauswahl. Untertitel und Hinweis zur Symbolerstellung entfernt.\n\n2026-10-08 · 0.4.0\nAutomatische Aufzeichnung standardmäßig aktiv: Überwachung startet die Aufnahme, Beenden speichert sie. Alle Werte werden unabhängig vom Overlay erfasst. 15 gestapelte Diagramme mit gemeinsamer Zeitachse, synchronem Cursor, letztem/gewähltem Wert sowie Min/Max/Mittel. Löschen von Punkten, Zeiträumen und Sitzungen bleibt möglich.\n\n2026-10-07 · 0.3.0\nUmbenennung in MurasameRTSS mit Murasame-Symbol. Manuelle Aufzeichnung, Messgrößenauswahl, Zeiträume und Löschen von Punkten, Zeiträumen oder Sitzungen hinzugefügt. App-Info und Änderungsverlauf ergänzt.\n\n2026-10-07 · 0.2.1\nUnnötige Zeilenumbrüche im Querformat behoben. Breite wird beim Drehen neu berechnet.\n\n2026-10-07 · 0.2.0\nDarstellungs-FPS, Frame-Zeiten über Shizuku und Schätzung des Geräteverbrauchs ergänzt. GPU-Zugriffsgrenzen erklärt und Diagnose verbessert.\n\n2026-10-07 · 0.1.0\nErste Version: manuelle Steuerung, dauerhafte Benachrichtigung, oberes Overlay, CPU-Gruppentakt, Temperaturen, Speicher und Akku. Messgrößen, Schrift und Deckkraft einstellbar; Berührungen werden durchgereicht."</string>
+    <string name="msg_188" formatted="false">"2026-10-16 · 1.4.1\nOptionaler gemeinsamer Start von Leistungs- und App-Akkuüberwachung, standardmäßig aus und ab dem nächsten Start wirksam. Beim Stoppen werden gekoppelte Aufzeichnungen gespeichert; unabhängige Akkuüberwachung läuft weiter. Ausblenden, Pausieren und manuelles Stoppen starten sie nicht erneut. Fehlende Shizuku-Berechtigung wird gemeldet.\n\n2026-10-16 · 1.4.0\nAutomatische Prüfung von GitHub Releases beim Öffnen der Hauptseite hinzugefügt, standardmäßig aktiv. Unter Info sind manuelle Prüfung und ein Schalter verfügbar. Neue Versionen zeigen Hinweise und einen APK-Link. Numerischer Versionsvergleich verhindert Downgrade-Hinweise; Netzwerkfehler, Limits und fehlende APKs werden behandelt.\n\n2026-10-16 · 1.3.2\nDas gesamte Menü gleitet von links ein und aus, während die Abdunklung überblendet. Erst nach dem Schließen folgt der Seitenübergang. Neue Seiten warten auf das Layout; auch wiederverwendete Seiten erhalten einen Übergang. Bei schnellen Klicks gilt das letzte Ziel; Abbrechen verwirft ausstehende Navigation.\n\n2026-10-16 · 1.3.1\nZeitschritt-Tasten gedrückt halten, um kontinuierlich zu navigieren. Loslassen, Verlassen der Taste oder Erreichen des Endpunkts stoppt die Bewegung. Avatar links, Titel rechts. Antippen öffnet das Menü mit einem Drittel der Breite; geschlossen ist es vollständig verborgen. Das Menübild überdeckt den Seitenavatar. Avatar, Außenbereich oder Zurück schließt das Menü.\n\n2026-10-15 · 1.3.0\nGerätezeit zusätzlich zur Aufzeichnungsdauer sowie einstellbare Schritte für den Diagrammcursor. Bereichshinweis nur bei ungültiger Eingabe. Einklappbare linke Navigation mit einem Drittel der verfügbaren Breite im geöffneten Zustand. Zeitbereich und Löschwerkzeuge lassen sich direkt aufklappen.\n\n2026-10-13 · 1.2.1\nFlüssigere Karten- und Seitennavigation mit erhaltenen Seiten und Scrollpositionen, kurzen Übergängen und visueller Berührungsrückmeldung. Verbrauchsdetails erscheinen separat; Zurück führt zur Liste, gewählte Diagrammintervalle bleiben erhalten.\n\n2026-10-13 · 1.2.0\nUnabhängige Aufzeichnung des App-Energieverbrauchs, Anteile und mAh, Zeitbereiche und Diagramme der mittleren Leistung. Vordergrund deckend, Hintergrund transparent, nicht zugeordneter Verbrauch schraffiert.\n\n2026-10-10 · 1.1.0\nNeue untere Navigation, Leistungsübersicht, Overlay-Vorschau und Diagrammkarten. Dauerhaft gespeicherte Designs Dunkel, Hell und System hinzugefügt.\n\n2026-10-10 · 1.0.0\nJapanisch, Englisch, Französisch und Deutsch hinzugefügt, mit System- oder manueller Sprachauswahl. Untertitel und Hinweis zur Symbolerstellung entfernt.\n\n2026-10-08 · 0.4.0\nAutomatische Aufzeichnung standardmäßig aktiv: Überwachung startet die Aufnahme, Beenden speichert sie. Alle Werte werden unabhängig vom Overlay erfasst. 15 gestapelte Diagramme mit gemeinsamer Zeitachse, synchronem Cursor, letztem/gewähltem Wert sowie Min/Max/Mittel. Löschen von Punkten, Zeiträumen und Sitzungen bleibt möglich.\n\n2026-10-07 · 0.3.0\nUmbenennung in MurasameRTSS mit Murasame-Symbol. Manuelle Aufzeichnung, Messgrößenauswahl, Zeiträume und Löschen von Punkten, Zeiträumen oder Sitzungen hinzugefügt. App-Info und Änderungsverlauf ergänzt.\n\n2026-10-07 · 0.2.1\nUnnötige Zeilenumbrüche im Querformat behoben. Breite wird beim Drehen neu berechnet.\n\n2026-10-07 · 0.2.0\nDarstellungs-FPS, Frame-Zeiten über Shizuku und Schätzung des Geräteverbrauchs ergänzt. GPU-Zugriffsgrenzen erklärt und Diagnose verbessert.\n\n2026-10-07 · 0.1.0\nErste Version: manuelle Steuerung, dauerhafte Benachrichtigung, oberes Overlay, CPU-Gruppentakt, Temperaturen, Speicher und Akku. Messgrößen, Schrift und Deckkraft einstellbar; Berührungen werden durchgereicht."</string>
     <string name="msg_189" formatted="false">"Live-Diagnose"</string>
     <string name="msg_190" formatted="false">"Daten bleiben auf dem Gerät. -- bedeutet nicht verfügbar, nicht null Grad oder null Watt."</string>
     <string name="msg_191" formatted="false">"Diagnosebericht kopieren"</string>
@@ -348,4 +348,39 @@
     <string name="battery_044" formatted="false">"App-Energieaufzeichnungen"</string>
     <string name="battery_unknown_app" formatted="false">"Unbekannte App"</string>
     <string name="battery_back" formatted="false">"Zurück"</string>
+    <string name="msg_347" formatted="false">"Navigation ausklappen"</string>
+    <string name="msg_348" formatted="false">"Navigation einklappen"</string>
+    <string name="msg_349" formatted="false">"Früher anzeigen"</string>
+    <string name="msg_350" formatted="false">"Später anzeigen"</string>
+    <string name="msg_351" formatted="false">"Schritt"</string>
+    <string name="msg_352" formatted="false">"Schritt (Sekunden)"</string>
+    <string name="msg_353" formatted="false">"Position"</string>
+    <string name="msg_354" formatted="false">"OK"</string>
+    <string name="msg_355" formatted="false">"Ganze Sekunden von 1 bis 60 eingeben"</string>
+    <string name="msg_356" formatted="false">"Oben: Gerätezeit · Unten: Aufzeichnungsdauer"</string>
+    <string name="msg_357" formatted="false">"Aufzeichnung steuern"</string>
+    <string name="msg_358" formatted="false">"Noch nicht auf Updates geprüft"</string>
+    <string name="msg_359" formatted="false">"Keine stabile GitHub-Version verfügbar"</string>
+    <string name="msg_360" formatted="false">"Neue Version verfügbar"</string>
+    <string name="msg_361" formatted="false">"Die installierte Version benötigt kein Update"</string>
+    <string name="msg_362" formatted="false">"GitHub-Anfragelimit erreicht. Später erneut versuchen"</string>
+    <string name="msg_363" formatted="false">"Suche nach Updates…"</string>
+    <string name="msg_364" formatted="false">"Keine Verbindung zu GitHub. Später erneut versuchen"</string>
+    <string name="msg_365" formatted="false">"Update-Format nicht unterstützt. Veröffentlichungsseite öffnen"</string>
+    <string name="msg_366" formatted="false">"Automatisch nach Updates suchen"</string>
+    <string name="msg_367" formatted="false">"Prüfung beim Öffnen der Hauptseite, einmal alle 24 Stunden. Sie entscheiden über den Download."</string>
+    <string name="msg_368" formatted="false">"Jetzt nach Updates suchen"</string>
+    <string name="msg_369" formatted="false">"Update-Details anzeigen"</string>
+    <string name="msg_370" formatted="false">"GitHub-Veröffentlichungen"</string>
+    <string name="msg_371" formatted="false">"Neueste Version"</string>
+    <string name="msg_372" formatted="false">"Keine Versionshinweise vorhanden"</string>
+    <string name="msg_373" formatted="false">"Für diese Version ist kein APK verfügbar. Veröffentlichungsseite öffnen."</string>
+    <string name="msg_374" formatted="false">"Veröffentlichungsseite"</string>
+    <string name="msg_375" formatted="false">"APK herunterladen"</string>
+    <string name="msg_376" formatted="false">"Kein Browser zum Öffnen dieses Links gefunden"</string>
+    <string name="msg_377" formatted="false">"Software-Updates"</string>
+    <string name="battery_link_switch" formatted="false">"App-Akkuverbrauch gleichzeitig überwachen"</string>
+    <string name="battery_link_help" formatted="false">"Gilt ab dem nächsten Überwachungsstart. Shizuku-Berechtigung erforderlich. Beim Stoppen wird die gekoppelte Akkuaufzeichnung gespeichert; separat gestartete Akkuüberwachung läuft weiter."</string>
+    <string name="battery_link_auth_error" formatted="false">"Akkuüberwachung nicht gestartet: Shizuku zuerst starten und autorisieren"</string>
+    <string name="battery_link_start_error" formatted="false">"Akkuüberwachung nicht gestartet: Das System hat den Vordergrunddienst abgelehnt"</string>
 </resources>

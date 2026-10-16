@@ -18,6 +18,7 @@ public final class MonitorService extends Service implements android.content.Sha
     public static final String START = "start", STOP = "stop", HIDE = "hide", PAUSE = "pause", REFRESH = "refresh";
     public static final String RECORD_START = "record_start", RECORD_STOP = "record_stop";
     public static volatile boolean running, hidden, paused;
+    public static volatile String sessionToken = "";
     public static volatile Snapshot latest;
     public static volatile String message = "已停止";
     private final Handler main = new Handler(Looper.getMainLooper());
@@ -152,6 +153,10 @@ public final class MonitorService extends Service implements android.content.Sha
         // Only a new monitoring session auto-starts. Manual end must stay ended
         // through hide/pause/refresh and repeated START intents.
         if (newMonitoring && prefs.autoRecord()) history.begin();
+        if (newMonitoring) {
+            sessionToken = java.util.UUID.randomUUID().toString();
+            if (prefs.batteryWithMonitor()) startLinkedBattery();
+        }
         suspended = !getSystemService(PowerManager.class).isInteractive() || getSystemService(KeyguardManager.class).isKeyguardLocked();
         if (prefs.shizuku()) bridge.connect();
         if (hidden || paused || suspended) removeOverlay(); else showIfNeeded();
@@ -159,6 +164,20 @@ public final class MonitorService extends Service implements android.content.Sha
         if (!paused && !suspended) main.post(sampleTick);
         updateTile();
         return START_NOT_STICKY;
+    }
+    private void startLinkedBattery() {
+        if (!ShizukuBridge.authorized()) {
+            AppBatteryService.status = "请先启动并授权 Shizuku";
+            Toast.makeText(this, I18n.t("应用耗电未启动：请先启动并授权 Shizuku"), Toast.LENGTH_LONG).show();
+            return;
+        }
+        try {
+            startForegroundService(new Intent(this, AppBatteryService.class).setAction(AppBatteryService.START_LINKED)
+                    .putExtra(AppBatteryService.SESSION, sessionToken));
+        } catch (RuntimeException e) {
+            AppBatteryService.status = "系统拒绝启动前台服务";
+            Toast.makeText(this, I18n.t("应用耗电未启动：系统拒绝启动前台服务"), Toast.LENGTH_LONG).show();
+        }
     }
     private Notification notification() {
         Intent launch = new Intent(this, MainActivity.class);
@@ -232,6 +251,14 @@ public final class MonitorService extends Service implements android.content.Sha
         }
     }
     @Override public void onDestroy() {
+        String endedSession = sessionToken;
+        sessionToken = "";
+        if (!endedSession.isEmpty() && AppBatteryService.running) {
+            try {
+                startService(new Intent(this, AppBatteryService.class).setAction(AppBatteryService.STOP_LINKED)
+                        .putExtra(AppBatteryService.SESSION, endedSession));
+            } catch (RuntimeException ignored) { }
+        }
         destroyed = true; main.removeCallbacksAndMessages(null); removeOverlay(); worker.shutdownNow();
         history.end();
         bridge.close(); prefs.store.unregisterOnSharedPreferenceChangeListener(this);
@@ -242,7 +269,7 @@ public final class MonitorService extends Service implements android.content.Sha
     }
     @Override public IBinder onBind(Intent intent) { return null; }
     @Override protected void dump(java.io.FileDescriptor fd, java.io.PrintWriter writer, String[] args) {
-        writer.println("MurasameRTSS 1.2.1 running=" + running + " hidden=" + hidden + " paused=" + paused);
+        writer.println("MurasameRTSS running=" + running + " hidden=" + hidden + " paused=" + paused);
         writer.println("font=" + prefs.font() + " backgroundOpacity=" + prefs.opacity() + " windowAlpha=" + params.alpha);
         int[] location = new int[2]; overlay.getLocationOnScreen(location);
         writer.println("overlay attached=" + attached + " x=" + location[0] + " y=" + location[1]
@@ -250,6 +277,7 @@ public final class MonitorService extends Service implements android.content.Sha
         writer.println("layout availableWidth=" + availableWidth + " requestedWidth=" + params.width + " rows=" + overlay.rowCount());
         writer.println("history active=" + history.active + " status=" + history.status);
         writer.println("autoRecord=" + prefs.autoRecord());
+        writer.println("batteryWithMonitor=" + prefs.batteryWithMonitor() + " session=" + sessionToken);
         Snapshot s = latest;
         if (s != null) {
             writer.println(s.backend);

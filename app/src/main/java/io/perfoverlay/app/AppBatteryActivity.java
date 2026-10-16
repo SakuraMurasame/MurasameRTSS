@@ -13,6 +13,7 @@ import java.util.*;
 
 public final class AppBatteryActivity extends Activity {
     private UiTheme theme;
+    private UiNav.Shell nav;
     private AppBatteryRecords records;
     private final Handler ui=new Handler(Looper.getMainLooper());
     private LinearLayout content, rows, graphBox;
@@ -66,7 +67,7 @@ public final class AppBatteryActivity extends Activity {
         b.putInt("detailOffset",detailScroll.getHeight()>0?detailScroll.getScrollY():savedDetailOffset);
     }
     @Override public void onBackPressed() { backAction(); }
-    private void backAction() { if (uid>=0) closeDetails(); else UiMotion.back(this); }
+    private void backAction() { if(nav!=null && nav.collapse())return; if (uid>=0) closeDetails(); else UiMotion.back(this); }
     private void closeDetails() {
         int offset=listScroll.getHeight()>0?listScroll.getScrollY():savedListOffset; cursors.put(uid,selectedEnd); uid=-1; draw();
         UiMotion.swap(sceneHost,listScroll,-1,true); UiMotion.restoreScroll(listScroll,offset);
@@ -100,18 +101,16 @@ public final class AppBatteryActivity extends Activity {
     private void build() {
         theme=UiTheme.get(this); theme.window(this); language=((MurasameApp)getApplication()).selection();
         LinearLayout root=column(); root.setBackgroundColor(theme.bg);
-        root.setOnApplyWindowInsetsListener((v,insets)->{
-            if (Build.VERSION.SDK_INT>=30) { android.graphics.Insets safe=insets.getInsets(WindowInsets.Type.systemBars()|WindowInsets.Type.displayCutout()); v.setPadding(safe.left,safe.top,safe.right,safe.bottom); }
-            else v.setPadding(insets.getSystemWindowInsetLeft(),insets.getSystemWindowInsetTop(),insets.getSystemWindowInsetRight(),insets.getSystemWindowInsetBottom()); return insets;
-        });
-        LinearLayout heading=new LinearLayout(this); heading.setGravity(Gravity.CENTER_VERTICAL); heading.setPadding(dp(16),dp(10),dp(16),dp(10));
-        Button back=button(heading,"‹",this::backAction,false); back.setContentDescription(I18n.t("返回")); back.setTextSize(23); back.setLayoutParams(new LinearLayout.LayoutParams(dp(44),dp(44)));
-        TextView title=text(I18n.t("应用耗电"),23,theme.ink); title.setTypeface(null,Typeface.BOLD); title.setPadding(dp(12),0,0,0);
-        heading.addView(title,new LinearLayout.LayoutParams(0,-2,1)); ImageView mascot=new ImageView(this); mascot.setImageResource(R.drawable.murasame_character); heading.addView(mascot,new LinearLayout.LayoutParams(dp(40),dp(40))); root.addView(heading);
+        root.addView(UiNav.header(this,theme,I18n.t("应用耗电"),()->nav.toggle(),this::backAction));
         sceneHost=new UiMotion.Host(this); root.addView(sceneHost,new LinearLayout.LayoutParams(-1,0,1));
         listScroll=new ScrollView(this); content=column(); content.setPadding(dp(16),dp(6),dp(16),dp(20)); listScroll.addView(content);
         detailScroll=new ScrollView(this); LinearLayout detailBody=column(); detailBody.setPadding(dp(16),dp(6),dp(16),dp(20)); detailScroll.addView(detailBody);
-        UiMotion.swap(sceneHost,uid>=0?detailScroll:listScroll,1,false); setContentView(root);
+        UiMotion.swap(sceneHost,uid>=0?detailScroll:listScroll,1,false); nav=UiNav.create(this,theme,root,5,index->{
+            if(index==5)return;
+            Intent target=index==3?new Intent(this,HistoryActivity.class):new Intent(this,MainActivity.class).putExtra("page",index);
+            target.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            UiMotion.open(this,target,UiNav.direction(5,index)); finish();
+        }); setContentView(nav);
         LinearLayout control=card(""); state=text("",12,theme.muted); control.addView(state);
         start=button(control,I18n.t("开始耗电监控"),this::toggle,true);
         button(control,I18n.t("采样间隔")+" · "+getSharedPreferences("overlay",MODE_PRIVATE).getInt("battery_interval",60)+" s",this::chooseInterval,false);
@@ -254,7 +253,8 @@ public final class AppBatteryActivity extends Activity {
         graphBox.addView(text(split(s.foreground,s.background,s.unknown),12,theme.muted));
         graphBox.addView(text(I18n.t("前台：不透明 · 后台：半透明 · 未归类：斜纹"),12,theme.ink));
         button(graphBox,I18n.t(watts?"区间平均功耗":"每区间消耗")+" · "+(watts?"W":"mAh"),()->{ watts=!watts; draw(); },false);
-        chart=new AppBatteryChart(this); graphBox.addView(chart,new LinearLayout.LayoutParams(-1,dp(220)));
+        graphBox.addView(text(I18n.t("上轴：手机时间 · 下轴：记录时长"),11,theme.muted));
+        chart=new AppBatteryChart(this); graphBox.addView(chart,new LinearLayout.LayoutParams(-1,dp(240)));
         graphCaption=text(I18n.t("点选区间查看应用功耗"),12,theme.muted); graphBox.addView(graphCaption);
         chart.listener(i->{
             AppBatteryData.Drain d=i.apps.get(uid);

@@ -185,11 +185,11 @@
     <string name="msg_181" formatted="false">": verify what the sensor measures before selecting"</string>
     <string name="msg_182" formatted="false">"Sensor updated"</string>
     <string name="msg_183" formatted="false">"About the app"</string>
-    <string name="msg_184" formatted="false">"MurasameRTSS · 1.2.1\nAndroid gaming overlay and local performance graphs"</string>
+    <string name="msg_184" formatted="false">"MurasameRTSS · 1.4.1\nAndroid gaming overlay and local performance graphs"</string>
     <string name="msg_185" formatted="false">"Murasame app icon"</string>
     <string name="msg_186" formatted="false">"Changelog"</string>
     <string name="msg_187" formatted="false">"Date / Version / Changes"</string>
-    <string name="msg_188" formatted="false">"2026-10-13 · 1.2.1\nSmoother card and page navigation with retained pages and scroll positions, brief transitions and touch feedback. Battery details use a separate view; Back returns to the list and selected chart intervals are preserved.\n\n2026-10-13 · 1.2.0\nAdded independent background app battery recording, consumption shares and mAh, time ranges and interval-average power charts. Foreground is opaque, background translucent, and unclassified consumption hatched.\n\n2026-10-10 · 1.1.0\nRedesigned bottom navigation, performance overview, overlay preview and graph cards. Added persistent Dark, Light and System themes.\n\n2026-10-10 · 1.0.0\nAdded Japanese, English, French and German, with system or manual language selection. Removed the home subtitle and icon creation note.\n\n2026-10-08 · 0.4.0\nAutomatic recording enabled by default. Monitoring starts recording; stopping saves it. All metrics are recorded independently of overlay selection. Added 15 stacked graphs with shared timeline, synchronized cursor, last/selected values and min/max/mean. Kept sample, range and session deletion.\n\n2026-10-07 · 0.3.0\nRenamed to MurasameRTSS with Murasame icon. Added manual recording, metric selection, time ranges and deletion of points, ranges or sessions. Added About and changelog.\n\n2026-10-07 · 0.2.1\nFixed unnecessary wrapping in landscape. Measure available width again on rotation.\n\n2026-10-07 · 0.2.0\nAdded Shizuku presentation FPS, frame time and device power estimate. Explained GPU access limits and improved diagnostics.\n\n2026-10-07 · 0.1.0\nInitial release: manual controls, persistent notification, top overlay, CPU group clocks, temperatures, memory and battery monitoring. Configurable metrics, font and background opacity with touch-through."</string>
+    <string name="msg_188" formatted="false">"2026-10-16 · 1.4.1\nAdded an optional switch to start app battery monitoring with performance monitoring, off by default and applied on the next start. Stopping saves linked recordings while independent battery monitoring continues. Hide, pause and manual battery stops do not restart it. Missing Shizuku permission is reported.\n\n2026-10-16 · 1.4.0\nAdded automatic GitHub Releases update checks on opening the main screen, enabled by default. About offers manual checks and an automatic-check switch. New releases show their version, notes and APK download link. Numeric version comparison prevents downgrade prompts; network errors, rate limits and missing APKs are handled explicitly.\n\n2026-10-16 · 1.3.2\nThe whole drawer now slides in and out from the left with a fading scrim. Selecting a destination closes it before the page transition. First-time pages animate after layout; reused pages also transition. Rapid selection keeps the latest destination, and cancellation clears pending navigation.\n\n2026-10-16 · 1.3.1\nHold the time-step buttons to keep moving; release, move outside or reach an endpoint to stop. Murasame moves to the left and the title to the right. Tap the avatar to open a one-third-width drawer, fully hidden when closed. Its avatar covers the page avatar; tap it, the outside area or Back to close.\n\n2026-10-15 · 1.3.0\nAdded phone clock timestamps alongside elapsed time and configurable cursor steps on the chart page. Step limits appear only for invalid input. Added a collapsible left navigation rail that expands to one third of the available width, with inline time-range and deletion tools.\n\n2026-10-13 · 1.2.1\nSmoother card and page navigation with retained pages and scroll positions, brief transitions and touch feedback. Battery details use a separate view; Back returns to the list and selected chart intervals are preserved.\n\n2026-10-13 · 1.2.0\nAdded independent background app battery recording, consumption shares and mAh, time ranges and interval-average power charts. Foreground is opaque, background translucent, and unclassified consumption hatched.\n\n2026-10-10 · 1.1.0\nRedesigned bottom navigation, performance overview, overlay preview and graph cards. Added persistent Dark, Light and System themes.\n\n2026-10-10 · 1.0.0\nAdded Japanese, English, French and German, with system or manual language selection. Removed the home subtitle and icon creation note.\n\n2026-10-08 · 0.4.0\nAutomatic recording enabled by default. Monitoring starts recording; stopping saves it. All metrics are recorded independently of overlay selection. Added 15 stacked graphs with shared timeline, synchronized cursor, last/selected values and min/max/mean. Kept sample, range and session deletion.\n\n2026-10-07 · 0.3.0\nRenamed to MurasameRTSS with Murasame icon. Added manual recording, metric selection, time ranges and deletion of points, ranges or sessions. Added About and changelog.\n\n2026-10-07 · 0.2.1\nFixed unnecessary wrapping in landscape. Measure available width again on rotation.\n\n2026-10-07 · 0.2.0\nAdded Shizuku presentation FPS, frame time and device power estimate. Explained GPU access limits and improved diagnostics.\n\n2026-10-07 · 0.1.0\nInitial release: manual controls, persistent notification, top overlay, CPU group clocks, temperatures, memory and battery monitoring. Configurable metrics, font and background opacity with touch-through."</string>
     <string name="msg_189" formatted="false">"Live diagnostics"</string>
     <string name="msg_190" formatted="false">"Data stays on this device. -- means unavailable, not zero temperature or power."</string>
     <string name="msg_191" formatted="false">"Copy diagnostic report"</string>
@@ -348,4 +348,39 @@
     <string name="battery_044" formatted="false">"App battery records"</string>
     <string name="battery_unknown_app" formatted="false">"Unidentified app"</string>
     <string name="battery_back" formatted="false">"Back"</string>
+    <string name="msg_347" formatted="false">"Expand navigation"</string>
+    <string name="msg_348" formatted="false">"Collapse navigation"</string>
+    <string name="msg_349" formatted="false">"View earlier"</string>
+    <string name="msg_350" formatted="false">"View later"</string>
+    <string name="msg_351" formatted="false">"Step"</string>
+    <string name="msg_352" formatted="false">"Step (seconds)"</string>
+    <string name="msg_353" formatted="false">"Position"</string>
+    <string name="msg_354" formatted="false">"OK"</string>
+    <string name="msg_355" formatted="false">"Enter a whole number of seconds from 1 to 60"</string>
+    <string name="msg_356" formatted="false">"Upper axis: phone time · Lower axis: elapsed time"</string>
+    <string name="msg_357" formatted="false">"Recording controls"</string>
+    <string name="msg_358" formatted="false">"Updates not checked yet"</string>
+    <string name="msg_359" formatted="false">"No stable GitHub release is available"</string>
+    <string name="msg_360" formatted="false">"New version available"</string>
+    <string name="msg_361" formatted="false">"Your installed version needs no update"</string>
+    <string name="msg_362" formatted="false">"GitHub request limit reached. Try again later"</string>
+    <string name="msg_363" formatted="false">"Checking for updates…"</string>
+    <string name="msg_364" formatted="false">"Cannot connect to GitHub. Try again later"</string>
+    <string name="msg_365" formatted="false">"Unsupported update information. Open the release page"</string>
+    <string name="msg_366" formatted="false">"Check for updates automatically"</string>
+    <string name="msg_367" formatted="false">"Checks on opening the main screen, once every 24 hours. You choose whether to download."</string>
+    <string name="msg_368" formatted="false">"Check for updates now"</string>
+    <string name="msg_369" formatted="false">"View update details"</string>
+    <string name="msg_370" formatted="false">"GitHub releases"</string>
+    <string name="msg_371" formatted="false">"Latest version"</string>
+    <string name="msg_372" formatted="false">"No release notes were provided"</string>
+    <string name="msg_373" formatted="false">"No APK is available for this release. Open the release page."</string>
+    <string name="msg_374" formatted="false">"Release page"</string>
+    <string name="msg_375" formatted="false">"Download APK"</string>
+    <string name="msg_376" formatted="false">"No browser found to open this link"</string>
+    <string name="msg_377" formatted="false">"Software updates"</string>
+    <string name="battery_link_switch" formatted="false">"Monitor app battery usage together"</string>
+    <string name="battery_link_help" formatted="false">"Applies the next time monitoring starts. Requires Shizuku permission. Stopping saves the linked battery recording; independently started battery monitoring continues."</string>
+    <string name="battery_link_auth_error" formatted="false">"Battery monitoring did not start: start and authorize Shizuku first"</string>
+    <string name="battery_link_start_error" formatted="false">"Battery monitoring did not start: the system denied the foreground service"</string>
 </resources>

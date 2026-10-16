@@ -19,3 +19,11 @@ if ($LASTEXITCODE -ne 0) { throw 'Localization tests failed' }
 if ($LASTEXITCODE -ne 0) { throw 'App battery test compilation failed' }
 & (Join-Path $Jdk 'bin\java.exe') -ea -cp $taskClasses AppBatteryTests (Join-Path $PSScriptRoot 'build')
 if ($LASTEXITCODE -ne 0) { throw 'App battery tests failed' }
+& (Join-Path $Jdk 'bin\javac.exe') -encoding UTF-8 --release 17 -d $taskClasses (Join-Path $taskSource 'UpdatePolicy.java') (Join-Path $PSScriptRoot 'tests\UpdateTests.java')
+if ($LASTEXITCODE -ne 0) { throw 'Update test compilation failed' }
+& (Join-Path $Jdk 'bin\java.exe') -ea -cp $taskClasses UpdateTests
+if ($LASTEXITCODE -ne 0) { throw 'Update tests failed' }
+& (Join-Path $Jdk 'bin\javac.exe') -encoding UTF-8 --release 17 -d $taskClasses (Join-Path $taskSource 'BatteryLink.java') (Join-Path $PSScriptRoot 'tests\BatteryLinkTests.java')
+if ($LASTEXITCODE -ne 0) { throw 'Battery link test compilation failed' }
+& (Join-Path $Jdk 'bin\java.exe') -ea -cp $taskClasses BatteryLinkTests
+if ($LASTEXITCODE -ne 0) { throw 'Battery link tests failed' }

@@ -74,7 +74,7 @@ if (-not (Test-Path -LiteralPath $taskKey)) {
     & (Join-Path $Jdk 'bin\keytool.exe') -genkeypair -keystore $taskKey -storepass android -keypass android -alias perfoverlay -dname 'CN=MurasameRTSS Development' -keyalg RSA -keysize 2048 -validity 10000 -noprompt
     Assert-Exit 'Development key generation'
 }
-$taskFinal = Join-Path $taskDist 'MurasameRTSS-1.2.1.apk'
+$taskFinal = Join-Path $taskDist 'MurasameRTSS-1.4.1.apk'
 & $taskJava -jar (Join-Path $taskTools 'lib\apksigner.jar') sign --ks $taskKey --ks-key-alias perfoverlay --ks-pass pass:android --key-pass pass:android --out $taskFinal $taskAligned
 Assert-Exit 'APK signing'
 & $taskJava -jar (Join-Path $taskTools 'lib\apksigner.jar') verify --verbose $taskFinal
@@ -82,6 +82,6 @@ Assert-Exit 'Signature verification'
 & (Join-Path $taskTools 'zipalign.exe') -c -p 4 $taskFinal
 Assert-Exit 'Alignment verification'
 $taskHash = (Get-FileHash -LiteralPath $taskFinal -Algorithm SHA256).Hash.ToLowerInvariant()
-[IO.File]::WriteAllText((Join-Path $taskDist 'SHA256SUMS-1.2.1.txt'), "$taskHash  MurasameRTSS-1.2.1.apk`n", [Text.UTF8Encoding]::new($false))
+[IO.File]::WriteAllText((Join-Path $taskDist 'SHA256SUMS-1.4.1.txt'), "$taskHash  MurasameRTSS-1.4.1.apk`n", [Text.UTF8Encoding]::new($false))
 Write-Output "APK: $taskFinal"
 Write-Output "SHA256: $taskHash"

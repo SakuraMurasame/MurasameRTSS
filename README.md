@@ -1,17 +1,27 @@
-# MurasameRTSS 1.2.1
+# MurasameRTSS 1.4.1
 
 Android 游戏性能监控浮窗，默认顶部横向平铺。为“无 Root，已安装 Shizuku”的使用方式实现。
 
-[下载 APK](https://github.com/SakuraMurasame/MurasameRTSS/releases/tag/v1.2.1) · [历史更新](CHANGELOG.md) · [问题反馈](https://github.com/SakuraMurasame/MurasameRTSS/issues)
+[下载 APK](https://github.com/SakuraMurasame/MurasameRTSS/releases/tag/v1.4.1) · [历史更新](CHANGELOG.md) · [问题反馈](https://github.com/SakuraMurasame/MurasameRTSS/issues)
 
-1.2.1 安装包为 `MurasameRTSS-1.2.1.apk`，发布页同时提供 SHA-256 校验文件。
+1.4.1 安装包为 `MurasameRTSS-1.4.1.apk`，发布页同时提供 SHA-256 校验文件。
+
+新版侧栏整体滑入/滑出，栏目选择在收栏后衔接页面滑动与淡入淡出。
+
+新版：`dist/MurasameRTSS-1.4.1.apk`。微调按钮支持长按连续移动；点击左侧丛雨头像展开导航，收起后导航完全隐藏，主标题右对齐。本次正式发布包含时间轴、侧栏动画、自动更新及耗电联动。验证范围见 [1.4.1 检查报告](TEST_REPORT_1.4.1.md)。
+
+## 自动检查更新
+
+默认开启，打开主界面时查询本仓库 GitHub Releases 的最新正式版本；成功后 24 小时内不重复自动请求，失败后至少隔 1 小时重试。关于 → 软件更新可关闭自动检查、立即手动检查和查看发布页面。仅发现比本机版本更高的正式版时提示，同一版本自动提示一次。点击下载才会打开浏览器获取 APK，由系统安装器确认安装。不会把本地较新版本降级到 GitHub 较旧版本。
+
+后续发布需创建正式 Release，版本标签使用 `v主版本.次版本.修订号`（也支持不带 v），上传名称匹配 `MurasameRTSS-版本号.apk` 的安装包，并将 Release 设为 Latest。只推送源码或标签不会产生更新提醒。完整规则及验证见 [更新检查报告](TEST_REPORT_1.4.0.md)。
 
 ## 安装与使用
 
-1. 从 [GitHub Releases](https://github.com/SakuraMurasame/MurasameRTSS/releases/tag/v1.2.1) 下载并安装 `MurasameRTSS-1.2.1.apk`。可覆盖同签名旧版并保留配置与历史记录。
+1. 从 [GitHub Releases](https://github.com/SakuraMurasame/MurasameRTSS/releases/tag/v1.4.1) 下载并安装 `MurasameRTSS-1.4.1.apk`。可覆盖同签名旧版并保留配置与历史记录。
 2. 在 Shizuku 中通过无线调试启动服务。
 3. 打开 MurasameRTSS，在“监控”页允许悬浮窗和通知，点击“连接 / 授权 Shizuku”。
-4. 点击“开始监控”，再切回游戏。
+4. 点击“开始监控”，再切回游戏。可先开启“同时监控应用耗电”（默认关闭，需 Shizuku 授权），下次开始监控时一起记录耗电，停止时保存。单独开启的耗电监控继续运行；隐藏或暂停性能采样不会停止耗电记录，手动停止耗电后须下次重新开始性能监控才会自动启动。
 5. 在“样式”页选择暗色、亮色或跟随系统主题，并调整字号、黑底不透明度、顶部间距、分隔线和刷新速度；设置会立即应用。主页也提供字号与黑底不透明度快捷滑块。
 6. 在“指标”页开关和排序显示项目。在通知栏可隐藏、暂停或停止；也可添加“性能浮窗”快捷设置磁贴。
 7. “记录”页的“监控时自动记录”默认开启：开始监控即记录，停止监控即保存。可同时查看 15 项纵向曲线；关闭开关后也可以手动开始。点任意曲线同步选择时刻，点击“时间范围 / 删除”管理数据。
@@ -26,6 +36,8 @@ Android 游戏性能监控浮窗，默认顶部横向平铺。为“无 Root，�
 翻译包含设置、通知、指标名称、曲线统计、删除提示及更新历史。硬件节点名称和系统原始错误信息保留原值。记录文件中的数值、单位和时间格式不随语言变化，兼容旧记录。
 
 ## 本版已实现
+
+- 1.3.0 新增手机时间 / 记录时长双轴，曲线上方固定前后微调，步长可配置。侧栏收起时保留快捷图标，展开占可用宽度三分之一；时间范围与删除在曲线顶部展开。
 
 - 1.2.1 改善卡片与页面切换，复用页面并保留滚动位置；耗电详情使用独立视图，返回先回到列表。短距离过渡和原生点击反馈遵守系统的动画设置。
 - 1.2.0 新增独立后台应用耗电统计、耗电占比、mAh、时间范围和平均功耗图；前台不透明、后台半透明，系统未归类部分斜纹显示。使用 Shizuku 读取系统归因估算，不会将整机电流按程序时间比例分摊。
@@ -103,7 +115,7 @@ Android 12+ 的整窗 alpha 取 `getMaximumObscuringOpacityForTouch() - 0.01`；
 .\test.ps1 -Jdk 'C:\Program Files\Android\openjdk\jdk-21.0.8'
 ```
 
-构建脚本使用 SDK 自带 AAPT2、AIDL、D8、zipalign 和 apksigner，所有中间产物写入项目 `build/`，不会修改系统 SDK。输出 `dist/MurasameRTSS-1.2.1.apk` 和 SHA-256 校验文件。
+构建脚本使用 SDK 自带 AAPT2、AIDL、D8、zipalign 和 apksigner，所有中间产物写入项目 `build/`，不会修改系统 SDK。输出 `dist/MurasameRTSS-1.4.1.apk` 和 SHA-256 校验文件。
 
 也可在 Android Studio 中打开本目录，通过 AGP 8.13.0 / Gradle 8.13 构建。Shizuku 13.1.5 依赖已固定版本并随源码保存在 `vendor/`。
 
@@ -159,6 +171,6 @@ tests/CoreTests.java         可在本机运行的核心逻辑测试
 
 记录期间采集全部已适配指标，不受浮窗显示开关限制。15 项曲线同时纵向排列，共用时间范围；点击或横向拖动一张图会同步其他图的游标和读数，CPU 各组分色显示。图表基于采集时的显示精度，受限指标留空并保存原因；旧记录中缺失的项目不会补造。电池侧功率曲线显示绝对值，选中采样点可查看充入 / 输出文字。卸载应用会清除记录。
 
-应用没有联网权限，不上传数据、不读取游戏内容、不录屏、不修改频率或温控。诊断报告仅在用户点击时复制到剪贴板。
+应用使用联网权限查询公开 GitHub 发布信息，请求包含应用版本号；不上传性能或耗电记录、不读取游戏内容、不录屏、不修改频率或温控。下载 APK 需用户点击后通过浏览器进行。诊断报告仅在用户点击时复制到剪贴板。
 
 Shizuku API 使用 MIT 许可证，许可证随 APK 和源码提供；AndroidX Annotation 使用 Apache-2.0，见 `vendor/NOTICE.md`。参考：[Shizuku API](https://github.com/RikkaApps/Shizuku-API)、[Android 触摸遮挡规则](https://developer.android.com/about/versions/12/behavior-changes-all#untrusted-touch-events)。

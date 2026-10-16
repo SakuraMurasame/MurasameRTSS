@@ -185,11 +185,11 @@
     <string name="msg_181" formatted="false">"：センサーの意味を確認して選択"</string>
     <string name="msg_182" formatted="false">"センサーを変更しました"</string>
     <string name="msg_183" formatted="false">"アプリについて"</string>
-    <string name="msg_184" formatted="false">"MurasameRTSS · 1.2.1\nAndroid ゲーム性能表示とローカル記録グラフ"</string>
+    <string name="msg_184" formatted="false">"MurasameRTSS · 1.4.1\nAndroid ゲーム性能表示とローカル記録グラフ"</string>
     <string name="msg_185" formatted="false">"ムラサメのアプリアイコン"</string>
     <string name="msg_186" formatted="false">"更新履歴"</string>
     <string name="msg_187" formatted="false">"日付／バージョン／更新内容"</string>
-    <string name="msg_188" formatted="false">"2026-10-13 · 1.2.1\nカードとページの移動を改善。ページとスクロール位置を保持し、短い遷移とタップの反応を追加。電力消費の詳細を独立表示し、戻る操作で一覧に戻ります。選択した区間も保持します。\n\n2026-10-13 · 1.2.0\n独立したアプリ電力消費のバックグラウンド記録、消費割合と mAh、時間範囲と平均電力グラフを追加。前面は不透明、背面は半透明、未分類は斜線で表示します。\n\n2026-10-10 · 1.1.0\n下部ナビゲーション、性能概要、表示プレビュー、グラフカードを刷新。ダーク・ライト・システム連動テーマと設定保存に対応。\n\n2026-10-10 · 1.0.0\n日本語・英語・フランス語・ドイツ語に対応。システム連動または手動で言語を選択できます。ホームの副題とアイコン制作説明を削除。\n\n2026-10-08 · 0.4.0\n自動記録を既定で有効化。監視開始で記録、停止で保存。表示項目とは独立して全項目を記録。15 項目の縦並びグラフ、共通時間軸、同期カーソル、末尾・選択値と最小・最大・平均値を追加。点・範囲・記録全体の削除に対応。\n\n2026-10-07 · 0.3.0\nMurasameRTSS に改名し、ムラサメのアイコンに変更。手動記録、項目切替、時間範囲表示と点・範囲・記録全体の削除、アプリ情報と更新履歴を追加。\n\n2026-10-07 · 0.2.1\n横画面で余裕がある場合の不要な折り返しを修正。回転時に再測定。\n\n2026-10-07 · 0.2.0\nShizuku による実表示 FPS、フレーム間隔、端末電力推定を追加。GPU の権限制限を明記し診断を改善。\n\n2026-10-07 · 0.1.0\n初版：手動操作、常駐通知、上部表示、CPU グループ周波数・温度・メモリ・電池の監視。項目、文字サイズ、背景不透明度を設定可能。タッチ通過に対応。"</string>
+    <string name="msg_188" formatted="false">"2026-10-16 · 1.4.1\n性能監視とアプリ電池監視を同時に開始するスイッチを追加。初期設定はオフで、次回開始時に適用されます。停止時は連動した記録を保存し、個別の電池監視は継続します。非表示、一時停止、電池監視の手動停止後には再開しません。Shizuku の許可不足を通知します。\n\n2026-10-16 · 1.4.0\nGitHub Releases の自動更新確認を追加。既定で有効になり、メイン画面を開くと間隔に応じて確認します。アプリ情報から手動確認と自動確認の切替が可能。新バージョン、更新内容、APK リンクを表示し、ダウングレード通知、通信失敗、制限、APK 未公開を適切に処理します。\n\n2026-10-16 · 1.3.2\nサイドメニュー全体が左からスライドし、背景もフェードします。閉じた後にページの移動とフェードを開始。初回ページはレイアウト完了後に再生し、既存ページへ戻る際も遷移します。連続選択は最後の項目を優先し、キャンセル時は移動予約を解除します。\n\n2026-10-16 · 1.3.1\n時間移動ボタンの長押しで連続移動します。指を離す、ボタンの外へ移動する、記録の端に達すると停止します。左側のムラサメをタップすると幅3分の1のメニューが開き、タイトルは右側に表示。メニューの同位置のアバター、外側、戻る操作で完全に閉じます。\n\n2026-10-15 · 1.3.0\n経過時間軸に端末の実時刻を追加。グラフの前後移動幅を設定でき、無効な入力時のみ範囲を表示します。左側ナビゲーションは折りたたみ可能で、展開時は利用可能幅の3分の1になります。時間範囲と削除ツールをその場で展開できます。\n\n2026-10-13 · 1.2.1\nカードとページの移動を改善。ページとスクロール位置を保持し、短い遷移とタップの反応を追加。電力消費の詳細を独立表示し、戻る操作で一覧に戻ります。選択した区間も保持します。\n\n2026-10-13 · 1.2.0\n独立したアプリ電力消費のバックグラウンド記録、消費割合と mAh、時間範囲と平均電力グラフを追加。前面は不透明、背面は半透明、未分類は斜線で表示します。\n\n2026-10-10 · 1.1.0\n下部ナビゲーション、性能概要、表示プレビュー、グラフカードを刷新。ダーク・ライト・システム連動テーマと設定保存に対応。\n\n2026-10-10 · 1.0.0\n日本語・英語・フランス語・ドイツ語に対応。システム連動または手動で言語を選択できます。ホームの副題とアイコン制作説明を削除。\n\n2026-10-08 · 0.4.0\n自動記録を既定で有効化。監視開始で記録、停止で保存。表示項目とは独立して全項目を記録。15 項目の縦並びグラフ、共通時間軸、同期カーソル、末尾・選択値と最小・最大・平均値を追加。点・範囲・記録全体の削除に対応。\n\n2026-10-07 · 0.3.0\nMurasameRTSS に改名し、ムラサメのアイコンに変更。手動記録、項目切替、時間範囲表示と点・範囲・記録全体の削除、アプリ情報と更新履歴を追加。\n\n2026-10-07 · 0.2.1\n横画面で余裕がある場合の不要な折り返しを修正。回転時に再測定。\n\n2026-10-07 · 0.2.0\nShizuku による実表示 FPS、フレーム間隔、端末電力推定を追加。GPU の権限制限を明記し診断を改善。\n\n2026-10-07 · 0.1.0\n初版：手動操作、常駐通知、上部表示、CPU グループ周波数・温度・メモリ・電池の監視。項目、文字サイズ、背景不透明度を設定可能。タッチ通過に対応。"</string>
     <string name="msg_189" formatted="false">"リアルタイム診断"</string>
     <string name="msg_190" formatted="false">"データは端末内に保存します。-- は取得不可を表し、温度や電力がゼロという意味ではありません。"</string>
     <string name="msg_191" formatted="false">"診断レポートをコピー"</string>
@@ -348,4 +348,39 @@
     <string name="battery_044" formatted="false">"アプリの電力消費記録"</string>
     <string name="battery_unknown_app" formatted="false">"不明なアプリ"</string>
     <string name="battery_back" formatted="false">"戻る"</string>
+    <string name="msg_347" formatted="false">"ナビゲーションを展開"</string>
+    <string name="msg_348" formatted="false">"ナビゲーションを折りたたむ"</string>
+    <string name="msg_349" formatted="false">"前の時刻へ"</string>
+    <string name="msg_350" formatted="false">"次の時刻へ"</string>
+    <string name="msg_351" formatted="false">"移動幅"</string>
+    <string name="msg_352" formatted="false">"移動幅（秒）"</string>
+    <string name="msg_353" formatted="false">"位置"</string>
+    <string name="msg_354" formatted="false">"OK"</string>
+    <string name="msg_355" formatted="false">"1～60 の整数で秒数を入力してください"</string>
+    <string name="msg_356" formatted="false">"上段：端末時刻 · 下段：記録開始からの経過時間"</string>
+    <string name="msg_357" formatted="false">"記録操作"</string>
+    <string name="msg_358" formatted="false">"更新は未確認です"</string>
+    <string name="msg_359" formatted="false">"GitHub に正式リリースはありません"</string>
+    <string name="msg_360" formatted="false">"新しいバージョンがあります"</string>
+    <string name="msg_361" formatted="false">"現在のバージョンは更新不要です"</string>
+    <string name="msg_362" formatted="false">"GitHub のリクエスト制限中です。後で再試行してください"</string>
+    <string name="msg_363" formatted="false">"更新を確認中…"</string>
+    <string name="msg_364" formatted="false">"GitHub に接続できません。後で再試行してください"</string>
+    <string name="msg_365" formatted="false">"更新情報の形式に対応していません。リリースページをご覧ください"</string>
+    <string name="msg_366" formatted="false">"更新を自動確認"</string>
+    <string name="msg_367" formatted="false">"メイン画面を開くと24時間ごとに確認します。ダウンロードは確認後に行います。"</string>
+    <string name="msg_368" formatted="false">"今すぐ更新を確認"</string>
+    <string name="msg_369" formatted="false">"更新の詳細を見る"</string>
+    <string name="msg_370" formatted="false">"GitHub リリースページ"</string>
+    <string name="msg_371" formatted="false">"最新バージョン"</string>
+    <string name="msg_372" formatted="false">"更新内容の記載はありません"</string>
+    <string name="msg_373" formatted="false">"このリリースの APK はまだありません。リリースページをご覧ください。"</string>
+    <string name="msg_374" formatted="false">"リリースページ"</string>
+    <string name="msg_375" formatted="false">"APK をダウンロード"</string>
+    <string name="msg_376" formatted="false">"リンクを開けるブラウザが見つかりません"</string>
+    <string name="msg_377" formatted="false">"ソフトウェア更新"</string>
+    <string name="battery_link_switch" formatted="false">"アプリの電池使用量も監視"</string>
+    <string name="battery_link_help" formatted="false">"次回の監視開始時に適用されます。Shizuku の許可が必要です。監視を停止すると連動した電池記録を保存します。個別に開始した電池監視は継続します。"</string>
+    <string name="battery_link_auth_error" formatted="false">"電池監視を開始できません：先に Shizuku を起動して許可してください"</string>
+    <string name="battery_link_start_error" formatted="false">"電池監視を開始できません：システムがフォアグラウンドサービスの起動を拒否しました"</string>
 </resources>

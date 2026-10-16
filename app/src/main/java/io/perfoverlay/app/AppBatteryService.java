@@ -11,6 +11,9 @@ import java.util.concurrent.*;
 /** User-started battery attribution recording, independent of overlay and screen-on state. */
 public final class AppBatteryService extends Service {
     public static final String START = "battery_start", STOP = "battery_stop";
+    public static final String START_LINKED = "battery_start_linked", STOP_LINKED = "battery_stop_linked", SESSION = "monitor_session";
+    private final BatteryLink link = new BatteryLink();
+    private boolean recordingStarted;
     public static volatile boolean running;
     public static volatile String status = "已停止";
     private final Handler main = new Handler(Looper.getMainLooper());
@@ -76,13 +79,26 @@ public final class AppBatteryService extends Service {
     }
     @Override public int onStartCommand(Intent intent, int flags, int startId) {
         if (intent == null || STOP.equals(intent.getAction())) { stopSelf(); return START_NOT_STICKY; }
-        if (!START.equals(intent.getAction()) || running) return START_NOT_STICKY;
+        String action = intent.getAction(), token = intent.getStringExtra(SESSION);
+        if (STOP_LINKED.equals(action)) {
+            if (link.shouldStop(token) || !running) stopSelf();
+            return START_NOT_STICKY;
+        }
+        if (START_LINKED.equals(action)) {
+            if (!link.acceptStart(token, MonitorService.sessionToken, MonitorService.running, running)) {
+                if (!running) stopSelf();
+                return START_NOT_STICKY;
+            }
+        } else if (START.equals(action)) {
+            if (!running) link.independent();
+        } else { if (!running) stopSelf(); return START_NOT_STICKY; }
+        if (running) return START_NOT_STICKY;
         if (!ShizukuBridge.authorized()) { status = "请先启动并授权 Shizuku"; stopSelf(); return START_NOT_STICKY; }
         try {
             if (Build.VERSION.SDK_INT >= 34) startForeground(11, notification(), ServiceInfo.FOREGROUND_SERVICE_TYPE_SPECIAL_USE);
             else startForeground(11, notification());
         } catch (RuntimeException e) { status = "系统拒绝启动前台服务"; stopSelf(); return START_NOT_STICKY; }
-        running = true; status = "等待首个耗电基线";
+        running = true; recordingStarted = true; status = "等待首个耗电基线";
         records.begin(() -> main.post(() -> { if (destroyed) return; if (records.active.isEmpty()) { status = records.status; stopSelf(); } else main.post(tick); }));
         return START_NOT_STICKY;
     }
@@ -98,7 +114,7 @@ public final class AppBatteryService extends Service {
     private void notifyState() { if (!destroyed && running) getSystemService(NotificationManager.class).notify(11, notification()); }
     @Override public void onDestroy() {
         destroyed = true; running = false; main.removeCallbacksAndMessages(null);
-        if (records != null) {
+        if (records != null && recordingStarted) {
             records.end();
             records.status = hasBaseline && (status.equals("正在记录应用耗电") || status.equals("基线已建立，等待下一次采样")) ? "记录已保存" : status;
         }
@@ -109,6 +125,7 @@ public final class AppBatteryService extends Service {
     @Override public IBinder onBind(Intent i) { return null; }
     @Override protected void dump(java.io.FileDescriptor fd, java.io.PrintWriter out, String[] args) {
         out.println("AppBattery running=" + running + " interval=" + interval + " status=" + status);
+        out.println("linkedMonitor=" + link.owner());
         out.println("active=" + records.active + " samples=" + records.samples + " baseline=" + hasBaseline);
     }
 }

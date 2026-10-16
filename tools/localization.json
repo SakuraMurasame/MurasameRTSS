@@ -1473,11 +1473,11 @@
   },
   {
     "key": "msg_184",
-    "zh": "MurasameRTSS · 1.2.1\nAndroid 游戏性能浮窗与本地曲线记录",
-    "en": "MurasameRTSS · 1.2.1\nAndroid gaming overlay and local performance graphs",
-    "ja": "MurasameRTSS · 1.2.1\nAndroid ゲーム性能表示とローカル記録グラフ",
-    "fr": "MurasameRTSS · 1.2.1\nSuperposition de performances Android et courbes locales",
-    "de": "MurasameRTSS · 1.2.1\nAndroid-Leistungsoverlay und lokale Verlaufsdiagramme"
+    "zh": "MurasameRTSS · 1.4.1\nAndroid 游戏性能浮窗与本地曲线记录",
+    "en": "MurasameRTSS · 1.4.1\nAndroid gaming overlay and local performance graphs",
+    "ja": "MurasameRTSS · 1.4.1\nAndroid ゲーム性能表示とローカル記録グラフ",
+    "fr": "MurasameRTSS · 1.4.1\nSuperposition de performances Android et courbes locales",
+    "de": "MurasameRTSS · 1.4.1\nAndroid-Leistungsoverlay und lokale Verlaufsdiagramme"
   },
   {
     "key": "msg_185",
@@ -1505,11 +1505,11 @@
   },
   {
     "key": "msg_188",
-    "zh": "2026-10-13 · 1.2.1\n优化卡片与页面切换：保留页面、滚动位置，新增轻量过渡与点击反馈。耗电详情独立显示，返回键先回到列表，保留曲线选中区间。\n\n2026-10-13 · 1.2.0\n新增独立后台应用耗电记录、耗电占比与 mAh、时间范围查看及平均功耗图。前台不透明，后台半透明，未归类消耗使用斜纹。\n\n2026-10-10 · 1.1.0\n更新底部导航、性能概览、浮窗预览与曲线卡片；新增暗色、亮色和跟随系统主题，设置持久保存。\n\n2026-10-10 · 1.0.0\n新增日语、英语、法语和德语，支持跟随系统或手动选择语言。移除首页副标题和关于页图标制作说明。\n\n2026-10-08 · 0.4.0\n新增默认开启的“监控时自动记录”开关；开始监控自动记录，停止监控保存。记录采集独立于浮窗显示，新增 15 项指标纵向曲线面板、共用时间轴、同步游标、末点 / 选中读数及最低 / 最高 / 均值。保留单点、时间段和整次删除。\n\n2026-10-07 · 0.3.0\n应用更名 MurasameRTSS，更换丛雨图标；新增手动曲线记录、指标切换、时间范围查看、单点 / 时间段 / 整次记录删除；新增关于程序和历史更新。\n\n2026-10-07 · 0.2.1\n修复横屏空间充足时仍显示两行的问题；按可用宽度平铺，旋转屏幕自动重新测量。\n\n2026-10-07 · 0.2.0\n加入 Shizuku 应用呈现 FPS 和帧间隔检测、整机功耗估算；明确 GPU 节点读取限制，改进诊断信息。\n\n2026-10-07 · 0.1.0\n首个版本：手动启停、常驻通知、顶部浮窗、CPU 核心组频率及温度 / 内存 / 电池监控；可选指标、字号与黑底透明度，支持触摸穿透。",
-    "en": "2026-10-13 · 1.2.1\nSmoother card and page navigation with retained pages and scroll positions, brief transitions and touch feedback. Battery details use a separate view; Back returns to the list and selected chart intervals are preserved.\n\n2026-10-13 · 1.2.0\nAdded independent background app battery recording, consumption shares and mAh, time ranges and interval-average power charts. Foreground is opaque, background translucent, and unclassified consumption hatched.\n\n2026-10-10 · 1.1.0\nRedesigned bottom navigation, performance overview, overlay preview and graph cards. Added persistent Dark, Light and System themes.\n\n2026-10-10 · 1.0.0\nAdded Japanese, English, French and German, with system or manual language selection. Removed the home subtitle and icon creation note.\n\n2026-10-08 · 0.4.0\nAutomatic recording enabled by default. Monitoring starts recording; stopping saves it. All metrics are recorded independently of overlay selection. Added 15 stacked graphs with shared timeline, synchronized cursor, last/selected values and min/max/mean. Kept sample, range and session deletion.\n\n2026-10-07 · 0.3.0\nRenamed to MurasameRTSS with Murasame icon. Added manual recording, metric selection, time ranges and deletion of points, ranges or sessions. Added About and changelog.\n\n2026-10-07 · 0.2.1\nFixed unnecessary wrapping in landscape. Measure available width again on rotation.\n\n2026-10-07 · 0.2.0\nAdded Shizuku presentation FPS, frame time and device power estimate. Explained GPU access limits and improved diagnostics.\n\n2026-10-07 · 0.1.0\nInitial release: manual controls, persistent notification, top overlay, CPU group clocks, temperatures, memory and battery monitoring. Configurable metrics, font and background opacity with touch-through.",
-    "ja": "2026-10-13 · 1.2.1\nカードとページの移動を改善。ページとスクロール位置を保持し、短い遷移とタップの反応を追加。電力消費の詳細を独立表示し、戻る操作で一覧に戻ります。選択した区間も保持します。\n\n2026-10-13 · 1.2.0\n独立したアプリ電力消費のバックグラウンド記録、消費割合と mAh、時間範囲と平均電力グラフを追加。前面は不透明、背面は半透明、未分類は斜線で表示します。\n\n2026-10-10 · 1.1.0\n下部ナビゲーション、性能概要、表示プレビュー、グラフカードを刷新。ダーク・ライト・システム連動テーマと設定保存に対応。\n\n2026-10-10 · 1.0.0\n日本語・英語・フランス語・ドイツ語に対応。システム連動または手動で言語を選択できます。ホームの副題とアイコン制作説明を削除。\n\n2026-10-08 · 0.4.0\n自動記録を既定で有効化。監視開始で記録、停止で保存。表示項目とは独立して全項目を記録。15 項目の縦並びグラフ、共通時間軸、同期カーソル、末尾・選択値と最小・最大・平均値を追加。点・範囲・記録全体の削除に対応。\n\n2026-10-07 · 0.3.0\nMurasameRTSS に改名し、ムラサメのアイコンに変更。手動記録、項目切替、時間範囲表示と点・範囲・記録全体の削除、アプリ情報と更新履歴を追加。\n\n2026-10-07 · 0.2.1\n横画面で余裕がある場合の不要な折り返しを修正。回転時に再測定。\n\n2026-10-07 · 0.2.0\nShizuku による実表示 FPS、フレーム間隔、端末電力推定を追加。GPU の権限制限を明記し診断を改善。\n\n2026-10-07 · 0.1.0\n初版：手動操作、常駐通知、上部表示、CPU グループ周波数・温度・メモリ・電池の監視。項目、文字サイズ、背景不透明度を設定可能。タッチ通過に対応。",
-    "fr": "2026-10-13 · 1.2.1\nNavigation plus fluide avec conservation des pages et du défilement, transitions brèves et retour tactile visuel. Les détails de consommation sont séparés ; Retour revient à la liste et l’intervalle sélectionné est conservé.\n\n2026-10-13 · 1.2.0\nAjout de relevés indépendants de consommation des applications, parts et mAh, plages horaires et graphiques de puissance moyenne. Premier plan opaque, arrière-plan translucide, consommation non classée hachurée.\n\n2026-10-10 · 1.1.0\nNouvelle navigation basse, aperçu des performances, prévisualisation et cartes de courbes. Ajout des thèmes Sombre, Clair et Système, avec choix mémorisé.\n\n2026-10-10 · 1.0.0\nAjout du japonais, de l’anglais, du français et de l’allemand, selon le système ou un choix manuel. Retrait du sous-titre et de la note sur la création de l’icône.\n\n2026-10-08 · 0.4.0\nEnregistrement automatique activé par défaut : le suivi démarre la capture, son arrêt la sauvegarde. Toutes les mesures sont enregistrées indépendamment de l’affichage. Ajout de 15 courbes empilées avec axe commun, curseur synchronisé, valeurs dernière/sélectionnée et min/max/moyenne. Suppression de points, périodes et sessions conservée.\n\n2026-10-07 · 0.3.0\nRenommage en MurasameRTSS avec icône Murasame. Ajout de l’enregistrement manuel, choix des mesures, périodes et suppression de points, périodes ou sessions. Ajout des informations et de l’historique des versions.\n\n2026-10-07 · 0.2.1\nCorrection des retours à la ligne inutiles en paysage. Nouveau calcul de largeur lors de la rotation.\n\n2026-10-07 · 0.2.0\nAjout des FPS de présentation et intervalles via Shizuku, et de l’estimation de puissance totale. Précisions sur les restrictions GPU et amélioration du diagnostic.\n\n2026-10-07 · 0.1.0\nPremière version : commandes manuelles, notification persistante, superposition en haut, fréquences CPU, températures, mémoire et batterie. Mesures, texte et opacité configurables, gestes traversants.",
-    "de": "2026-10-13 · 1.2.1\nFlüssigere Karten- und Seitennavigation mit erhaltenen Seiten und Scrollpositionen, kurzen Übergängen und visueller Berührungsrückmeldung. Verbrauchsdetails erscheinen separat; Zurück führt zur Liste, gewählte Diagrammintervalle bleiben erhalten.\n\n2026-10-13 · 1.2.0\nUnabhängige Aufzeichnung des App-Energieverbrauchs, Anteile und mAh, Zeitbereiche und Diagramme der mittleren Leistung. Vordergrund deckend, Hintergrund transparent, nicht zugeordneter Verbrauch schraffiert.\n\n2026-10-10 · 1.1.0\nNeue untere Navigation, Leistungsübersicht, Overlay-Vorschau und Diagrammkarten. Dauerhaft gespeicherte Designs Dunkel, Hell und System hinzugefügt.\n\n2026-10-10 · 1.0.0\nJapanisch, Englisch, Französisch und Deutsch hinzugefügt, mit System- oder manueller Sprachauswahl. Untertitel und Hinweis zur Symbolerstellung entfernt.\n\n2026-10-08 · 0.4.0\nAutomatische Aufzeichnung standardmäßig aktiv: Überwachung startet die Aufnahme, Beenden speichert sie. Alle Werte werden unabhängig vom Overlay erfasst. 15 gestapelte Diagramme mit gemeinsamer Zeitachse, synchronem Cursor, letztem/gewähltem Wert sowie Min/Max/Mittel. Löschen von Punkten, Zeiträumen und Sitzungen bleibt möglich.\n\n2026-10-07 · 0.3.0\nUmbenennung in MurasameRTSS mit Murasame-Symbol. Manuelle Aufzeichnung, Messgrößenauswahl, Zeiträume und Löschen von Punkten, Zeiträumen oder Sitzungen hinzugefügt. App-Info und Änderungsverlauf ergänzt.\n\n2026-10-07 · 0.2.1\nUnnötige Zeilenumbrüche im Querformat behoben. Breite wird beim Drehen neu berechnet.\n\n2026-10-07 · 0.2.0\nDarstellungs-FPS, Frame-Zeiten über Shizuku und Schätzung des Geräteverbrauchs ergänzt. GPU-Zugriffsgrenzen erklärt und Diagnose verbessert.\n\n2026-10-07 · 0.1.0\nErste Version: manuelle Steuerung, dauerhafte Benachrichtigung, oberes Overlay, CPU-Gruppentakt, Temperaturen, Speicher und Akku. Messgrößen, Schrift und Deckkraft einstellbar; Berührungen werden durchgereicht."
+    "zh": "2026-10-16 · 1.4.1\n监控页新增“同时监控应用耗电”开关，默认关闭，下次开始监控时生效。停止监控保存联动记录，单独开启的耗电监控继续运行。隐藏、暂停及手动停止耗电后不会重复启动；未授权 Shizuku 时提示原因。\n\n2026-10-16 · 1.4.0\n新增 GitHub Releases 自动检查更新，默认开启，进入主界面时按间隔检查。关于页支持手动检查和关闭自动检查；发现新版显示版本、更新说明与 APK 下载入口。数值比较版本，避免降级；网络失败、限流和无 APK 均明确处理。\n\n2026-10-16 · 1.3.2\n侧栏改为整体从左侧滑入和滑出，背景遮罩同步渐变。栏目选择在收栏结束后衔接页面滑动与淡入淡出；首次打开页面等待布局完成后播放，修复返回已有页面时缺少过渡的问题。快速切换保留最后选择，取消操作清理待执行跳转。\n\n2026-10-16 · 1.3.1\n时间微调支持长按连续移动，松手、移出按钮或到达边界即停止。丛雨头像移至左侧、标题移至右侧；点击头像打开占三分之一宽度的导航，收起时完全隐藏。菜单头像覆盖主界面头像，点击头像、空白区域或返回键收回。\n\n2026-10-15 · 1.3.0\n新增手机实际时间轴，保留记录时长轴；曲线页提供可设置步长的前后微调，输入无效时才显示范围提示。导航改为左侧可收起栏，展开占可用宽度三分之一；记录时间范围与删除工具可就地展开。\n\n2026-10-13 · 1.2.1\n优化卡片与页面切换：保留页面、滚动位置，新增轻量过渡与点击反馈。耗电详情独立显示，返回键先回到列表，保留曲线选中区间。\n\n2026-10-13 · 1.2.0\n新增独立后台应用耗电记录、耗电占比与 mAh、时间范围查看及平均功耗图。前台不透明，后台半透明，未归类消耗使用斜纹。\n\n2026-10-10 · 1.1.0\n更新底部导航、性能概览、浮窗预览与曲线卡片；新增暗色、亮色和跟随系统主题，设置持久保存。\n\n2026-10-10 · 1.0.0\n新增日语、英语、法语和德语，支持跟随系统或手动选择语言。移除首页副标题和关于页图标制作说明。\n\n2026-10-08 · 0.4.0\n新增默认开启的“监控时自动记录”开关；开始监控自动记录，停止监控保存。记录采集独立于浮窗显示，新增 15 项指标纵向曲线面板、共用时间轴、同步游标、末点 / 选中读数及最低 / 最高 / 均值。保留单点、时间段和整次删除。\n\n2026-10-07 · 0.3.0\n应用更名 MurasameRTSS，更换丛雨图标；新增手动曲线记录、指标切换、时间范围查看、单点 / 时间段 / 整次记录删除；新增关于程序和历史更新。\n\n2026-10-07 · 0.2.1\n修复横屏空间充足时仍显示两行的问题；按可用宽度平铺，旋转屏幕自动重新测量。\n\n2026-10-07 · 0.2.0\n加入 Shizuku 应用呈现 FPS 和帧间隔检测、整机功耗估算；明确 GPU 节点读取限制，改进诊断信息。\n\n2026-10-07 · 0.1.0\n首个版本：手动启停、常驻通知、顶部浮窗、CPU 核心组频率及温度 / 内存 / 电池监控；可选指标、字号与黑底透明度，支持触摸穿透。",
+    "en": "2026-10-16 · 1.4.1\nAdded an optional switch to start app battery monitoring with performance monitoring, off by default and applied on the next start. Stopping saves linked recordings while independent battery monitoring continues. Hide, pause and manual battery stops do not restart it. Missing Shizuku permission is reported.\n\n2026-10-16 · 1.4.0\nAdded automatic GitHub Releases update checks on opening the main screen, enabled by default. About offers manual checks and an automatic-check switch. New releases show their version, notes and APK download link. Numeric version comparison prevents downgrade prompts; network errors, rate limits and missing APKs are handled explicitly.\n\n2026-10-16 · 1.3.2\nThe whole drawer now slides in and out from the left with a fading scrim. Selecting a destination closes it before the page transition. First-time pages animate after layout; reused pages also transition. Rapid selection keeps the latest destination, and cancellation clears pending navigation.\n\n2026-10-16 · 1.3.1\nHold the time-step buttons to keep moving; release, move outside or reach an endpoint to stop. Murasame moves to the left and the title to the right. Tap the avatar to open a one-third-width drawer, fully hidden when closed. Its avatar covers the page avatar; tap it, the outside area or Back to close.\n\n2026-10-15 · 1.3.0\nAdded phone clock timestamps alongside elapsed time and configurable cursor steps on the chart page. Step limits appear only for invalid input. Added a collapsible left navigation rail that expands to one third of the available width, with inline time-range and deletion tools.\n\n2026-10-13 · 1.2.1\nSmoother card and page navigation with retained pages and scroll positions, brief transitions and touch feedback. Battery details use a separate view; Back returns to the list and selected chart intervals are preserved.\n\n2026-10-13 · 1.2.0\nAdded independent background app battery recording, consumption shares and mAh, time ranges and interval-average power charts. Foreground is opaque, background translucent, and unclassified consumption hatched.\n\n2026-10-10 · 1.1.0\nRedesigned bottom navigation, performance overview, overlay preview and graph cards. Added persistent Dark, Light and System themes.\n\n2026-10-10 · 1.0.0\nAdded Japanese, English, French and German, with system or manual language selection. Removed the home subtitle and icon creation note.\n\n2026-10-08 · 0.4.0\nAutomatic recording enabled by default. Monitoring starts recording; stopping saves it. All metrics are recorded independently of overlay selection. Added 15 stacked graphs with shared timeline, synchronized cursor, last/selected values and min/max/mean. Kept sample, range and session deletion.\n\n2026-10-07 · 0.3.0\nRenamed to MurasameRTSS with Murasame icon. Added manual recording, metric selection, time ranges and deletion of points, ranges or sessions. Added About and changelog.\n\n2026-10-07 · 0.2.1\nFixed unnecessary wrapping in landscape. Measure available width again on rotation.\n\n2026-10-07 · 0.2.0\nAdded Shizuku presentation FPS, frame time and device power estimate. Explained GPU access limits and improved diagnostics.\n\n2026-10-07 · 0.1.0\nInitial release: manual controls, persistent notification, top overlay, CPU group clocks, temperatures, memory and battery monitoring. Configurable metrics, font and background opacity with touch-through.",
+    "ja": "2026-10-16 · 1.4.1\n性能監視とアプリ電池監視を同時に開始するスイッチを追加。初期設定はオフで、次回開始時に適用されます。停止時は連動した記録を保存し、個別の電池監視は継続します。非表示、一時停止、電池監視の手動停止後には再開しません。Shizuku の許可不足を通知します。\n\n2026-10-16 · 1.4.0\nGitHub Releases の自動更新確認を追加。既定で有効になり、メイン画面を開くと間隔に応じて確認します。アプリ情報から手動確認と自動確認の切替が可能。新バージョン、更新内容、APK リンクを表示し、ダウングレード通知、通信失敗、制限、APK 未公開を適切に処理します。\n\n2026-10-16 · 1.3.2\nサイドメニュー全体が左からスライドし、背景もフェードします。閉じた後にページの移動とフェードを開始。初回ページはレイアウト完了後に再生し、既存ページへ戻る際も遷移します。連続選択は最後の項目を優先し、キャンセル時は移動予約を解除します。\n\n2026-10-16 · 1.3.1\n時間移動ボタンの長押しで連続移動します。指を離す、ボタンの外へ移動する、記録の端に達すると停止します。左側のムラサメをタップすると幅3分の1のメニューが開き、タイトルは右側に表示。メニューの同位置のアバター、外側、戻る操作で完全に閉じます。\n\n2026-10-15 · 1.3.0\n経過時間軸に端末の実時刻を追加。グラフの前後移動幅を設定でき、無効な入力時のみ範囲を表示します。左側ナビゲーションは折りたたみ可能で、展開時は利用可能幅の3分の1になります。時間範囲と削除ツールをその場で展開できます。\n\n2026-10-13 · 1.2.1\nカードとページの移動を改善。ページとスクロール位置を保持し、短い遷移とタップの反応を追加。電力消費の詳細を独立表示し、戻る操作で一覧に戻ります。選択した区間も保持します。\n\n2026-10-13 · 1.2.0\n独立したアプリ電力消費のバックグラウンド記録、消費割合と mAh、時間範囲と平均電力グラフを追加。前面は不透明、背面は半透明、未分類は斜線で表示します。\n\n2026-10-10 · 1.1.0\n下部ナビゲーション、性能概要、表示プレビュー、グラフカードを刷新。ダーク・ライト・システム連動テーマと設定保存に対応。\n\n2026-10-10 · 1.0.0\n日本語・英語・フランス語・ドイツ語に対応。システム連動または手動で言語を選択できます。ホームの副題とアイコン制作説明を削除。\n\n2026-10-08 · 0.4.0\n自動記録を既定で有効化。監視開始で記録、停止で保存。表示項目とは独立して全項目を記録。15 項目の縦並びグラフ、共通時間軸、同期カーソル、末尾・選択値と最小・最大・平均値を追加。点・範囲・記録全体の削除に対応。\n\n2026-10-07 · 0.3.0\nMurasameRTSS に改名し、ムラサメのアイコンに変更。手動記録、項目切替、時間範囲表示と点・範囲・記録全体の削除、アプリ情報と更新履歴を追加。\n\n2026-10-07 · 0.2.1\n横画面で余裕がある場合の不要な折り返しを修正。回転時に再測定。\n\n2026-10-07 · 0.2.0\nShizuku による実表示 FPS、フレーム間隔、端末電力推定を追加。GPU の権限制限を明記し診断を改善。\n\n2026-10-07 · 0.1.0\n初版：手動操作、常駐通知、上部表示、CPU グループ周波数・温度・メモリ・電池の監視。項目、文字サイズ、背景不透明度を設定可能。タッチ通過に対応。",
+    "fr": "2026-10-16 · 1.4.1\nAjout d’un interrupteur pour lancer le suivi de consommation avec le suivi des performances, désactivé par défaut et appliqué au prochain démarrage. L’arrêt sauvegarde les relevés liés et laisse continuer les suivis indépendants. Masquer, mettre en pause ou arrêter manuellement ne relance pas le suivi. Une autorisation Shizuku manquante est signalée.\n\n2026-10-16 · 1.4.0\nAjout de la recherche automatique sur GitHub Releases à l’ouverture de l’écran principal, activée par défaut. La page À propos propose une vérification manuelle et un interrupteur. Les nouveautés affichent version, notes et lien APK. Comparaison numérique sans proposition de rétrogradation, avec gestion des erreurs réseau, limites et APK absent.\n\n2026-10-16 · 1.3.2\nLe panneau entier glisse depuis la gauche avec un voile progressif. Le changement de page commence après sa fermeture. Les nouvelles pages attendent la fin de la mise en page ; les pages réutilisées ont aussi une transition. Les clics rapides conservent la dernière destination et une annulation efface la navigation en attente.\n\n2026-10-16 · 1.3.1\nMaintenez les boutons temporels pour avancer ou reculer en continu. Relâchez, sortez du bouton ou atteignez une limite pour arrêter. Avatar à gauche, titre à droite. Touchez l’avatar pour ouvrir un menu d’un tiers de la largeur, entièrement masqué une fois fermé. Son avatar recouvre celui de la page ; touchez-le, l’extérieur ou Retour pour fermer.\n\n2026-10-15 · 1.3.0\nAjout de l’heure du téléphone à côté du temps écoulé et d’un pas réglable pour déplacer le curseur. Les limites ne sont indiquées qu’en cas de saisie incorrecte. Navigation latérale gauche repliable, occupant un tiers de la largeur disponible une fois ouverte. Outils de période et suppression dépliables sur place.\n\n2026-10-13 · 1.2.1\nNavigation plus fluide avec conservation des pages et du défilement, transitions brèves et retour tactile visuel. Les détails de consommation sont séparés ; Retour revient à la liste et l’intervalle sélectionné est conservé.\n\n2026-10-13 · 1.2.0\nAjout de relevés indépendants de consommation des applications, parts et mAh, plages horaires et graphiques de puissance moyenne. Premier plan opaque, arrière-plan translucide, consommation non classée hachurée.\n\n2026-10-10 · 1.1.0\nNouvelle navigation basse, aperçu des performances, prévisualisation et cartes de courbes. Ajout des thèmes Sombre, Clair et Système, avec choix mémorisé.\n\n2026-10-10 · 1.0.0\nAjout du japonais, de l’anglais, du français et de l’allemand, selon le système ou un choix manuel. Retrait du sous-titre et de la note sur la création de l’icône.\n\n2026-10-08 · 0.4.0\nEnregistrement automatique activé par défaut : le suivi démarre la capture, son arrêt la sauvegarde. Toutes les mesures sont enregistrées indépendamment de l’affichage. Ajout de 15 courbes empilées avec axe commun, curseur synchronisé, valeurs dernière/sélectionnée et min/max/moyenne. Suppression de points, périodes et sessions conservée.\n\n2026-10-07 · 0.3.0\nRenommage en MurasameRTSS avec icône Murasame. Ajout de l’enregistrement manuel, choix des mesures, périodes et suppression de points, périodes ou sessions. Ajout des informations et de l’historique des versions.\n\n2026-10-07 · 0.2.1\nCorrection des retours à la ligne inutiles en paysage. Nouveau calcul de largeur lors de la rotation.\n\n2026-10-07 · 0.2.0\nAjout des FPS de présentation et intervalles via Shizuku, et de l’estimation de puissance totale. Précisions sur les restrictions GPU et amélioration du diagnostic.\n\n2026-10-07 · 0.1.0\nPremière version : commandes manuelles, notification persistante, superposition en haut, fréquences CPU, températures, mémoire et batterie. Mesures, texte et opacité configurables, gestes traversants.",
+    "de": "2026-10-16 · 1.4.1\nOptionaler gemeinsamer Start von Leistungs- und App-Akkuüberwachung, standardmäßig aus und ab dem nächsten Start wirksam. Beim Stoppen werden gekoppelte Aufzeichnungen gespeichert; unabhängige Akkuüberwachung läuft weiter. Ausblenden, Pausieren und manuelles Stoppen starten sie nicht erneut. Fehlende Shizuku-Berechtigung wird gemeldet.\n\n2026-10-16 · 1.4.0\nAutomatische Prüfung von GitHub Releases beim Öffnen der Hauptseite hinzugefügt, standardmäßig aktiv. Unter Info sind manuelle Prüfung und ein Schalter verfügbar. Neue Versionen zeigen Hinweise und einen APK-Link. Numerischer Versionsvergleich verhindert Downgrade-Hinweise; Netzwerkfehler, Limits und fehlende APKs werden behandelt.\n\n2026-10-16 · 1.3.2\nDas gesamte Menü gleitet von links ein und aus, während die Abdunklung überblendet. Erst nach dem Schließen folgt der Seitenübergang. Neue Seiten warten auf das Layout; auch wiederverwendete Seiten erhalten einen Übergang. Bei schnellen Klicks gilt das letzte Ziel; Abbrechen verwirft ausstehende Navigation.\n\n2026-10-16 · 1.3.1\nZeitschritt-Tasten gedrückt halten, um kontinuierlich zu navigieren. Loslassen, Verlassen der Taste oder Erreichen des Endpunkts stoppt die Bewegung. Avatar links, Titel rechts. Antippen öffnet das Menü mit einem Drittel der Breite; geschlossen ist es vollständig verborgen. Das Menübild überdeckt den Seitenavatar. Avatar, Außenbereich oder Zurück schließt das Menü.\n\n2026-10-15 · 1.3.0\nGerätezeit zusätzlich zur Aufzeichnungsdauer sowie einstellbare Schritte für den Diagrammcursor. Bereichshinweis nur bei ungültiger Eingabe. Einklappbare linke Navigation mit einem Drittel der verfügbaren Breite im geöffneten Zustand. Zeitbereich und Löschwerkzeuge lassen sich direkt aufklappen.\n\n2026-10-13 · 1.2.1\nFlüssigere Karten- und Seitennavigation mit erhaltenen Seiten und Scrollpositionen, kurzen Übergängen und visueller Berührungsrückmeldung. Verbrauchsdetails erscheinen separat; Zurück führt zur Liste, gewählte Diagrammintervalle bleiben erhalten.\n\n2026-10-13 · 1.2.0\nUnabhängige Aufzeichnung des App-Energieverbrauchs, Anteile und mAh, Zeitbereiche und Diagramme der mittleren Leistung. Vordergrund deckend, Hintergrund transparent, nicht zugeordneter Verbrauch schraffiert.\n\n2026-10-10 · 1.1.0\nNeue untere Navigation, Leistungsübersicht, Overlay-Vorschau und Diagrammkarten. Dauerhaft gespeicherte Designs Dunkel, Hell und System hinzugefügt.\n\n2026-10-10 · 1.0.0\nJapanisch, Englisch, Französisch und Deutsch hinzugefügt, mit System- oder manueller Sprachauswahl. Untertitel und Hinweis zur Symbolerstellung entfernt.\n\n2026-10-08 · 0.4.0\nAutomatische Aufzeichnung standardmäßig aktiv: Überwachung startet die Aufnahme, Beenden speichert sie. Alle Werte werden unabhängig vom Overlay erfasst. 15 gestapelte Diagramme mit gemeinsamer Zeitachse, synchronem Cursor, letztem/gewähltem Wert sowie Min/Max/Mittel. Löschen von Punkten, Zeiträumen und Sitzungen bleibt möglich.\n\n2026-10-07 · 0.3.0\nUmbenennung in MurasameRTSS mit Murasame-Symbol. Manuelle Aufzeichnung, Messgrößenauswahl, Zeiträume und Löschen von Punkten, Zeiträumen oder Sitzungen hinzugefügt. App-Info und Änderungsverlauf ergänzt.\n\n2026-10-07 · 0.2.1\nUnnötige Zeilenumbrüche im Querformat behoben. Breite wird beim Drehen neu berechnet.\n\n2026-10-07 · 0.2.0\nDarstellungs-FPS, Frame-Zeiten über Shizuku und Schätzung des Geräteverbrauchs ergänzt. GPU-Zugriffsgrenzen erklärt und Diagnose verbessert.\n\n2026-10-07 · 0.1.0\nErste Version: manuelle Steuerung, dauerhafte Benachrichtigung, oberes Overlay, CPU-Gruppentakt, Temperaturen, Speicher und Akku. Messgrößen, Schrift und Deckkraft einstellbar; Berührungen werden durchgereicht."
   },
   {
     "key": "msg_189",
@@ -2774,5 +2774,285 @@
     "ja": "戻る",
     "fr": "Retour",
     "de": "Zurück"
+  },
+  {
+    "key": "msg_347",
+    "zh": "展开导航",
+    "en": "Expand navigation",
+    "ja": "ナビゲーションを展開",
+    "fr": "Développer la navigation",
+    "de": "Navigation ausklappen"
+  },
+  {
+    "key": "msg_348",
+    "zh": "收起导航",
+    "en": "Collapse navigation",
+    "ja": "ナビゲーションを折りたたむ",
+    "fr": "Réduire la navigation",
+    "de": "Navigation einklappen"
+  },
+  {
+    "key": "msg_349",
+    "zh": "向前查看",
+    "en": "View earlier",
+    "ja": "前の時刻へ",
+    "fr": "Voir avant",
+    "de": "Früher anzeigen"
+  },
+  {
+    "key": "msg_350",
+    "zh": "向后查看",
+    "en": "View later",
+    "ja": "次の時刻へ",
+    "fr": "Voir après",
+    "de": "Später anzeigen"
+  },
+  {
+    "key": "msg_351",
+    "zh": "步长",
+    "en": "Step",
+    "ja": "移動幅",
+    "fr": "Pas",
+    "de": "Schritt"
+  },
+  {
+    "key": "msg_352",
+    "zh": "步长（秒）",
+    "en": "Step (seconds)",
+    "ja": "移動幅（秒）",
+    "fr": "Pas (secondes)",
+    "de": "Schritt (Sekunden)"
+  },
+  {
+    "key": "msg_353",
+    "zh": "定位",
+    "en": "Position",
+    "ja": "位置",
+    "fr": "Position",
+    "de": "Position"
+  },
+  {
+    "key": "msg_354",
+    "zh": "确定",
+    "en": "OK",
+    "ja": "OK",
+    "fr": "OK",
+    "de": "OK"
+  },
+  {
+    "key": "msg_355",
+    "zh": "请输入 1–60 之间的整数秒数",
+    "en": "Enter a whole number of seconds from 1 to 60",
+    "ja": "1～60 の整数で秒数を入力してください",
+    "fr": "Saisissez un nombre entier de secondes entre 1 et 60",
+    "de": "Ganze Sekunden von 1 bis 60 eingeben"
+  },
+  {
+    "key": "msg_356",
+    "zh": "上轴：手机时间 · 下轴：记录时长",
+    "en": "Upper axis: phone time · Lower axis: elapsed time",
+    "ja": "上段：端末時刻 · 下段：記録開始からの経過時間",
+    "fr": "Axe supérieur : heure du téléphone · Inférieur : temps écoulé",
+    "de": "Oben: Gerätezeit · Unten: Aufzeichnungsdauer"
+  },
+  {
+    "key": "msg_357",
+    "zh": "记录控制",
+    "en": "Recording controls",
+    "ja": "記録操作",
+    "fr": "Commandes de capture",
+    "de": "Aufzeichnung steuern"
+  },
+  {
+    "key": "msg_358",
+    "zh": "尚未检查更新",
+    "en": "Updates not checked yet",
+    "ja": "更新は未確認です",
+    "fr": "Mises à jour non vérifiées",
+    "de": "Noch nicht auf Updates geprüft"
+  },
+  {
+    "key": "msg_359",
+    "zh": "GitHub 暂无正式发布版本",
+    "en": "No stable GitHub release is available",
+    "ja": "GitHub に正式リリースはありません",
+    "fr": "Aucune version stable disponible sur GitHub",
+    "de": "Keine stabile GitHub-Version verfügbar"
+  },
+  {
+    "key": "msg_360",
+    "zh": "发现新版本",
+    "en": "New version available",
+    "ja": "新しいバージョンがあります",
+    "fr": "Nouvelle version disponible",
+    "de": "Neue Version verfügbar"
+  },
+  {
+    "key": "msg_361",
+    "zh": "当前版本无需更新",
+    "en": "Your installed version needs no update",
+    "ja": "現在のバージョンは更新不要です",
+    "fr": "Votre version ne nécessite aucune mise à jour",
+    "de": "Die installierte Version benötigt kein Update"
+  },
+  {
+    "key": "msg_362",
+    "zh": "GitHub 请求受限，请稍后重试",
+    "en": "GitHub request limit reached. Try again later",
+    "ja": "GitHub のリクエスト制限中です。後で再試行してください",
+    "fr": "Limite de requêtes GitHub atteinte. Réessayez plus tard",
+    "de": "GitHub-Anfragelimit erreicht. Später erneut versuchen"
+  },
+  {
+    "key": "msg_363",
+    "zh": "正在检查更新…",
+    "en": "Checking for updates…",
+    "ja": "更新を確認中…",
+    "fr": "Recherche de mises à jour…",
+    "de": "Suche nach Updates…"
+  },
+  {
+    "key": "msg_364",
+    "zh": "无法连接 GitHub，请稍后重试",
+    "en": "Cannot connect to GitHub. Try again later",
+    "ja": "GitHub に接続できません。後で再試行してください",
+    "fr": "Connexion à GitHub impossible. Réessayez plus tard",
+    "de": "Keine Verbindung zu GitHub. Später erneut versuchen"
+  },
+  {
+    "key": "msg_365",
+    "zh": "更新信息格式不受支持，请查看发布页",
+    "en": "Unsupported update information. Open the release page",
+    "ja": "更新情報の形式に対応していません。リリースページをご覧ください",
+    "fr": "Format de mise à jour non pris en charge. Consultez la page de publication",
+    "de": "Update-Format nicht unterstützt. Veröffentlichungsseite öffnen"
+  },
+  {
+    "key": "msg_366",
+    "zh": "自动检查更新",
+    "en": "Check for updates automatically",
+    "ja": "更新を自動確認",
+    "fr": "Vérifier automatiquement les mises à jour",
+    "de": "Automatisch nach Updates suchen"
+  },
+  {
+    "key": "msg_367",
+    "zh": "打开主界面时检查，每 24 小时一次；下载前由你确认。",
+    "en": "Checks on opening the main screen, once every 24 hours. You choose whether to download.",
+    "ja": "メイン画面を開くと24時間ごとに確認します。ダウンロードは確認後に行います。",
+    "fr": "Vérification à l’ouverture de l’écran principal, une fois par 24 heures. Vous décidez du téléchargement.",
+    "de": "Prüfung beim Öffnen der Hauptseite, einmal alle 24 Stunden. Sie entscheiden über den Download."
+  },
+  {
+    "key": "msg_368",
+    "zh": "立即检查更新",
+    "en": "Check for updates now",
+    "ja": "今すぐ更新を確認",
+    "fr": "Vérifier maintenant",
+    "de": "Jetzt nach Updates suchen"
+  },
+  {
+    "key": "msg_369",
+    "zh": "查看新版详情",
+    "en": "View update details",
+    "ja": "更新の詳細を見る",
+    "fr": "Voir les détails de la mise à jour",
+    "de": "Update-Details anzeigen"
+  },
+  {
+    "key": "msg_370",
+    "zh": "GitHub 发布页面",
+    "en": "GitHub releases",
+    "ja": "GitHub リリースページ",
+    "fr": "Versions sur GitHub",
+    "de": "GitHub-Veröffentlichungen"
+  },
+  {
+    "key": "msg_371",
+    "zh": "最新版本",
+    "en": "Latest version",
+    "ja": "最新バージョン",
+    "fr": "Dernière version",
+    "de": "Neueste Version"
+  },
+  {
+    "key": "msg_372",
+    "zh": "此版本未填写更新说明",
+    "en": "No release notes were provided",
+    "ja": "更新内容の記載はありません",
+    "fr": "Aucune note de version fournie",
+    "de": "Keine Versionshinweise vorhanden"
+  },
+  {
+    "key": "msg_373",
+    "zh": "此版本暂无可下载 APK，请查看发布页面。",
+    "en": "No APK is available for this release. Open the release page.",
+    "ja": "このリリースの APK はまだありません。リリースページをご覧ください。",
+    "fr": "Aucun APK disponible pour cette version. Consultez la page de publication.",
+    "de": "Für diese Version ist kein APK verfügbar. Veröffentlichungsseite öffnen."
+  },
+  {
+    "key": "msg_374",
+    "zh": "发布页面",
+    "en": "Release page",
+    "ja": "リリースページ",
+    "fr": "Page de publication",
+    "de": "Veröffentlichungsseite"
+  },
+  {
+    "key": "msg_375",
+    "zh": "下载 APK",
+    "en": "Download APK",
+    "ja": "APK をダウンロード",
+    "fr": "Télécharger l’APK",
+    "de": "APK herunterladen"
+  },
+  {
+    "key": "msg_376",
+    "zh": "未找到可以打开链接的浏览器",
+    "en": "No browser found to open this link",
+    "ja": "リンクを開けるブラウザが見つかりません",
+    "fr": "Aucun navigateur trouvé pour ouvrir ce lien",
+    "de": "Kein Browser zum Öffnen dieses Links gefunden"
+  },
+  {
+    "key": "msg_377",
+    "zh": "软件更新",
+    "en": "Software updates",
+    "ja": "ソフトウェア更新",
+    "fr": "Mises à jour du logiciel",
+    "de": "Software-Updates"
+  },
+  {
+    "key": "battery_link_switch",
+    "zh": "同时监控应用耗电",
+    "en": "Monitor app battery usage together",
+    "ja": "アプリの電池使用量も監視",
+    "fr": "Surveiller aussi la consommation des applications",
+    "de": "App-Akkuverbrauch gleichzeitig überwachen"
+  },
+  {
+    "key": "battery_link_help",
+    "zh": "下次开始监控时生效，需要 Shizuku 授权。停止监控时保存联动的耗电记录；单独开启的耗电监控不受影响。",
+    "en": "Applies the next time monitoring starts. Requires Shizuku permission. Stopping saves the linked battery recording; independently started battery monitoring continues.",
+    "ja": "次回の監視開始時に適用されます。Shizuku の許可が必要です。監視を停止すると連動した電池記録を保存します。個別に開始した電池監視は継続します。",
+    "fr": "Prend effet au prochain démarrage du suivi. Autorisation Shizuku requise. L’arrêt enregistre le relevé de consommation lié ; le suivi démarré séparément continue.",
+    "de": "Gilt ab dem nächsten Überwachungsstart. Shizuku-Berechtigung erforderlich. Beim Stoppen wird die gekoppelte Akkuaufzeichnung gespeichert; separat gestartete Akkuüberwachung läuft weiter."
+  },
+  {
+    "key": "battery_link_auth_error",
+    "zh": "应用耗电未启动：请先启动并授权 Shizuku",
+    "en": "Battery monitoring did not start: start and authorize Shizuku first",
+    "ja": "電池監視を開始できません：先に Shizuku を起動して許可してください",
+    "fr": "Suivi de consommation non démarré : démarrez et autorisez Shizuku",
+    "de": "Akkuüberwachung nicht gestartet: Shizuku zuerst starten und autorisieren"
+  },
+  {
+    "key": "battery_link_start_error",
+    "zh": "应用耗电未启动：系统拒绝启动前台服务",
+    "en": "Battery monitoring did not start: the system denied the foreground service",
+    "ja": "電池監視を開始できません：システムがフォアグラウンドサービスの起動を拒否しました",
+    "fr": "Suivi de consommation non démarré : le système a refusé le service de premier plan",
+    "de": "Akkuüberwachung nicht gestartet: Das System hat den Vordergrunddienst abgelehnt"
   }
 ]

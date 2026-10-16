@@ -185,11 +185,11 @@
     <string name="msg_181" formatted="false">" : vérifiez la fonction du capteur avant de choisir"</string>
     <string name="msg_182" formatted="false">"Capteur mis à jour"</string>
     <string name="msg_183" formatted="false">"À propos de l’application"</string>
-    <string name="msg_184" formatted="false">"MurasameRTSS · 1.2.1\nSuperposition de performances Android et courbes locales"</string>
+    <string name="msg_184" formatted="false">"MurasameRTSS · 1.4.1\nSuperposition de performances Android et courbes locales"</string>
     <string name="msg_185" formatted="false">"Icône Murasame"</string>
     <string name="msg_186" formatted="false">"Historique des versions"</string>
     <string name="msg_187" formatted="false">"Date / Version / Modifications"</string>
-    <string name="msg_188" formatted="false">"2026-10-13 · 1.2.1\nNavigation plus fluide avec conservation des pages et du défilement, transitions brèves et retour tactile visuel. Les détails de consommation sont séparés ; Retour revient à la liste et l’intervalle sélectionné est conservé.\n\n2026-10-13 · 1.2.0\nAjout de relevés indépendants de consommation des applications, parts et mAh, plages horaires et graphiques de puissance moyenne. Premier plan opaque, arrière-plan translucide, consommation non classée hachurée.\n\n2026-10-10 · 1.1.0\nNouvelle navigation basse, aperçu des performances, prévisualisation et cartes de courbes. Ajout des thèmes Sombre, Clair et Système, avec choix mémorisé.\n\n2026-10-10 · 1.0.0\nAjout du japonais, de l’anglais, du français et de l’allemand, selon le système ou un choix manuel. Retrait du sous-titre et de la note sur la création de l’icône.\n\n2026-10-08 · 0.4.0\nEnregistrement automatique activé par défaut : le suivi démarre la capture, son arrêt la sauvegarde. Toutes les mesures sont enregistrées indépendamment de l’affichage. Ajout de 15 courbes empilées avec axe commun, curseur synchronisé, valeurs dernière/sélectionnée et min/max/moyenne. Suppression de points, périodes et sessions conservée.\n\n2026-10-07 · 0.3.0\nRenommage en MurasameRTSS avec icône Murasame. Ajout de l’enregistrement manuel, choix des mesures, périodes et suppression de points, périodes ou sessions. Ajout des informations et de l’historique des versions.\n\n2026-10-07 · 0.2.1\nCorrection des retours à la ligne inutiles en paysage. Nouveau calcul de largeur lors de la rotation.\n\n2026-10-07 · 0.2.0\nAjout des FPS de présentation et intervalles via Shizuku, et de l’estimation de puissance totale. Précisions sur les restrictions GPU et amélioration du diagnostic.\n\n2026-10-07 · 0.1.0\nPremière version : commandes manuelles, notification persistante, superposition en haut, fréquences CPU, températures, mémoire et batterie. Mesures, texte et opacité configurables, gestes traversants."</string>
+    <string name="msg_188" formatted="false">"2026-10-16 · 1.4.1\nAjout d’un interrupteur pour lancer le suivi de consommation avec le suivi des performances, désactivé par défaut et appliqué au prochain démarrage. L’arrêt sauvegarde les relevés liés et laisse continuer les suivis indépendants. Masquer, mettre en pause ou arrêter manuellement ne relance pas le suivi. Une autorisation Shizuku manquante est signalée.\n\n2026-10-16 · 1.4.0\nAjout de la recherche automatique sur GitHub Releases à l’ouverture de l’écran principal, activée par défaut. La page À propos propose une vérification manuelle et un interrupteur. Les nouveautés affichent version, notes et lien APK. Comparaison numérique sans proposition de rétrogradation, avec gestion des erreurs réseau, limites et APK absent.\n\n2026-10-16 · 1.3.2\nLe panneau entier glisse depuis la gauche avec un voile progressif. Le changement de page commence après sa fermeture. Les nouvelles pages attendent la fin de la mise en page ; les pages réutilisées ont aussi une transition. Les clics rapides conservent la dernière destination et une annulation efface la navigation en attente.\n\n2026-10-16 · 1.3.1\nMaintenez les boutons temporels pour avancer ou reculer en continu. Relâchez, sortez du bouton ou atteignez une limite pour arrêter. Avatar à gauche, titre à droite. Touchez l’avatar pour ouvrir un menu d’un tiers de la largeur, entièrement masqué une fois fermé. Son avatar recouvre celui de la page ; touchez-le, l’extérieur ou Retour pour fermer.\n\n2026-10-15 · 1.3.0\nAjout de l’heure du téléphone à côté du temps écoulé et d’un pas réglable pour déplacer le curseur. Les limites ne sont indiquées qu’en cas de saisie incorrecte. Navigation latérale gauche repliable, occupant un tiers de la largeur disponible une fois ouverte. Outils de période et suppression dépliables sur place.\n\n2026-10-13 · 1.2.1\nNavigation plus fluide avec conservation des pages et du défilement, transitions brèves et retour tactile visuel. Les détails de consommation sont séparés ; Retour revient à la liste et l’intervalle sélectionné est conservé.\n\n2026-10-13 · 1.2.0\nAjout de relevés indépendants de consommation des applications, parts et mAh, plages horaires et graphiques de puissance moyenne. Premier plan opaque, arrière-plan translucide, consommation non classée hachurée.\n\n2026-10-10 · 1.1.0\nNouvelle navigation basse, aperçu des performances, prévisualisation et cartes de courbes. Ajout des thèmes Sombre, Clair et Système, avec choix mémorisé.\n\n2026-10-10 · 1.0.0\nAjout du japonais, de l’anglais, du français et de l’allemand, selon le système ou un choix manuel. Retrait du sous-titre et de la note sur la création de l’icône.\n\n2026-10-08 · 0.4.0\nEnregistrement automatique activé par défaut : le suivi démarre la capture, son arrêt la sauvegarde. Toutes les mesures sont enregistrées indépendamment de l’affichage. Ajout de 15 courbes empilées avec axe commun, curseur synchronisé, valeurs dernière/sélectionnée et min/max/moyenne. Suppression de points, périodes et sessions conservée.\n\n2026-10-07 · 0.3.0\nRenommage en MurasameRTSS avec icône Murasame. Ajout de l’enregistrement manuel, choix des mesures, périodes et suppression de points, périodes ou sessions. Ajout des informations et de l’historique des versions.\n\n2026-10-07 · 0.2.1\nCorrection des retours à la ligne inutiles en paysage. Nouveau calcul de largeur lors de la rotation.\n\n2026-10-07 · 0.2.0\nAjout des FPS de présentation et intervalles via Shizuku, et de l’estimation de puissance totale. Précisions sur les restrictions GPU et amélioration du diagnostic.\n\n2026-10-07 · 0.1.0\nPremière version : commandes manuelles, notification persistante, superposition en haut, fréquences CPU, températures, mémoire et batterie. Mesures, texte et opacité configurables, gestes traversants."</string>
     <string name="msg_189" formatted="false">"Diagnostic en direct"</string>
     <string name="msg_190" formatted="false">"Les données restent sur l’appareil. -- signifie indisponible, pas une température ou puissance nulle."</string>
     <string name="msg_191" formatted="false">"Copier le diagnostic"</string>
@@ -348,4 +348,39 @@
     <string name="battery_044" formatted="false">"Relevés de consommation"</string>
     <string name="battery_unknown_app" formatted="false">"Application non identifiée"</string>
     <string name="battery_back" formatted="false">"Retour"</string>
+    <string name="msg_347" formatted="false">"Développer la navigation"</string>
+    <string name="msg_348" formatted="false">"Réduire la navigation"</string>
+    <string name="msg_349" formatted="false">"Voir avant"</string>
+    <string name="msg_350" formatted="false">"Voir après"</string>
+    <string name="msg_351" formatted="false">"Pas"</string>
+    <string name="msg_352" formatted="false">"Pas (secondes)"</string>
+    <string name="msg_353" formatted="false">"Position"</string>
+    <string name="msg_354" formatted="false">"OK"</string>
+    <string name="msg_355" formatted="false">"Saisissez un nombre entier de secondes entre 1 et 60"</string>
+    <string name="msg_356" formatted="false">"Axe supérieur : heure du téléphone · Inférieur : temps écoulé"</string>
+    <string name="msg_357" formatted="false">"Commandes de capture"</string>
+    <string name="msg_358" formatted="false">"Mises à jour non vérifiées"</string>
+    <string name="msg_359" formatted="false">"Aucune version stable disponible sur GitHub"</string>
+    <string name="msg_360" formatted="false">"Nouvelle version disponible"</string>
+    <string name="msg_361" formatted="false">"Votre version ne nécessite aucune mise à jour"</string>
+    <string name="msg_362" formatted="false">"Limite de requêtes GitHub atteinte. Réessayez plus tard"</string>
+    <string name="msg_363" formatted="false">"Recherche de mises à jour…"</string>
+    <string name="msg_364" formatted="false">"Connexion à GitHub impossible. Réessayez plus tard"</string>
+    <string name="msg_365" formatted="false">"Format de mise à jour non pris en charge. Consultez la page de publication"</string>
+    <string name="msg_366" formatted="false">"Vérifier automatiquement les mises à jour"</string>
+    <string name="msg_367" formatted="false">"Vérification à l’ouverture de l’écran principal, une fois par 24 heures. Vous décidez du téléchargement."</string>
+    <string name="msg_368" formatted="false">"Vérifier maintenant"</string>
+    <string name="msg_369" formatted="false">"Voir les détails de la mise à jour"</string>
+    <string name="msg_370" formatted="false">"Versions sur GitHub"</string>
+    <string name="msg_371" formatted="false">"Dernière version"</string>
+    <string name="msg_372" formatted="false">"Aucune note de version fournie"</string>
+    <string name="msg_373" formatted="false">"Aucun APK disponible pour cette version. Consultez la page de publication."</string>
+    <string name="msg_374" formatted="false">"Page de publication"</string>
+    <string name="msg_375" formatted="false">"Télécharger l’APK"</string>
+    <string name="msg_376" formatted="false">"Aucun navigateur trouvé pour ouvrir ce lien"</string>
+    <string name="msg_377" formatted="false">"Mises à jour du logiciel"</string>
+    <string name="battery_link_switch" formatted="false">"Surveiller aussi la consommation des applications"</string>
+    <string name="battery_link_help" formatted="false">"Prend effet au prochain démarrage du suivi. Autorisation Shizuku requise. L’arrêt enregistre le relevé de consommation lié ; le suivi démarré séparément continue."</string>
+    <string name="battery_link_auth_error" formatted="false">"Suivi de consommation non démarré : démarrez et autorisez Shizuku"</string>
+    <string name="battery_link_start_error" formatted="false">"Suivi de consommation non démarré : le système a refusé le service de premier plan"</string>
 </resources>

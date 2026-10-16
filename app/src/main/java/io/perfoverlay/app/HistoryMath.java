@@ -35,4 +35,41 @@ public final class HistoryMath {
     public static boolean connects(long previousSequence, long sequence, long previousTime, long time) {
         return sequence == previousSequence + 1 && time > previousTime && time - previousTime <= 6000;
     }
+    public static int parseStep(String value) {
+        try {
+            if (!value.trim().matches("[0-9]{1,2}")) throw new NumberFormatException();
+            int seconds = Integer.parseInt(value.trim());
+            if (seconds >= 1 && seconds <= 60) return seconds;
+        } catch (NumberFormatException ignored) { }
+        throw new IllegalArgumentException(I18n.t("请输入 1–60 之间的整数秒数"));
+    }
+    public static long stepTarget(long current, int seconds, int direction, long first, long last) {
+        if (seconds < 1 || seconds > 60 || (direction != -1 && direction != 1) || first > last)
+            throw new IllegalArgumentException("Invalid cursor step");
+        return Math.max(first, Math.min(last, current + direction * seconds * 1000L));
+    }
+    public static HistoryStore.Point nearest(java.util.List<HistoryStore.Point> points, long target) {
+        HistoryStore.Point result = null; long distance = Long.MAX_VALUE;
+        for (HistoryStore.Point point : points) {
+            long delta = Math.abs(point.elapsed - target);
+            if (delta < distance) { distance = delta; result = point; }
+        }
+        return result;
+    }
+    /** Translate a visible interval without changing its span, clamped to the recording. */
+    public static long[] reveal(long from, long to, long target, long last) {
+        long span = Math.min(Math.max(0, to - from), last);
+        if (target < from) from = target;
+        else if (target > to) from = target - span;
+        from = Math.max(0, Math.min(from, last - span));
+        return new long[]{from, from + span};
+    }
+    public static String clock(long wall, boolean withDate) {
+        return new java.text.SimpleDateFormat(withDate ? "MM-dd HH:mm:ss" : "HH:mm:ss", Locale.getDefault())
+                .format(new java.util.Date(wall));
+    }
+    public static boolean differentDate(long first, long last) {
+        java.text.SimpleDateFormat date = new java.text.SimpleDateFormat("yyyy-MM-dd", Locale.ROOT);
+        return !date.format(new java.util.Date(first)).equals(date.format(new java.util.Date(last)));
+    }
 }

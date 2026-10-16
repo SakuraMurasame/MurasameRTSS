@@ -38,18 +38,19 @@ public final class AppBatteryChart extends View {
     private boolean included(AppBatteryData.Interval i) { return i.valid && i.from.elapsed >= from && i.to.elapsed <= to && i.apps.containsKey(uid); }
     private double value(AppBatteryData.Interval i, double n) { return watts ? i.watts(n) : n; }
     private float x(long time) { return dp(44) + (float)((time-from)/(double)(to-from)) * (getWidth()-dp(54)); }
-    private float y(double value) { return getHeight()-dp(26) - (float)(value/high)*(getHeight()-dp(42)); }
+    private float y(double value) { return getHeight()-dp(46) - (float)(value/high)*(getHeight()-dp(62)); }
     @Override protected void onDraw(Canvas canvas) {
         super.onDraw(canvas); canvas.drawColor(theme.card); pen.setStyle(Paint.Style.FILL); pen.setAlpha(255);
         pen.setColor(theme.grid); pen.setStrokeWidth(dp(.5f));
-        for (float gx=dp(44); gx<=getWidth()-dp(10); gx+=dp(14)) canvas.drawLine(gx,dp(16),gx,getHeight()-dp(26),pen);
-        for (float gy=dp(16); gy<=getHeight()-dp(26); gy+=dp(14)) canvas.drawLine(dp(44),gy,getWidth()-dp(10),gy,pen);
+        for (float gx=dp(44); gx<=getWidth()-dp(10); gx+=dp(14)) canvas.drawLine(gx,dp(16),gx,getHeight()-dp(46),pen);
+        for (float gy=dp(16); gy<=getHeight()-dp(46); gy+=dp(14)) canvas.drawLine(dp(44),gy,getWidth()-dp(10),gy,pen);
         pen.setTextSize(dp(10)); pen.setColor(theme.muted);
-        canvas.drawText(MetricMath.fixed(high,2),0,dp(22),pen); canvas.drawText("0",0,getHeight()-dp(26),pen);
+        canvas.drawText(MetricMath.fixed(high,2),0,dp(22),pen); canvas.drawText("0",0,getHeight()-dp(46),pen);
         canvas.drawText(HistoryMath.time(Math.max(0,from-origin)),dp(44),getHeight()-dp(6),pen);
         String end=HistoryMath.time(Math.max(0,to-origin)); canvas.drawText(end,getWidth()-dp(10)-pen.measureText(end),getHeight()-dp(6),pen);
+        drawClockAxis(canvas);
         boolean any = false;
-        int save=canvas.save(); canvas.clipRect(dp(44),dp(16),getWidth()-dp(10),getHeight()-dp(26));
+        int save=canvas.save(); canvas.clipRect(dp(44),dp(16),getWidth()-dp(10),getHeight()-dp(46));
         for (AppBatteryData.Interval interval : intervals) {
             if (!included(interval)) continue;
             AppBatteryData.Drain d=interval.apps.get(uid); double total=value(interval,d.total);
@@ -69,10 +70,27 @@ public final class AppBatteryChart extends View {
         pen.setAlpha(255);
         if (selected!=null) {
             pen.setColor(theme.violet); pen.setStyle(Paint.Style.STROKE); pen.setStrokeWidth(dp(1.5f));
-            canvas.drawRect(x(selected.from.elapsed),dp(16),x(selected.to.elapsed),getHeight()-dp(26),pen); pen.setStyle(Paint.Style.FILL);
+            canvas.drawRect(x(selected.from.elapsed),dp(16),x(selected.to.elapsed),getHeight()-dp(46),pen); pen.setStyle(Paint.Style.FILL);
         }
         canvas.restoreToCount(save);
         if (!any) { pen.setColor(theme.muted); String empty=I18n.t("暂无有效读数"); canvas.drawText(empty,dp(50),getHeight()/2f,pen); }
+    }
+    private void drawClockAxis(Canvas canvas) {
+        AppBatteryData.Sample first=null,last=null;
+        for(AppBatteryData.Interval interval:intervals) if(included(interval)) {
+            if(first==null)first=interval.from;
+            last=interval.to;
+        }
+        if(first==null)return;
+        boolean dated=HistoryMath.differentDate(first.wall,last.wall);
+        String start=HistoryMath.clock(first.wall,dated), end=HistoryMath.clock(last.wall,dated);
+        pen.setTextSize(dp(9));
+        float left=dp(44), right=getWidth()-dp(10);
+        float a=Math.max(left,Math.min(right-pen.measureText(start),x(first.elapsed)-pen.measureText(start)/2));
+        float b=Math.max(left,Math.min(right-pen.measureText(end),x(last.elapsed)-pen.measureText(end)/2));
+        pen.setColor(theme.muted); pen.setTextSize(dp(9));
+        canvas.drawText(start,a,getHeight()-dp(26),pen);
+        if(b>a+pen.measureText(start)+dp(6))canvas.drawText(end,b,getHeight()-dp(26),pen);
     }
     private void select(float px) {
         long time=from+(long)((px-dp(44))/(getWidth()-dp(54))*(to-from)); AppBatteryData.Interval nearest=null; long distance=Long.MAX_VALUE;

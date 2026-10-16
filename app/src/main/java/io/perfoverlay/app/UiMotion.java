@@ -2,13 +2,14 @@ package io.perfoverlay.app;
 
 import android.animation.ValueAnimator;
 import android.app.Activity;
+import android.app.ActivityOptions;
+import android.view.animation.PathInterpolator;
 import android.content.*;
 import android.content.res.ColorStateList;
 import android.graphics.drawable.*;
 import android.os.Build;
 import android.transition.*;
 import android.view.*;
-import android.view.animation.DecelerateInterpolator;
 import android.widget.FrameLayout;
 import android.widget.ScrollView;
 
@@ -46,28 +47,39 @@ public final class UiMotion {
         if (!animate || !enabled() || previous==null) {
             if (previous!=null) host.removeView(previous); next.setAlpha(1); next.setTranslationX(0); return;
         }
-        float distance=18*host.getResources().getDisplayMetrics().density*(direction<0?-1:1);
+        float density=host.getResources().getDisplayMetrics().density;
+        float distance=Math.max(24*density,Math.min(48*density,host.getWidth()*.08f))*(direction<0?-1:1);
         previous.setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_NO_HIDE_DESCENDANTS);
         if (host instanceof Host) ((Host)host).changing=true;
-        next.setAlpha(.65f); next.setTranslationX(distance);
-        previous.animate().alpha(0).translationX(-distance).setDuration(180).setInterpolator(new DecelerateInterpolator()).start();
+        next.setAlpha(0); next.setTranslationX(distance);
         View outgoing=previous;
-        next.animate().alpha(1).translationX(0).setDuration(180).setInterpolator(new DecelerateInterpolator())
-                .withEndAction(()->{
-                    if (host.getTag()!=token) return;
-                    host.removeView(outgoing); outgoing.setAlpha(1); outgoing.setTranslationX(0);
-                    outgoing.setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_AUTO);
-                    if (host instanceof Host) ((Host)host).changing=false;
-                }).start();
+        // Begin only after the new page has been measured, so first-time pages get the complete transition.
+        host.getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
+            @Override public boolean onPreDraw() {
+                if(host.getViewTreeObserver().isAlive())host.getViewTreeObserver().removeOnPreDrawListener(this);
+                if(host.getTag()!=token)return true;
+                outgoing.animate().alpha(0).translationX(-distance*.4f).setDuration(240)
+                    .setInterpolator(new PathInterpolator(.2f,0,0,1)).withLayer().start();
+                next.animate().alpha(1).translationX(0).setDuration(240).setInterpolator(new PathInterpolator(.2f,0,0,1)).withLayer()
+                    .withEndAction(()->{
+                        if(host.getTag()!=token)return;
+                        host.removeView(outgoing); outgoing.setAlpha(1); outgoing.setTranslationX(0);
+                        outgoing.setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_AUTO);
+                        if(host instanceof Host)((Host)host).changing=false;
+                    }).start();
+                return true;
+            }
+        });
+        host.invalidate();
     }
     public static void expand(ViewGroup group) {
         if (enabled()) TransitionManager.beginDelayedTransition(group,new AutoTransition().setDuration(160));
     }
     public static void reveal(View view,int direction) {
         if (!enabled()) return;
-        view.animate().withEndAction(null).cancel(); view.setAlpha(.7f);
-        view.setTranslationX((direction<0?-1:1)*14*view.getResources().getDisplayMetrics().density);
-        view.animate().alpha(1).translationX(0).setDuration(180).setInterpolator(new DecelerateInterpolator()).start();
+        view.animate().withEndAction(null).cancel(); view.setAlpha(0);
+        view.setTranslationX((direction<0?-1:1)*24*view.getResources().getDisplayMetrics().density);
+        view.animate().alpha(1).translationX(0).setDuration(240).setInterpolator(new PathInterpolator(.2f,0,0,1)).start();
     }
     public static void restoreScroll(ScrollView view,int offset) {
         Object token=new Object(); view.setTag(token);
@@ -81,10 +93,10 @@ public final class UiMotion {
         view.invalidate();
     }
     public static void open(Activity activity,Intent intent,int direction) {
-        activity.startActivity(intent);
-        if (enabled()) activity.overridePendingTransition(direction<0?R.anim.ui_back_enter:R.anim.ui_forward_enter,
-                direction<0?R.anim.ui_back_exit:R.anim.ui_forward_exit);
-        else activity.overridePendingTransition(0,0);
+        intent.putExtra("ui_motion_direction",direction);
+        int enter=enabled()?(direction<0?R.anim.ui_back_enter:R.anim.ui_forward_enter):0;
+        int exit=enabled()?(direction<0?R.anim.ui_back_exit:R.anim.ui_forward_exit):0;
+        activity.startActivity(intent,ActivityOptions.makeCustomAnimation(activity,enter,exit).toBundle());
     }
     public static void back(Activity activity) {
         activity.finish();

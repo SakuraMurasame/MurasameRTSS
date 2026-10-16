@@ -19,6 +19,7 @@ public final class Prefs {
     public boolean shizuku() { return store.getBoolean("shizuku", true); }
     public boolean vertical() { return store.getBoolean("vertical", false); }
     public boolean autoRecord() { return store.getBoolean("auto_record", true); }
+    public boolean batteryWithMonitor() { return store.getBoolean("battery_with_monitor", false); }
     public boolean separators() { return store.getBoolean("separators", true); }
     public int dischargeSign() {
         return android.os.Build.FINGERPRINT.equals(store.getString("current_sign_build", "")) ? store.getInt("discharge_sign", 0) : 0;

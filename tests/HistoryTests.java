@@ -12,7 +12,48 @@ public final class HistoryTests {
     static void rejects(Action a, String reason) throws Exception {
         boolean rejected = false; try { a.run(); } catch (IllegalArgumentException | IllegalStateException e) { rejected = true; } check(rejected, reason);
     }
+    private static void cursorAndClock() throws Exception {
+        for(int step=1;step<=60;step++) {
+            check(HistoryMath.parseStep(Integer.toString(step))==step,"Accept every whole step in range");
+            check(HistoryMath.stepTarget(70000,step,-1,0,150000)==70000-step*1000L,"Earlier step");
+            check(HistoryMath.stepTarget(70000,step,1,0,150000)==70000+step*1000L,"Later step");
+        }
+        for(String invalid:new String[]{"","0","61","-1","1.5","1e1","abc","999999999999999","1 2"})
+            rejects(()->HistoryMath.parseStep(invalid),"Reject invalid input: "+invalid);
+        check(HistoryMath.parseStep(" 5 ")==5,"Trim input");
+        check(HistoryMath.stepTarget(1000,60,-1,250,30000)==250,"Clamp to first retained sample");
+        check(HistoryMath.stepTarget(29000,60,1,250,30000)==30000,"Clamp to final sample");
+        check(HistoryMath.stepTarget(250,1,1,250,250)==250,"Single sample");
+        rejects(()->HistoryMath.stepTarget(0,0,1,0,1000),"Reject invalid stored step");
+        rejects(()->HistoryMath.stepTarget(0,5,0,0,1000),"Reject invalid direction");
+        List<HistoryStore.Point> sparse=Arrays.asList(
+            new HistoryStore.Point(0,0,100000,Collections.emptyMap()),
+            new HistoryStore.Point(4,10000,50000,Collections.emptyMap()),
+            new HistoryStore.Point(5,20000,60000,Collections.emptyMap()));
+        check(HistoryMath.nearest(Collections.emptyList(),1)==null,"Empty session");
+        check(HistoryMath.nearest(sparse,6000)==sparse.get(1),"Gap uses a real sample");
+        check(HistoryMath.nearest(sparse,10000).wall==50000,"Clock adjustment uses stored wall time");
+        long cursor=0;
+        for(int i=1;i<=6;i++)cursor=HistoryMath.stepTarget(cursor,1,1,0,20000);
+        check(cursor==6000 && HistoryMath.nearest(sparse,cursor)==sparse.get(1),"Small steps progress through sampling gaps");
+        check(Arrays.equals(HistoryMath.reveal(10000,19999,5000,59999),new long[]{5000,14999}),"Pan earlier");
+        check(Arrays.equals(HistoryMath.reveal(10000,19999,25000,59999),new long[]{15001,25000}),"Pan later without changing span");
+        check(Arrays.equals(HistoryMath.reveal(10000,19999,15000,59999),new long[]{10000,19999}),"Keep containing window");
+        check(Arrays.equals(HistoryMath.reveal(0,59999,59000,59999),new long[]{0,59999}),"Full session remains in view");
+        check(Arrays.equals(HistoryMath.reveal(50000,59999,0,59999),new long[]{0,9999}),"Pan to first boundary");
+        TimeZone saved=TimeZone.getDefault(); Locale oldLocale=Locale.getDefault();
+        try {
+            TimeZone.setDefault(TimeZone.getTimeZone("Asia/Shanghai")); Locale.setDefault(Locale.US);
+            long wall=java.time.Instant.parse("2026-10-15T15:59:59Z").toEpochMilli();
+            check(HistoryMath.clock(wall,false).equals("23:59:59"),"Phone timezone conversion");
+            check(HistoryMath.clock(wall+1000,true).equals("10-16 00:00:00"),"Midnight date label");
+            check(HistoryMath.differentDate(wall,wall+1000),"Detect midnight");
+            check(!HistoryMath.differentDate(wall-1000,wall),"Same-day label");
+            check(HistoryMath.differentDate(wall+1000,wall),"Clock moved backwards across midnight");
+        } finally {TimeZone.setDefault(saved);Locale.setDefault(oldLocale);}
+    }
     public static void main(String[] args) throws Exception {
+        cursorAndClock();
         Path dir = Files.createTempDirectory(Paths.get(args[0]), "history-");
         HistoryStore store = new HistoryStore(dir.toFile());
         long start = 1791331200000L;
@@ -70,7 +111,7 @@ public final class HistoryTests {
         check(!HistoryMath.connects(1, 2, 1000, 8000), "Long sampling gap leaves a break");
         check(HistoryMath.connects(1, 2, 1000, 3000), "Normal 2 second sampling connects");
         testPanels();
-        System.out.println("PASS: " + assertions + " history assertions (persistence, range/point/session deletion, gaps, restart, corruption, units)");
+        System.out.println("PASS: " + assertions + " history assertions (persistence, range/point/session deletion, gaps, restart, corruption, units, cursor steps, phone clock)");
     }
     private static void testPanels() {
         List<HistoryStore.Point> samples = Arrays.asList(

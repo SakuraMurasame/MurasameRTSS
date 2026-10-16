@@ -15,6 +15,7 @@ public final class HistoryChart extends View {
     private Path[] traces = new Path[0];
     public interface Selection { void selected(HistoryStore.Point point); }
     private Selection listener;
+    private float downX, downY;
     public HistoryChart(Context c) { super(c); theme = UiTheme.get(c); colors = new int[]{theme.accent, theme.violet, theme.amber, theme.dark ? 0xFF79CAFF : 0xFF24699B, theme.dark ? 0xFFF199C7 : 0xFF9B3978, theme.dark ? 0xFFE9B58D : 0xFF885624}; setContentDescription(I18n.t("历史曲线，点击或横向拖动同步选择采样点")); }
     private float dp(float n) { return n * getResources().getDisplayMetrics().density; }
     public void selection(Selection callback) { listener = callback; }
@@ -27,7 +28,7 @@ public final class HistoryChart extends View {
     private float left() { return dp(42); }
     private float right() { return getWidth() - dp(10); }
     private float top() { return dp(16); }
-    private float bottom() { return getHeight() - dp(23); }
+    private float bottom() { return getHeight() - dp(43); }
     private float x(long time) { return left() + (time - data.from) * (right() - left()) / (data.to - data.from); }
     private float y(double v) { return bottom() - (float)((v - low) / (high - low)) * (bottom() - top()); }
     @Override protected void onSizeChanged(int w, int h, int oldw, int oldh) { super.onSizeChanged(w, h, oldw, oldh); rebuildTraces(); }
@@ -59,6 +60,7 @@ public final class HistoryChart extends View {
         c.drawText(String.format(Locale.ROOT, "%.1f", low), 0, bottom(), pen);
         c.drawText(HistoryMath.time(data.from), left(), getHeight() - dp(5), pen);
         String end = HistoryMath.time(data.to); c.drawText(end, right() - pen.measureText(end), getHeight() - dp(5), pen);
+        drawClockAxis(c);
         if (data.valid == 0) {
             String empty = I18n.t("暂无有效读数");
             c.drawText(empty, left() + (right() - left() - pen.measureText(empty)) / 2, (top() + bottom()) / 2, pen);
@@ -84,6 +86,30 @@ public final class HistoryChart extends View {
             pen.setColor(theme.accent); c.drawText(stamp, labelX, getHeight() - dp(5), pen);
         }
     }
+    private void drawClockAxis(Canvas c) {
+        if (data.points.isEmpty()) return;
+        HistoryStore.Point first=data.points.get(0), last=data.points.get(data.points.size()-1);
+        boolean dated=HistoryMath.differentDate(first.wall,last.wall);
+        HistoryStore.Point focus=selected!=null && selected.elapsed>=data.from && selected.elapsed<=data.to?selected:null;
+        String focused=focus==null?"":HistoryMath.clock(focus.wall,dated);
+        float focusLeft=focus==null?Float.MAX_VALUE:labelX(focused,focus.elapsed);
+        float focusRight=focusLeft+pen.measureText(focused);
+        float priorRight=-1;
+        // Use actual sample timestamps: clock adjustments must not be hidden by interpolation.
+        HistoryStore.Point[] ticks={first,HistoryMath.nearest(data.points,data.from+(data.to-data.from)/2),last};
+        long previous=-1;
+        for(HistoryStore.Point point:ticks) {
+            if(point==null || point.sequence==previous)continue; previous=point.sequence;
+            String label=HistoryMath.clock(point.wall,dated); float start=labelX(label,point.elapsed), end=start+pen.measureText(label);
+            if(start<priorRight+dp(6) || (focus!=null && end+dp(6)>focusLeft && start-dp(6)<focusRight))continue;
+            pen.setColor(theme.muted); c.drawText(label,start,getHeight()-dp(24),pen);
+            c.drawLine(x(point.elapsed),bottom(),x(point.elapsed),bottom()+dp(3),pen); priorRight=end;
+        }
+        if(focus!=null) { pen.setColor(theme.accent); c.drawText(focused,focusLeft,getHeight()-dp(24),pen); }
+    }
+    private float labelX(String label,long elapsed) {
+        return Math.max(left(),Math.min(right()-pen.measureText(label),x(elapsed)-pen.measureText(label)/2));
+    }
     private void select(float px) {
         if (data == null) return;
         HistoryStore.Point nearest = null; float distance = Float.MAX_VALUE;
@@ -92,8 +118,12 @@ public final class HistoryChart extends View {
     }
     @Override public boolean onTouchEvent(MotionEvent e) {
         switch (e.getActionMasked()) {
-            case MotionEvent.ACTION_DOWN: case MotionEvent.ACTION_MOVE: select(e.getX()); return true;
-            case MotionEvent.ACTION_UP: performClick(); select(e.getX()); return true;
+            case MotionEvent.ACTION_DOWN: downX=e.getX(); downY=e.getY(); select(downX); return true;
+            case MotionEvent.ACTION_MOVE:
+                if(Math.abs(e.getX()-downX)>Math.abs(e.getY()-downY)) { getParent().requestDisallowInterceptTouchEvent(true); select(e.getX()); }
+                return true;
+            case MotionEvent.ACTION_UP: getParent().requestDisallowInterceptTouchEvent(false); performClick(); select(e.getX()); return true;
+            case MotionEvent.ACTION_CANCEL: getParent().requestDisallowInterceptTouchEvent(false); return true;
             default: return true;
         }
     }
